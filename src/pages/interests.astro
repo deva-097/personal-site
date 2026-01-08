@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Organize your interests by category
+// You can expand these with images, links, and more details
+const interests = {
+  fountainPens: {
+    title: "Fountain Pens",
+    description: "The joy of writing with a good pen.",
+    items: [
+      { name: "Example Pen", notes: "Why I like it" },
+      // Add more pens
+    ]
+  },
+  watches: {
+    title: "Watches",
+    description: "Mechanical timekeeping.",
+    items: [
+      { name: "Example Watch", notes: "Notes about it" },
+      // Add more watches
+    ]
+  },
+  knives: {
+    title: "Swiss Knives",
+    description: "Everyday carry tools.",
+    items: [
+      { name: "Example Knife", notes: "Notes" },
+      // Add more
+    ]
+  },
+  music: {
+    title: "Music & Bands",
+    description: "What I listen to.",
+    items: [
+      { name: "Example Band", notes: "Favorite album" },
+      // Add more
+    ]
+  }
+};
+---
+
+<BaseLayout title="Interests | Devashish" description="Things I care about">
+  <h1>Interests</h1>
+  <p class="page-intro">
+    A collection of things that bring me joy or occupy my attention. 
+    Objects, hobbies, and obsessions, documented for my own reference and 
+    anyone else who might share these interests.
+  </p>
+  
+  <nav class="interest-nav">
+    <a href="#fountain-pens">Fountain Pens</a>
+    <a href="#watches">Watches</a>
+    <a href="#knives">Swiss Knives</a>
+    <a href="#music">Music</a>
+  </nav>
+  
+  <section id="fountain-pens" class="interest-section">
+    <h2>{interests.fountainPens.title}</h2>
+    <p class="section-description">{interests.fountainPens.description}</p>
+    <ul class="item-list">
+      {interests.fountainPens.items.map((item) => (
+        <li>
+          <span class="item-name">{item.name}</span>
+          {item.notes && <span class="item-notes">{item.notes}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+  
+  <section id="watches" class="interest-section">
+    <h2>{interests.watches.title}</h2>
+    <p class="section-description">{interests.watches.description}</p>
+    <ul class="item-list">
+      {interests.watches.items.map((item) => (
+        <li>
+          <span class="item-name">{item.name}</span>
+          {item.notes && <span class="item-notes">{item.notes}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+  
+  <section id="knives" class="interest-section">
+    <h2>{interests.knives.title}</h2>
+    <p class="section-description">{interests.knives.description}</p>
+    <ul class="item-list">
+      {interests.knives.items.map((item) => (
+        <li>
+          <span class="item-name">{item.name}</span>
+          {item.notes && <span class="item-notes">{item.notes}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+  
+  <section id="music" class="interest-section">
+    <h2>{interests.music.title}</h2>
+    <p class="section-description">{interests.music.description}</p>
+    <ul class="item-list">
+      {interests.music.items.map((item) => (
+        <li>
+          <span class="item-name">{item.name}</span>
+          {item.notes && <span class="item-notes">{item.notes}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-intro {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+  
+  .interest-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .interest-nav a {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  
+  .interest-nav a:hover {
+    color: var(--color-text);
+  }
+  
+  .interest-section {
+    margin-bottom: 3rem;
+  }
+  
+  .section-description {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  
+  .item-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .item-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .item-list li:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .item-name {
+    font-family: var(--font-heading);
+    font-weight: 500;
+  }
+  
+  .item-notes {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+</style>

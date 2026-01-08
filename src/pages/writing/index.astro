@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Get all posts from the content/writing folder
+const posts = await Astro.glob('../content/writing/*.md');
+const sortedPosts = posts.sort((a, b) => 
+  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+);
+---
+
+<BaseLayout title="Writing | Devashish" description="Essays and thoughts">
+  <h1>Writing</h1>
+  <p class="page-intro">Essays, notes, and thoughts on various topics.</p>
+  
+  <ul class="post-list">
+    {sortedPosts.map((post) => (
+      <li>
+        <a href={`/writing/${post.frontmatter.slug}`}>
+          <span class="post-title">{post.frontmatter.title}</span>
+          <span class="post-date">
+            {new Date(post.frontmatter.date).toLocaleDateString('en-US', { 
+              month: 'short', 
+              year: 'numeric' 
+            })}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  .page-intro {
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+  }
+  
+  .post-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .post-list li {
+    margin-bottom: 0;
+  }
+  
+  .post-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .post-list li:first-child a {
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .post-list a:hover .post-title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  
+  .post-title {
+    font-family: var(--font-heading);
+  }
+  
+  .post-date {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+</style>

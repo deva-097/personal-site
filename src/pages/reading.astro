@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// You can move this to a separate data file later
+const books = [
+  {
+    title: "Example Book Title",
+    author: "Author Name",
+    status: "reading", // reading, finished, want-to-read
+    year: 2026,
+    notes: "Brief thoughts on the book."
+  },
+  // Add more books here
+];
+
+const currentlyReading = books.filter(b => b.status === 'reading');
+const finished = books.filter(b => b.status === 'finished');
+---
+
+<BaseLayout title="Reading | Devashish" description="Books I've read and am reading">
+  <h1>Reading</h1>
+  <p class="page-intro">Books that have shaped my thinking, and what I'm currently reading.</p>
+  
+  {currentlyReading.length > 0 && (
+    <>
+      <h2>Currently Reading</h2>
+      <ul class="book-list">
+        {currentlyReading.map((book) => (
+          <li class="book-item">
+            <span class="book-title">{book.title}</span>
+            <span class="book-author">{book.author}</span>
+            {book.notes && <p class="book-notes">{book.notes}</p>}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+  
+  {finished.length > 0 && (
+    <>
+      <h2>Finished</h2>
+      <ul class="book-list">
+        {finished.map((book) => (
+          <li class="book-item">
+            <div class="book-header">
+              <span class="book-title">{book.title}</span>
+              <span class="book-year">{book.year}</span>
+            </div>
+            <span class="book-author">{book.author}</span>
+            {book.notes && <p class="book-notes">{book.notes}</p>}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+  
+  <div class="empty-state">
+    <p>Books will be added here as I read them. Check back soon.</p>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-intro {
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+  }
+  
+  .book-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .book-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .book-item:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .book-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  
+  .book-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    display: block;
+  }
+  
+  .book-author {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    display: block;
+    margin-top: 0.25rem;
+  }
+  
+  .book-year {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+  
+  .book-notes {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+  
+  .empty-state {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--color-border);
+    border-radius: 6px;
+  }
+  
+  .empty-state p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    text-align: center;
+    margin: 0;
+  }
+</style>

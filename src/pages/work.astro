@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    name: "Project Name",
+    description: "Brief description of what this project is about.",
+    link: "https://github.com/yourusername/project",
+    year: 2026
+  },
+  // Add more projects
+];
+---
+
+<BaseLayout title="Work | Devashish" description="Professional work and projects">
+  <h1>Work</h1>
+  <p class="page-intro">
+    Projects I've worked on and things I've built.
+  </p>
+  
+  <section class="links-section">
+    <h2>Links</h2>
+    <ul class="external-links">
+      <li>
+        <a href="https://github.com/yourusername" target="_blank" rel="noopener">
+          GitHub
+        </a>
+      </li>
+      <li>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">
+          LinkedIn
+        </a>
+      </li>
+    </ul>
+  </section>
+  
+  <section class="projects-section">
+    <h2>Projects</h2>
+    {projects.length > 0 ? (
+      <ul class="project-list">
+        {projects.map((project) => (
+          <li class="project-item">
+            <div class="project-header">
+              <a href={project.link} target="_blank" rel="noopener" class="project-name">
+                {project.name} ↗
+              </a>
+              <span class="project-year">{project.year}</span>
+            </div>
+            <p class="project-description">{project.description}</p>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="empty-state">
+        <p>Projects will be added here soon.</p>
+      </div>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .page-intro {
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+  }
+  
+  .links-section {
+    margin-bottom: 2rem;
+  }
+  
+  .external-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .external-links a {
+    font-family: var(--font-heading);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  
+  .project-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .project-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .project-item:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .project-name {
+    font-family: var(--font-heading);
+    font-weight: 500;
+  }
+  
+  .project-year {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+  
+  .project-description {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  
+  .empty-state {
+    margin-top: 1rem;
+    padding: 2rem;
+    background: var(--color-border);
+    border-radius: 6px;
+  }
+  
+  .empty-state p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    text-align: center;
+    margin: 0;
+  }
+</style>

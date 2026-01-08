@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Devashish">
+  <section class="intro">
+    <p class="greeting">Hello, I'm <strong>Devashish</strong>.</p>
+    <p>
+      I'm based in Bangalore. This is my corner of the internet where I collect 
+      my thoughts, interests, and things I'm learning along the way.
+    </p>
+    <p>
+      I write about things that interest me, keep track of what I'm reading, 
+      and maintain lists of the objects and ideas that shape my life.
+    </p>
+  </section>
+
+  <section class="links">
+    <h2>Elsewhere</h2>
+    <ul class="external-links">
+      <li><a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://twitter.com/yourusername" target="_blank" rel="noopener">Twitter</a></li>
+    </ul>
+  </section>
+
+  <section class="recent">
+    <h2>Recent Writing</h2>
+    <ul class="post-list">
+      <li>
+        <a href="/writing/first-post">
+          <span class="post-title">Welcome to my site</span>
+          <span class="post-date">January 2026</span>
+        </a>
+      </li>
+      <!-- More posts will be added here -->
+    </ul>
+    <p class="see-all"><a href="/writing">See all →</a></p>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-bottom: 2rem;
+  }
+  
+  .greeting {
+    font-size: 1.25rem;
+  }
+  
+  .greeting strong {
+    font-weight: 600;
+  }
+  
+  .external-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .external-links a {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  
+  .post-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .post-list li {
+    margin-bottom: 0.75rem;
+  }
+  
+  .post-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .post-list a:hover {
+    color: var(--color-text);
+  }
+  
+  .post-list a:hover .post-title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  
+  .post-title {
+    font-family: var(--font-heading);
+  }
+  
+  .post-date {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+  
+  .see-all {
+    margin-top: 1rem;
+  }
+  
+  .see-all a {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+</style>
