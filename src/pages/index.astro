@@ -15,15 +15,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </p>
   </section>
 
-  <section class="links">
-    <h2>Elsewhere</h2>
-    <ul class="external-links">
-      <li><a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a></li>
-      <li><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a></li>
-      <li><a href="https://twitter.com/yourusername" target="_blank" rel="noopener">Twitter</a></li>
-    </ul>
-  </section>
-
   <section class="recent">
     <h2>Recent Writing</h2>
     <ul class="post-list">
@@ -51,21 +42,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .greeting strong {
     font-weight: 600;
   }
-  
-  .external-links {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .external-links a {
-    font-family: var(--font-heading);
-    font-size: 0.95rem;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  
+
   .post-list {
     list-style: none;
     padding: 0;
