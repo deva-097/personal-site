@@ -139,14 +139,19 @@ This site is deployed on **Vercel** and automatically deploys on every push to t
 
 ### Making Updates
 
-1. Make changes locally
-2. Commit and push to GitHub:
-   ```bash
-   git add .
-   git commit -m "Your change description"
-   git push
-   ```
-3. Vercel automatically rebuilds and deploys (takes ~1 minute)
+**Quick Deploy (Recommended):**
+```bash
+./deploy.sh "Your change description"
+```
+
+**Manual Deploy:**
+```bash
+git add .
+git commit -m "Your change description"
+git push
+```
+
+Vercel automatically rebuilds and deploys (takes ~1 minute)
 
 ### Adding a Custom Domain
 
