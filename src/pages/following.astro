@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Blogs and podcasts organized by category
+const media = {
+  podcasts: [
+    {
+      name: "The Seen and the Unseen",
+      host: "Amit Varma",
+      description: "Long-form conversations on economics, politics, society, and culture in India",
+      url: "https://seenunseen.in",
+      favorite: true
+    },
+    // Add more podcasts here
+  ],
+
+  blogs: [
+    {
+      name: "Example Blog",
+      author: "Author Name",
+      description: "Brief description of what they write about",
+      url: "https://example.com",
+      favorite: false
+    },
+    // Add more blogs here
+  ],
+
+  newsletters: [
+    {
+      name: "Example Newsletter",
+      author: "Author Name",
+      description: "What this newsletter covers",
+      url: "https://example.com",
+      favorite: false
+    },
+    // Add more newsletters here
+  ]
+};
+
+const totalCount = media.podcasts.length + media.blogs.length + media.newsletters.length;
+const favoriteCount = [...media.podcasts, ...media.blogs, ...media.newsletters].filter(item => item.favorite).length;
+---
+
+<BaseLayout title="Following | Devashish" description="Blogs, podcasts, and newsletters I follow">
+  <h1>Following</h1>
+  <p class="page-intro">
+    Voices and perspectives I follow regularly. The blogs, podcasts, and newsletters
+    that inform my thinking and keep me curious.
+  </p>
+
+  <div class="stats">
+    <span>{totalCount} sources</span>
+    {favoriteCount > 0 && (
+      <>
+        <span>•</span>
+        <span>{favoriteCount} favorites</span>
+      </>
+    )}
+  </div>
+
+  <nav class="section-nav">
+    <a href="#podcasts">Podcasts</a>
+    <a href="#blogs">Blogs</a>
+    <a href="#newsletters">Newsletters</a>
+  </nav>
+
+  <section id="podcasts" class="media-section">
+    <h2>Podcasts</h2>
+    <ul class="media-list">
+      {media.podcasts.map((item) => (
+        <li class="media-item">
+          <div class="media-header">
+            <a href={item.url} target="_blank" rel="noopener noreferrer" class="media-name">
+              {item.favorite && <span class="favorite">⭐ </span>}
+              {item.name}
+            </a>
+          </div>
+          <span class="media-author">{item.host}</span>
+          <p class="media-description">{item.description}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="blogs" class="media-section">
+    <h2>Blogs</h2>
+    <ul class="media-list">
+      {media.blogs.map((item) => (
+        <li class="media-item">
+          <div class="media-header">
+            <a href={item.url} target="_blank" rel="noopener noreferrer" class="media-name">
+              {item.favorite && <span class="favorite">⭐ </span>}
+              {item.name}
+            </a>
+          </div>
+          <span class="media-author">{item.author}</span>
+          <p class="media-description">{item.description}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="newsletters" class="media-section">
+    <h2>Newsletters</h2>
+    <ul class="media-list">
+      {media.newsletters.map((item) => (
+        <li class="media-item">
+          <div class="media-header">
+            <a href={item.url} target="_blank" rel="noopener noreferrer" class="media-name">
+              {item.favorite && <span class="favorite">⭐ </span>}
+              {item.name}
+            </a>
+          </div>
+          <span class="media-author">{item.author}</span>
+          <p class="media-description">{item.description}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <div class="empty-note">
+    <p>This list grows and changes as I discover new voices. Last updated: January 2026</p>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-intro {
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .stats {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .section-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .section-nav a {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .section-nav a:hover {
+    color: var(--color-text);
+  }
+
+  .media-section {
+    margin-bottom: 3rem;
+  }
+
+  .media-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .media-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .media-item:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .media-header {
+    margin-bottom: 0.25rem;
+  }
+
+  .media-name {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 1.05rem;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  .media-name:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .favorite {
+    font-size: 0.9em;
+  }
+
+  .media-author {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .media-description {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .empty-note {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: var(--color-border);
+    border-radius: 6px;
+  }
+
+  .empty-note p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+    margin: 0;
+  }
+</style>

@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # misc
 *.log
+
+# raw notes and drafts
+raw_notes/

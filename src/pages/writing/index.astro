@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 // Get all posts from the content/writing folder
-const posts = await Astro.glob('../content/writing/*.md');
-const sortedPosts = posts.sort((a, b) => 
+const posts = await Astro.glob('../../content/writing/*.md');
+const sortedPosts = posts.sort((a, b) =>
   new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
 );
 ---
@@ -11,22 +11,28 @@ const sortedPosts = posts.sort((a, b) =>
 <BaseLayout title="Writing | Devashish" description="Essays and thoughts">
   <h1>Writing</h1>
   <p class="page-intro">Essays, notes, and thoughts on various topics.</p>
-  
-  <ul class="post-list">
-    {sortedPosts.map((post) => (
-      <li>
-        <a href={`/writing/${post.frontmatter.slug}`}>
-          <span class="post-title">{post.frontmatter.title}</span>
-          <span class="post-date">
-            {new Date(post.frontmatter.date).toLocaleDateString('en-US', { 
-              month: 'short', 
-              year: 'numeric' 
-            })}
-          </span>
-        </a>
-      </li>
-    ))}
-  </ul>
+
+  {sortedPosts.length > 0 ? (
+    <ul class="post-list">
+      {sortedPosts.map((post) => (
+        <li>
+          <a href={`/writing/${post.frontmatter.slug}`}>
+            <span class="post-title">{post.frontmatter.title}</span>
+            <span class="post-date">
+              {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                month: 'short',
+                year: 'numeric'
+              })}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div class="placeholder">
+      <p>Writing coming soon. Check back later for essays and thoughts.</p>
+    </div>
+  )}
 </BaseLayout>
 
 <style>
@@ -70,5 +76,18 @@ const sortedPosts = posts.sort((a, b) =>
     font-size: 0.85rem;
     color: var(--color-text-muted);
     white-space: nowrap;
+  }
+
+  .placeholder {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--color-border);
+    border-radius: 6px;
+  }
+
+  .placeholder p {
+    color: var(--color-text-muted);
+    text-align: center;
+    margin: 0;
   }
 </style>

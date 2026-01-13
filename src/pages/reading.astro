@@ -1,127 +1,286 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// You can move this to a separate data file later
-const books = [
-  {
-    title: "Example Book Title",
-    author: "Author Name",
-    status: "reading", // reading, finished, want-to-read
-    year: 2026,
-    notes: "Brief thoughts on the book."
-  },
-  // Add more books here
-];
+// Reading data organized by category
+const readingData = {
+  fantasy: {
+    title: "Fantasy",
+    books: [
+      // Epic Fantasy Series
+      { title: "Realm of the Elderlings", author: "Robin Hobb", type: "series", count: "15 books", notes: ""},
+      { title: "Malazan Book of the Fallen", author: "Steven Erikson", type: "series", count: "10 books", },
+      { title: "The Wheel of Time", author: "Robert Jordan", type: "series", count: "14 books",  },
+      { title: "A Song of Ice and Fire", author: "George R.R. Martin", type: "series",  },
+      { title: "The Stormlight Archive", author: "Brandon Sanderson", type: "series",  },
 
-const currentlyReading = books.filter(b => b.status === 'reading');
-const finished = books.filter(b => b.status === 'finished');
+      // Other Series
+      { title: "The First Law Trilogy", author: "Joe Abercrombie", rating: 5,  },
+      { title: "Gentleman Bastard", author: "Scott Lynch", rating: 5 },
+      { title: "The Broken Earth", author: "N.K. Jemisin", rating: 5,  },
+      { title: "The Inheritance Cycle", author: "Christopher Paolini", rating: 3 },
+
+      // Standalone
+      { title: "The Lord of the Rings", author: "J.R.R. Tolkien",  },
+      { title: "The Hobbit", author: "J.R.R. Tolkien", rating: 3 },
+      { title: "American Gods", author: "Neil Gaiman", rating: 5 },
+      { title: "Norse Mythology", author: "Neil Gaiman", rating: 5 },
+      { title: "Good Omens", author: "Terry Pratchett & Neil Gaiman", rating: 4 },
+      { title: "A Wizard of Earthsea", author: "Ursula K. Le Guin", rating: 5 },
+      { title: "Chronicles of The Black Company", author: "Glen Cook", rating: 5 },
+    ]
+  },
+
+  scifi: {
+    title: "Science Fiction",
+    books: [
+      // Space Opera & Hard SF
+      { title: "Foundation Series", author: "Isaac Asimov", type: "series",  },
+      { title: "Hyperion Cantos", author: "Dan Simmons", type: "series",  },
+      { title: "Remembrance of Earth's Past (The 3 Body Problem)", author: "Liu Cixin", rating: 5,  },
+      { title: "The Murderbot Diaries", author: "Martha Wells",  },
+      { title: "Project Hail Mary", author: "Andy Weir", rating: 5 },
+      { title: "Ender's Game", author: "Orson Scott Card", rating: 5 },
+      { title: "Ringworld", author: "Larry Niven", rating: 4 },
+      { title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams", type: "series",  },
+      { title: "The Moon is a Harsh Mistress", author: "Robert A Heinlein" },
+
+
+
+      // Dystopian & Cyberpunk
+      { title: "1984", author: "George Orwell", rating: 5 },
+      { title: "Brave New World", author: "Aldous Huxley", rating: 5 },
+      { title: "Do Androids Dream of Electric Sheep?", author: "Philip K. Dick", rating: 5 },
+      { title: "Neuromancer", author: "William Gibson", rating: 4 },
+      { title: "I, Robot", author: "Isaac Asimov", year: 2025 },
+    ]
+  },
+
+  nonfiction: {
+    title: "Non-Fiction",
+    books: [
+      // Business & Career
+      { title: "Shoe Dog: A Memoir by the Creator of Nike", author: "Phil Knight", rating: 4, category: "Business" },
+      { title: "Working Backwards: Insights, Stories, and Secrets from Inside Amazon", author: "Colin Bryar", rating: 5, category: "Business" },
+      { title: "Who: The A Method for Hiring", author: "Geoff Smart", rating: 4, category: "Business" },
+      { title: "The Quarter-Life Breakthrough", author: "Adam Smiley Poswolsky", rating: 5, category: "Career" },
+
+      // Self-Help & Productivity
+      { title: "Atomic Habits", author: "James Clear", rating: 5, category: "Productivity" },
+      { title: "Deep Work", author: "Cal Newport", category: "Productivity" },
+      { title: "The Psychology of Money", author: "Morgan Housel", rating: 5, category: "Finance" },
+      { title: "The Subtle Art of Not Giving a F*ck", author: "Mark Manson", rating: 4, category: "Self-Help" },
+      { title: "Rich Dad, Poor Dad", author: "Robert T. Kiyosaki", rating: 3, category: "Finance" },
+      { title: "Ikigai: The Japanese secret to a long and happy life", author: "Héctor García", rating: 4, category: "Self-Help" },
+      { title: "Wanting: Mimetic Desire", author: "Luke Burgis", category: "Psychology" },
+
+      // Science & History
+      { title: "A Short History of Nearly Everything", author: "Bill Bryson", rating: 5, category: "Science" },
+      { title: "At Home: A Short History of Private Life", author: "Bill Bryson", rating: 3, category: "History" },
+      { title: "Why We Sleep: The New Science of Sleep and Dreams", author: "Matthew Walker", rating: 4, year: 2025, category: "Science" },
+      { title: "Predictably Irrational: The Hidden Forces That Shape Our Decisions", author: "Dan Ariely", rating: 5, category: "Psychology" },
+
+      // Indian History & Politics
+      { title: "India After Gandhi: The History of the World's Largest Democracy", author: "Ramachandra Guha", rating: 5, category: "History" },
+      { title: "The Discovery of India", author: "Jawaharlal Nehru", rating: 4, category: "History" },
+    ]
+  },
+
+  ya: {
+    title: "Other Favorites",
+    books: [
+      { title: "Harry Potter", author: "J.K. Rowling", type: "series",  },
+      { title: "Matilda", author: "Roald Dahl", rating: 5,  },
+      { title: "Charlie and the Chocolate Factory", author: "Roald Dahl", rating: 5,  },
+      { title: "Danny the Champion of the World", author: "Roald Dahl", rating: 5,  },
+      { title: "The Godfather", author: "Mario Puzo", rating: 5 },
+      { title: "The Complete Sherlock Holmes", author: "Arthur Conan Doyle", rating: 5 },
+      { title: "Congo", author: "Michael Crichton", rating: 5 },
+      { title: "Shantaram", author: "Gregory David Roberts", rating: 5 },
+      { title: "The Book Thief", author: "Markus Zusak", rating: 5 },
+      { title: "Life of Pi", author: "Yann Martel", rating: 5 },
+      { title: "Perfume: The Story of a Murderer", author: "Patrick Süskind", rating: 5 },
+      { title: "A Man Called Ove", author: "Fredrik Backman", rating: 5 },
+    ]
+  }
+};
 ---
 
-<BaseLayout title="Reading | Devashish" description="Books I've read and am reading">
+<BaseLayout title="Reading | Devashish" description="Books I've read and recommendations">
   <h1>Reading</h1>
-  <p class="page-intro">Books that have shaped my thinking, and what I'm currently reading.</p>
-  
-  {currentlyReading.length > 0 && (
-    <>
-      <h2>Currently Reading</h2>
-      <ul class="book-list">
-        {currentlyReading.map((book) => (
-          <li class="book-item">
-            <span class="book-title">{book.title}</span>
-            <span class="book-author">{book.author}</span>
-            {book.notes && <p class="book-notes">{book.notes}</p>}
-          </li>
-        ))}
-      </ul>
-    </>
-  )}
-  
-  {finished.length > 0 && (
-    <>
-      <h2>Finished</h2>
-      <ul class="book-list">
-        {finished.map((book) => (
-          <li class="book-item">
-            <div class="book-header">
-              <span class="book-title">{book.title}</span>
-              <span class="book-year">{book.year}</span>
-            </div>
-            <span class="book-author">{book.author}</span>
-            {book.notes && <p class="book-notes">{book.notes}</p>}
-          </li>
-        ))}
-      </ul>
-    </>
-  )}
-  
-  <div class="empty-state">
-    <p>Books will be added here as I read them. Check back soon.</p>
+  <p class="page-intro">
+    Reading has been a life-long companion. Introduced by my mom, encouraged by a couple of lovely people early on in life. Below is a collection of books I've loved best. Occasionally I will try to post short write-ups on these and link them back. Full list on <a href="https://www.goodreads.com/devashish_097" target="_blank" rel="noopener noreferrer">Goodreads</a>
+  </p>
+
+  <nav class="genre-nav">
+    <a href="#fantasy">Fantasy</a>
+    <a href="#scifi">Science Fiction</a>
+    <a href="#nonfiction">Non-Fiction</a>
+    <a href="#ya">Other Favorites</a>
+  </nav>
+
+  <div class="categories">
+    {Object.entries(readingData).map(([key, category]) => (
+      <section class="category" id={key}>
+        <h2>{category.title}</h2>
+        <ul class="book-list">
+          {category.books.map((book) => (
+            <li class="book-item">
+              <div>
+                <span class="book-title">
+                  {book.favorite && <span class="favorite">⭐ </span>}
+                  {book.title}
+                  {book.type === "series" && book.count && <span class="series-count"> ({book.count})</span>}
+                </span>
+                <span class="book-author"> {book.author}</span>
+              </div>
+              {book.notes && <div class="book-notes">{book.notes}</div>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
   </div>
+
+  <footer class="reading-footer">
+    <p>Last updated: January 2026</p>
+  </footer>
 </BaseLayout>
 
 <style>
   .page-intro {
     color: var(--color-text-muted);
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
-  
+
+  .genre-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .genre-nav a {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .genre-nav a:hover {
+    color: var(--color-text);
+  }
+
+  .genre-nav a.active {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .categories {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .category {
+    transition: opacity 0.2s ease;
+  }
+
+  .category.hidden {
+    display: none;
+  }
+
+  .category h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
   .book-list {
     list-style: none;
     padding: 0;
   }
-  
+
   .book-item {
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 0.85rem;
   }
-  
-  .book-item:first-child {
-    border-top: 1px solid var(--color-border);
-  }
-  
-  .book-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-  }
-  
+
   .book-title {
     font-family: var(--font-heading);
     font-weight: 500;
-    display: block;
   }
-  
+
+  .favorite {
+    font-size: 0.9em;
+  }
+
+  .series-count {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-weight: normal;
+  }
+
   .book-author {
     font-size: 0.9rem;
     color: var(--color-text-muted);
-    display: block;
-    margin-top: 0.25rem;
   }
-  
-  .book-year {
+
+  .book-notes {
     font-size: 0.85rem;
     color: var(--color-text-muted);
-    white-space: nowrap;
+    margin-top: 0.15rem;
   }
-  
-  .book-notes {
-    margin-top: 0.75rem;
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
-  }
-  
-  .empty-state {
-    margin-top: 2rem;
-    padding: 2rem;
-    background: var(--color-border);
-    border-radius: 6px;
-  }
-  
-  .empty-state p {
-    color: var(--color-text-muted);
-    font-size: 0.95rem;
+
+  .reading-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
     text-align: center;
-    margin: 0;
+  }
+
+  .reading-footer p {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
   }
 </style>
+
+<script>
+  function filterGenres() {
+    const hash = window.location.hash.slice(1);
+    const categories = document.querySelectorAll('.category');
+    const navLinks = document.querySelectorAll('.genre-nav a');
+
+    // Update navigation active state
+    navLinks.forEach(link => {
+      const linkHash = link.getAttribute('href')?.slice(1);
+      if (linkHash === hash) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    // Show/hide categories
+    if (hash) {
+      categories.forEach(category => {
+        if (category.id === hash) {
+          category.classList.remove('hidden');
+        } else {
+          category.classList.add('hidden');
+        }
+      });
+    } else {
+      // Show all categories if no hash
+      categories.forEach(category => category.classList.remove('hidden'));
+      navLinks.forEach(link => link.classList.remove('active'));
+    }
+  }
+
+  // Run on page load
+  filterGenres();
+
+  // Run when hash changes
+  window.addEventListener('hashchange', filterGenres);
+</script>

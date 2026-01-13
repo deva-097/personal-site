@@ -1,39 +1,71 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Organize your interests by category
-// You can expand these with images, links, and more details
 const interests = {
-  fountainPens: {
-    title: "Fountain Pens",
-    description: "The joy of writing with a good pen.",
+  swissKnives: {
+    title: "Swiss Knives & EDC",
+    description: "My first obsession. Multi-functional, well-designed, built to last. Led me down the broader EDC rabbithole.",
     items: [
-      { name: "Example Pen", notes: "Why I like it" },
-      // Add more pens
+      { name: "Tinker", brand: "Victorinox", url: "https://www.victorinox.com/en/Products/Swiss-Army-Knife%E2%84%A2-and-Tools/Essentials/Tinker/p/1.4603" },
+      { name: "Spartan", brand: "Victorinox", url: "https://www.victorinox.com/en/Products/Swiss-Army-Knife%E2%84%A2-and-Tools/Essentials/Spartan/p/1.3603" },
+      { name: "Evolution 14 Wood", brand: "Victorinox", url: "https://www.victorinox.com/en-KR/Products/Swiss-Army-Knife%E2%84%A2-and-Tools/Outdoor/Evolution-17-Wood/p/2.3911.63" },
+      { name: "Tenacious", brand: "Spyderco", url: "https://spyderco.com/products/c122g-tenacious%C2%AE?variant=44049535696940" },
+      { name: "No.8 Carbon", brand: "Opinel", url: "https://www.opinel.com/en/pocket-knives/carbone/n8-carbon" },
+      { name: "i3T 2", brand: "Olight", url: "https://www.olight.com/store/i3t-2-small-edc-flashlight", notes: "EDC flashlight" },
+      { name: "Dime", brand: "Gerber", url: "https://www.gerbergear.com/en-us/shop/multi-tools/all-multi-tools/dime-black-30-000469n", notes: "Lost at BLR airport security" }
+    ]
+  },
+  wallets: {
+    title: "Wallets",
+    description: "Started off as functional, but I quickly got tired of the fat leather wallets. Tried a few, settled on the Secrid wallet.",
+    items: [
+      { name: "Miniwallet Original (Chocolate)", brand: "Secrid", url: "https://secrid.com/en-global/miniwallet-original-chocolate/", notes: "Highly recommend some version of this" },
+      { name: "Altitude Billfold", brand: "Pioneer", url: "https://pioneercarry.com/collections/wallets/products/altitude-billfold" },
+      { name: "Classic Wallet (Ikat Blue)", brand: "Nappadori", url: "https://www.nappadori.com/collections/wallets/products/classic-wallet-ikat" }
     ]
   },
   watches: {
     title: "Watches",
-    description: "Mechanical timekeeping.",
+    description: "Graduated slowly from kid G-Shock to an Omega. At one point my wishlist was worth about $2Mn. But the Aqua Terra made me feel 'done' — a true GADA watch.",
     items: [
-      { name: "Example Watch", notes: "Notes about it" },
-      // Add more watches
+      { name: "Seamaster Aqua Terra", brand: "Omega", url: "https://www.omegawatches.com/watch-omega-seamaster-aqua-terra-150m-co-axial-master-chronometer-41-mm-22010412103004", notes: "The GADA watch" },
+      { name: "Prospex Alpinist", brand: "Seiko", url: "https://www.seikowatches.com/in-en/products/prospex/spb121j1" },
+      { name: "Seamaster ST 166-0209 (Vintage)", brand: "Omega", url: "https://www.omegawatches.com/watch-omega-seamaster-omega-st-166-0209" },
+      { name: "6M13 Age of Discovery", brand: "Seiko", url: "https://www.reddit.com/r/Watches/comments/be4r0d/seiko_6m13_age_of_discovery_perpetual_calendar/", notes: "Lying out of commission. Need to find someone I trust enough to repair it" },
+      { name: "Couturier Chronograph", brand: "Tissot", url: "https://zimsonwatches.com/products/tissot-t-classic-silver-dial-men-41mm-t0356171103100" },
+      { name: "Metric Retro Black", brand: "Brew", url: "https://www.brew-watches.com/products/brew-metric-retro-black" },
+      { name: "A Perfectly Useless Afternoon", brand: "Mr Jones", url: "https://mrjoneswatches.com/collections/all-watches/products/a-perfectly-useless-afternoon" },
+      { name: "Paper Crane", brand: "Mr Jones", url: "https://mrjoneswatches.com/products/paper-crane" },
+      { name: "INOX", brand: "Victorinox", url: "https://www.victorinox.com/en/Products/Watches/Men's-Watches/INOX/p/241682.1", notes: "Mine's on a paracord strap" }
     ]
   },
-  knives: {
-    title: "Swiss Knives",
-    description: "Everyday carry tools.",
+  fountainPens: {
+    title: "Fountain Pens",
+    description: "The deepest (and most recent) obsession - hopefully recovered from it now :crossed_fingers:. From a Lamy Safari in school to 25+ pens at one point. Ran the gauntlet on different filling systems, grinds, nibs, custom pens, inks, leather holders — Diderot effect in full glory.",
     items: [
-      { name: "Example Knife", notes: "Notes" },
-      // Add more
+      { name: "2000", brand: "Lamy", url: "https://www.lamy.com/en-us/p/lamy-2000-fountain-pen/52875809096014" },
+      { name: "3776 Century (Chartres Blue)", brand: "Platinum", url: "https://www.gouletpens.com/products/platinum-3776-century-fountain-pen-chartres-blue-gold" },
+      { name: "Carène Deluxe", brand: "Waterman", url: "https://www.waterman.com/pens/car%C3%A8ne/car%C3%A8ne-deluxe-fountain-pen/SP_1912425.html" },
+      { name: "1911 Large (Black/Silver)", brand: "Sailor", url: "https://goldspot.com/products/sailor-1911-large-fountain-pen-in-black-with-silver-trim-21k-gold" },
+      { name: "Custom 823 (Amber Brown)", brand: "Pilot", url: "https://makoba.com/products/pilot-custom-823-fountain-pen-amber-brown-gt" },
+      { name: "Safari (Umbra)", brand: "Lamy", url: "https://makoba.com/products/lamy-safari-fountain-pen-umbra" },
+      { name: "Starwalker Ultrablack", brand: "Montblanc", url: "https://www.gioiellerialucchese.it/en/writing-pens/19971-montblanc-starwalker-ultrablack-fountain-pen-126339.html" },
+      { name: "Beatles LE", brand: "Montblanc" },
+      { name: "Legacy Swirl (Red/Black)", brand: "Kanwrite", url: "https://kanwrite.com/product/legacy-swirl-red-black/" },
+      { name: "302", brand: "Ratnamson", url: "https://helloaugust.in/my-shop/ratnamson-302-fountain-pen/" },
+      { name: "Aura", brand: "Mohi", url: "https://www.mohipens.com/product-page/mohi-aura" },
+      { name: "Several vintage pens", brand: "Various" }
     ]
   },
-  music: {
-    title: "Music & Bands",
-    description: "What I listen to.",
+  coffee: {
+    title: "Coffee",
+    description: "Brew a french press most days in the morning. My favorite beans: anything from Thogarihunkal Estate (any roaster), and Blue Tokai's annual birthday blends.",
     items: [
-      { name: "Example Band", notes: "Favorite album" },
-      // Add more
+      { name: "Encore Grinder", brand: "Baratza", url: "https://www.baratza.com/en-us/product/encore-zcg485" },
+      { name: "Cold Brew Pot", brand: "Hario", url: "https://global.hario.com/product/coffee/coldbrew/MCPN.html" },
+      { name: "Chestnut C2 Grinder", brand: "Timemore", url: "https://toffeecoffeeroasters.com/collections/timemore/products/timemore-chestnut-c2-grinder" },
+      { name: "Steel French Press", brand: "Generic", url: "https://www.amazon.in/dp/B09MHWWGH9", notes: "After breaking 3 glass ones" },
+      { name: "Rambler 20oz", brand: "Yeti", url: "https://www.yeti.com/drinkware/tumblers/21071502223.html", notes: "Gift from the wife" }
     ]
   }
 };
@@ -42,65 +74,114 @@ const interests = {
 <BaseLayout title="Interests | Devashish" description="Things I care about">
   <h1>Interests</h1>
   <p class="page-intro">
-    A collection of things that bring me joy or occupy my attention. 
-    Objects, hobbies, and obsessions, documented for my own reference and 
+    A collection of things that bring me joy or occupy my attention.
+    Objects, hobbies, and obsessions, documented for my own reference and
     anyone else who might share these interests.
   </p>
-  
+
   <nav class="interest-nav">
-    <a href="#fountain-pens">Fountain Pens</a>
+    <a href="#knives">Swiss Knives & EDC</a>
+    <a href="#wallets">Wallets</a>
     <a href="#watches">Watches</a>
-    <a href="#knives">Swiss Knives</a>
-    <a href="#music">Music</a>
+    <a href="#fountain-pens">Fountain Pens</a>
+    <a href="#coffee">Coffee</a>
   </nav>
-  
-  <section id="fountain-pens" class="interest-section">
-    <h2>{interests.fountainPens.title}</h2>
-    <p class="section-description">{interests.fountainPens.description}</p>
+
+  <section id="knives" class="interest-section">
+    <h2>{interests.swissKnives.title}</h2>
+    <p class="section-description">{interests.swissKnives.description}</p>
     <ul class="item-list">
-      {interests.fountainPens.items.map((item) => (
-        <li>
-          <span class="item-name">{item.name}</span>
-          {item.notes && <span class="item-notes">{item.notes}</span>}
+      {interests.swissKnives.items.map((item) => (
+        <li class="item">
+          <div>
+            {item.url ? (
+              <a href={item.url} target="_blank" rel="noopener noreferrer" class="item-name">{item.name}</a>
+            ) : (
+              <span class="item-name">{item.name}</span>
+            )}
+            <span class="item-brand"> {item.brand}</span>
+          </div>
+          {item.notes && <div class="item-notes">{item.notes}</div>}
         </li>
       ))}
     </ul>
   </section>
-  
+
+  <section id="wallets" class="interest-section">
+    <h2>{interests.wallets.title}</h2>
+    <p class="section-description">{interests.wallets.description}</p>
+    <ul class="item-list">
+      {interests.wallets.items.map((item) => (
+        <li class="item">
+          <div>
+            {item.url ? (
+              <a href={item.url} target="_blank" rel="noopener noreferrer" class="item-name">{item.name}</a>
+            ) : (
+              <span class="item-name">{item.name}</span>
+            )}
+            <span class="item-brand"> {item.brand}</span>
+          </div>
+          {item.notes && <div class="item-notes">{item.notes}</div>}
+        </li>
+      ))}
+    </ul>
+  </section>
+
   <section id="watches" class="interest-section">
     <h2>{interests.watches.title}</h2>
     <p class="section-description">{interests.watches.description}</p>
     <ul class="item-list">
       {interests.watches.items.map((item) => (
-        <li>
-          <span class="item-name">{item.name}</span>
-          {item.notes && <span class="item-notes">{item.notes}</span>}
+        <li class="item">
+          <div>
+            {item.url ? (
+              <a href={item.url} target="_blank" rel="noopener noreferrer" class="item-name">{item.name}</a>
+            ) : (
+              <span class="item-name">{item.name}</span>
+            )}
+            <span class="item-brand"> {item.brand}</span>
+          </div>
+          {item.notes && <div class="item-notes">{item.notes}</div>}
         </li>
       ))}
     </ul>
   </section>
-  
-  <section id="knives" class="interest-section">
-    <h2>{interests.knives.title}</h2>
-    <p class="section-description">{interests.knives.description}</p>
+
+  <section id="fountain-pens" class="interest-section">
+    <h2>{interests.fountainPens.title}</h2>
+    <p class="section-description">{interests.fountainPens.description}</p>
     <ul class="item-list">
-      {interests.knives.items.map((item) => (
-        <li>
-          <span class="item-name">{item.name}</span>
-          {item.notes && <span class="item-notes">{item.notes}</span>}
+      {interests.fountainPens.items.map((item) => (
+        <li class="item">
+          <div>
+            {item.url ? (
+              <a href={item.url} target="_blank" rel="noopener noreferrer" class="item-name">{item.name}</a>
+            ) : (
+              <span class="item-name">{item.name}</span>
+            )}
+            <span class="item-brand"> {item.brand}</span>
+          </div>
+          {item.notes && <div class="item-notes">{item.notes}</div>}
         </li>
       ))}
     </ul>
   </section>
-  
-  <section id="music" class="interest-section">
-    <h2>{interests.music.title}</h2>
-    <p class="section-description">{interests.music.description}</p>
+
+  <section id="coffee" class="interest-section">
+    <h2>{interests.coffee.title}</h2>
+    <p class="section-description">{interests.coffee.description}</p>
     <ul class="item-list">
-      {interests.music.items.map((item) => (
-        <li>
-          <span class="item-name">{item.name}</span>
-          {item.notes && <span class="item-notes">{item.notes}</span>}
+      {interests.coffee.items.map((item) => (
+        <li class="item">
+          <div>
+            {item.url ? (
+              <a href={item.url} target="_blank" rel="noopener noreferrer" class="item-name">{item.name}</a>
+            ) : (
+              <span class="item-name">{item.name}</span>
+            )}
+            <span class="item-brand"> {item.brand}</span>
+          </div>
+          {item.notes && <div class="item-notes">{item.notes}</div>}
         </li>
       ))}
     </ul>
@@ -133,41 +214,97 @@ const interests = {
   .interest-nav a:hover {
     color: var(--color-text);
   }
-  
-  .interest-section {
-    margin-bottom: 3rem;
+
+  .interest-nav a.active {
+    color: var(--color-text);
+    font-weight: 500;
   }
-  
+
+  .interest-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .interest-section.hidden {
+    display: none;
+  }
+
   .section-description {
     color: var(--color-text-muted);
     font-size: 0.95rem;
     margin-bottom: 1rem;
   }
-  
+
   .item-list {
     list-style: none;
     padding: 0;
   }
-  
-  .item-list li {
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--color-border);
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+
+  .item {
+    margin-bottom: 0.85rem;
   }
-  
-  .item-list li:first-child {
-    border-top: 1px solid var(--color-border);
-  }
-  
+
   .item-name {
     font-family: var(--font-heading);
     font-weight: 500;
   }
-  
-  .item-notes {
+
+  a.item-name {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  a.item-name:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .item-brand {
     font-size: 0.9rem;
     color: var(--color-text-muted);
   }
+
+  .item-notes {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 0.15rem;
+  }
 </style>
+
+<script>
+  function filterSections() {
+    const hash = window.location.hash.slice(1);
+    const sections = document.querySelectorAll('.interest-section');
+    const navLinks = document.querySelectorAll('.interest-nav a');
+
+    // Update navigation active state
+    navLinks.forEach(link => {
+      const linkHash = link.getAttribute('href')?.slice(1);
+      if (linkHash === hash) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    // Show/hide sections
+    if (hash) {
+      sections.forEach(section => {
+        if (section.id === hash) {
+          section.classList.remove('hidden');
+        } else {
+          section.classList.add('hidden');
+        }
+      });
+    } else {
+      // Show all sections if no hash
+      sections.forEach(section => section.classList.remove('hidden'));
+      navLinks.forEach(link => link.classList.remove('active'));
+    }
+  }
+
+  // Run on page load
+  filterSections();
+
+  // Run when hash changes
+  window.addEventListener('hashchange', filterSections);
+</script>
