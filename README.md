@@ -2,6 +2,9 @@
 
 A minimal personal website built with [Astro](https://astro.build).
 
+**Live Site:** [https://devashish-bansal.vercel.app](https://devashish-bansal.vercel.app)
+**Repository:** [https://github.com/deva-097/personal-site](https://github.com/deva-097/personal-site)
+
 ## Quick Start
 
 ```bash
@@ -42,10 +45,10 @@ The dev server runs at `http://localhost:4321`
 ## Pages & Features
 
 ### Reading (`/reading`)
-- **217 books** organized by genre (Fantasy, Sci-Fi, Literary Fiction, Thriller, Non-Fiction, YA)
+- **217 books** organized by genre (Fantasy, Sci-Fi, Non-Fiction, Other Favorites)
 - **Filterable navigation**: Click genres to show only that category
-- Favorites marked with ⭐
-- Series counts, ratings, and notes
+- Compact list format with inline author names
+- Links to [Goodreads profile](https://www.goodreads.com/devashish_097)
 
 ### Interests (`/interests`)
 - **Filterable sections**: Swiss Knives & EDC, Wallets, Watches, Fountain Pens, Coffee
@@ -87,8 +90,8 @@ Edit `src/pages/reading.astro` and add to the appropriate category in `readingDa
 {
   title: "Book Title",
   author: "Author Name",
-  rating: 5,
-  favorite: true,
+  type: "series",  // optional
+  count: "3 books",  // optional, for series
   notes: "Optional notes"
 }
 ```
@@ -99,7 +102,8 @@ Edit `src/pages/interests.astro` and add items to the relevant section:
 
 ```javascript
 {
-  name: "Item Name",
+  name: "Product Name",
+  brand: "Brand Name",
   url: "https://example.com",
   notes: "Optional notes"
 }
@@ -126,24 +130,33 @@ Edit `src/pages/following.astro` and add to podcasts, blogs, or newsletters:
 
 ## Deployment
 
-### Vercel (Recommended)
+This site is deployed on **Vercel** and automatically deploys on every push to the `main` branch.
 
-1. Push your code to GitHub
-2. Go to [vercel.com](https://vercel.com)
-3. Import your GitHub repository
-4. Vercel auto-detects Astro—just click Deploy
+### Current Deployment
+- **Platform:** Vercel
+- **URL:** https://devashish-bansal.vercel.app
+- **Auto-deploy:** Enabled (pushes to `main` trigger automatic rebuilds)
 
-### Netlify
+### Making Updates
 
-1. Push your code to GitHub
-2. Go to [netlify.com](https://netlify.com)
-3. Import your repository
-4. Build command: `npm run build`
-5. Publish directory: `dist`
+1. Make changes locally
+2. Commit and push to GitHub:
+   ```bash
+   git add .
+   git commit -m "Your change description"
+   git push
+   ```
+3. Vercel automatically rebuilds and deploys (takes ~1 minute)
 
-### Custom Domain
+### Adding a Custom Domain
 
-After deploying, you can add a custom domain in your hosting provider's dashboard. Both Vercel and Netlify offer free SSL certificates.
+When you're ready to add a custom domain:
+
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Select your project → Settings → Domains
+3. Add your custom domain (e.g., `devashish.com`)
+4. Update DNS settings at your domain registrar (Vercel provides instructions)
+5. Free SSL certificate is automatically provisioned
 
 ## Customization
 
