@@ -180,6 +180,15 @@ Edit the CSS variables in `src/layouts/BaseLayout.astro`:
 }
 ```
 
+### Social Media Links
+
+The footer contains social media icons that appear on every page:
+- **GitHub:** [https://github.com/deva-097](https://github.com/deva-097)
+- **LinkedIn:** [https://www.linkedin.com/in/devashish-bansal](https://www.linkedin.com/in/devashish-bansal)
+- **Goodreads:** [https://www.goodreads.com/devashish_097](https://www.goodreads.com/devashish_097)
+
+To update these links, edit the footer section in `src/layouts/BaseLayout.astro`.
+
 ### Adding New Sections
 
 1. Create a new `.astro` file in `src/pages/`
