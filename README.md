@@ -44,6 +44,18 @@ The dev server runs at `http://localhost:4321`
 
 ## Pages & Features
 
+### Home (`/`)
+- Shows up to 5 most recent blog posts
+- Dynamically pulls from writing folder
+- Clean, minimal introduction
+
+### Dark Mode
+- **Theme toggle** in header navigation with sun/moon icons
+- **System preference detection**: Automatically matches your OS theme
+- **Manual override**: Click toggle to switch themes
+- **Persistent**: Your preference is saved to localStorage
+- Warm color palette for comfortable reading in both modes
+
 ### Reading (`/reading`)
 - **217 books** organized by genre (Fantasy, Sci-Fi, Non-Fiction, Other Favorites)
 - **Filterable navigation**: Click genres to show only that category
@@ -62,8 +74,10 @@ The dev server runs at `http://localhost:4321`
 - Links to sources
 
 ### Writing (`/writing`)
-- Blog posts and essays
-- Placeholder view when no posts exist
+- Blog posts and essays with Markdown support
+- **Footnotes support**: GitHub Flavored Markdown footnotes
+- Sorted by date (newest first)
+- Individual post pages with formatted content
 
 ## Adding Content
 
@@ -77,10 +91,17 @@ title: "Your Post Title"
 slug: "your-post-slug"
 date: "2026-01-15"
 description: "Brief description"
+tags: ["category"]
 ---
 
 Your content here...
+
+Add footnotes like this.[^1]
+
+[^1]: This is a footnote that will appear at the bottom of the post.
 ```
+
+**Footnotes**: Use GitHub Flavored Markdown syntax with `[^1]` in text and `[^1]: Content` at the bottom.
 
 ### Adding Books
 
@@ -170,6 +191,7 @@ When you're ready to add a custom domain:
 Edit the CSS variables in `src/layouts/BaseLayout.astro`:
 
 ```css
+/* Light mode */
 :root {
   --color-bg: #fafaf9;
   --color-text: #1c1917;
@@ -177,6 +199,16 @@ Edit the CSS variables in `src/layouts/BaseLayout.astro`:
   --color-border: #e7e5e4;
   --font-body: 'Source Serif 4', Georgia, serif;
   --font-heading: 'DM Sans', system-ui, sans-serif;
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  --color-bg: #1c1917;
+  --color-text: #fafaf9;
+  --color-text-muted: #a8a29e;
+  --color-border: #44403c;
+  --color-link: #fafaf9;
+  --color-link-hover: #d6d3d1;
 }
 ```
 
@@ -220,8 +252,10 @@ This site is designed to be easily modified with Claude Code. You can ask it to:
 - "Add a new book to the Fantasy section"
 - "Add a new interest category"
 - "Update the Following page with new podcasts"
-- "Change the color scheme to dark mode"
+- "Adjust the dark mode colors"
 - "Add filtering to another page"
+- "Create a new blog post about [topic]"
+- "Add footnotes to an existing post"
 
 Claude Code can read and modify all the files in this project.
 
