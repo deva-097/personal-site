@@ -20,6 +20,18 @@ const { title, description = "Personal website" } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+
+    <!-- Theme Detection: Run immediately to prevent flash -->
+    <script is:inline>
+      (function() {
+        const getTheme = () => {
+          const stored = localStorage.getItem('theme');
+          if (stored) return stored;
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        };
+        document.documentElement.setAttribute('data-theme', getTheme());
+      })();
+    </script>
   </head>
   <body>
     <div class="container">
@@ -32,6 +44,22 @@ const { title, description = "Personal website" } = Astro.props;
             <a href="/following">Following</a>
             <a href="/interests">Interests</a>
             <a href="/work">Work</a>
+            <button id="theme-toggle" aria-label="Toggle theme">
+              <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </button>
           </div>
         </nav>
       </header>
@@ -64,6 +92,30 @@ const { title, description = "Personal website" } = Astro.props;
         </div>
       </footer>
     </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+      function initThemeToggle() {
+        const toggle = document.getElementById('theme-toggle');
+
+        toggle?.addEventListener('click', () => {
+          const current = document.documentElement.getAttribute('data-theme');
+          const next = current === 'light' ? 'dark' : 'light';
+
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+        });
+
+        // Listen for system preference changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          if (!localStorage.getItem('theme')) {
+            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+          }
+        });
+      }
+
+      initThemeToggle();
+    </script>
   </body>
 </html>
 
@@ -76,12 +128,21 @@ const { title, description = "Personal website" } = Astro.props;
     --color-link: #1c1917;
     --color-link-hover: #78716c;
     --color-accent: #dc2626;
-    
+
     --font-body: 'Source Serif 4', Georgia, serif;
     --font-heading: 'DM Sans', system-ui, sans-serif;
-    
+
     --max-width: 640px;
     --spacing-unit: 1rem;
+  }
+
+  [data-theme="dark"] {
+    --color-bg: #1c1917;
+    --color-text: #fafaf9;
+    --color-text-muted: #a8a29e;
+    --color-border: #44403c;
+    --color-link: #fafaf9;
+    --color-link-hover: #d6d3d1;
   }
   
   * {
@@ -278,7 +339,30 @@ const { title, description = "Personal website" } = Astro.props;
   .nav-links a:hover {
     color: var(--color-text);
   }
-  
+
+  #theme-toggle {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.15s ease;
+  }
+
+  #theme-toggle:hover {
+    color: var(--color-text);
+  }
+
+  [data-theme="light"] .moon-icon {
+    display: none;
+  }
+
+  [data-theme="dark"] .sun-icon {
+    display: none;
+  }
+
   footer {
     margin-top: 4rem;
     padding-top: 2rem;
