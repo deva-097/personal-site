@@ -11,7 +11,8 @@ Whenever I find myself a little "unhinged" in life, I find solace in reading. As
 While I have read some of the larger sci-fi series, I haven't really covered the greats (and the works that made them great): Asimov, Heinlein, Clarke, Stephenson, LeGuin. Hence, I'm embarking on a SciFi binge for a while. One of the first books that I read is "The Moon is a Harsh Mistress" by Robert Heinlein. 
 
 *Warning: Spoilers abound, though I'll try not to give too much away of the main plot.*
-#### The hardcore Sci-Fi angle: A(G)I in all its glory
+
+### The hardcore Sci-Fi angle: A(G)I in all its glory
 
 Reading this book today for the first time gives a much different experience than it would have even 4-5 years ago. Much of the plot hinges on an AI (AGI?) that essentially emerges as a consequence of unintended events.  
 
@@ -26,7 +27,8 @@ One of the most "human" interactions was the most touching for me. It's buried i
 This is such a sweet parallel to what humans (at least some of us) do - obsess over the tiniest of things to say in order to maintain relationships. It made Mike more than just a machine - he understood that relationships are paramount, and worth really investing in.
 
 One overarching theme will stick with me though - just how much is possible with one AGI + a handful of driven humans dedicated to a cause. Heinlein explores how society itself could be vastly different with a different set of constraints.
-#### The TANSTAAFL angle: Life on the Moon
+
+### The TANSTAAFL angle: Life on the Moon
 
 Loonies (as they call themselves) face many contradictions and a completely different set of constraints from those on Earth. This makes the Lunar society evolve in a unique direction: their (unofficial) motto is "TANSTAAFL": There Ain't No Such Thing As A Free Lunch. *Having studied at IIMA, this was a welcome callback.* Everybody pulls their weight and there are no handouts (there simply aren't any extra resources in such a constrained environment). Everyone has to adhere to a strict but informal system - there simply cannot be any waste, as the system itself would collapse. Anybody who doesn't pull their own weight, or tries to extract more than their due, is simply eliminated.
 

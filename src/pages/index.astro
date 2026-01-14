@@ -1,5 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Get all posts from the content/writing folder
+const posts = await Astro.glob('../content/writing/*.md');
+const sortedPosts = posts
+  .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+  .slice(0, 5); // Show up to 5 most recent posts
 ---
 
 <BaseLayout title="Devashish">
@@ -17,15 +23,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="recent">
     <h2>Recent Writing</h2>
-    <ul class="post-list">
-      <li>
-        <a href="/writing/first-post">
-          <span class="post-title">Welcome to my site</span>
-          <span class="post-date">January 2026</span>
-        </a>
-      </li>
-      <!-- More posts will be added here -->
-    </ul>
+    {sortedPosts.length > 0 ? (
+      <ul class="post-list">
+        {sortedPosts.map((post) => (
+          <li>
+            <a href={`/writing/${post.frontmatter.slug}`}>
+              <span class="post-title">{post.frontmatter.title}</span>
+              <span class="post-date">
+                {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                  month: 'long',
+                  year: 'numeric'
+                })}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="no-posts">No posts yet. Check back soon!</p>
+    )}
     <p class="see-all"><a href="/writing">See all →</a></p>
   </section>
 </BaseLayout>
