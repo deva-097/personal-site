@@ -7,7 +7,7 @@ description: "An introduction to this space"
 
 This is the beginning of something new.
 
-I've wanted to create a personal corner on the internet for a while now—a place to collect my thoughts, document what I'm learning, and share the things that interest me.
+I've wanted to create a personal corner on the internet for a while now — a place to collect my thoughts, document what I'm learning, and share the things that interest me.
 
 This site is that place. It will evolve over time. For now, it's simple and sparse, but that's intentional. I want to focus on the content first and let the form follow.
 

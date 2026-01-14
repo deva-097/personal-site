@@ -16,7 +16,7 @@ While I have read some of the larger sci-fi series, I haven't really covered the
 
 Reading this book today for the first time gives a much different experience than it would have even 4-5 years ago. Much of the plot hinges on an AI (AGI?) that essentially emerges as a consequence of unintended events.  
 
-I found it mind boggling to recognize concepts that are instrumental to birthing the actual AI world today. The book was written in 1966, and yet it effortlessly predicts so much of the real mechanisms of AI over the last 3 years. 
+I found it mind boggling to recognize concepts that are instrumental to birthing the actual AI world today. The book was written in 1966, and yet it effortlessly predicts so much of the real mechanisms of AI over the last 3 years.[^ai-timing] 
 - RLHF (Mannie vetting the list of jokes to teach Mike what is funny v/s not): there is literally a passage where the protagonist muses that it's hard to tell a good joke by oneself, but easier to judge a good joke 
 - the concept of "scaling" (Mike "awakens" by being augmented with components willy-nilly) - and the events at the end of the book leave one wondering what happened
 - Different personas for different users (Mike / Michelle / Adam Selene)
@@ -49,3 +49,5 @@ One quote that really made me pause and think was
 Put differently, constraints lend themselves to "first-principles thinking" - a skill not easy to develop, but invaluable in today's world. One final quote in this same vein of constraints - simple but worth sitting with
 
 > "When faced with a problem you do not understand, first do any part of it that you do understand, and then look at it again."
+
+[^ai-timing]: It's remarkable that these concepts were imagined nearly 60 years before ChatGPT launched. The parallels between Mike's development and modern LLMs—emergent behavior from scaled systems, learning from interaction, RLHF-like feedback loops—feel almost prophetic.
