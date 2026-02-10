@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const pieces = await Astro.glob('../../content/commonplace/*.md');
+  return pieces.map((piece) => ({
+    params: { slug: piece.frontmatter.slug },
+    props: { piece },
+  }));
+}
+
+const { piece } = Astro.props;
+const { Content } = piece;
+const { title, description, author } = piece.frontmatter;
+---
+
+<BaseLayout title={`${title} | Devashish`} description={description}>
+  <article>
+    <header class="piece-header">
+      <h1>{title}</h1>
+      {author && <p class="piece-author">— {author}</p>}
+    </header>
+
+    <div class="piece-content">
+      <Content />
+    </div>
+
+    <footer class="piece-footer">
+      <a href="/commonplace">← Back to commonplace</a>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .piece-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .piece-header h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .piece-author {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .piece-content {
+    /* Prose styling is handled in BaseLayout */
+  }
+
+  .piece-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .piece-footer a {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+</style>
