@@ -27,18 +27,21 @@ The dev server runs at `http://localhost:4321`
 ├── raw_notes/           # Personal notes and drafts (gitignored)
 ├── src/
 │   ├── content/
-│   │   └── writing/     # Blog posts as Markdown files
+│   │   ├── writing/       # Blog posts as Markdown files
+│   │   └── commonplace/   # Collected poems, quotes, and fragments
 │   ├── layouts/
 │   │   └── BaseLayout.astro
 │   └── pages/
 │       ├── index.astro          # Home page
-│       ├── reading.astro        # Books page (217 books, filterable by genre)
+│       ├── reading.astro        # Books page (filterable by genre)
 │       ├── interests.astro      # Interests/collections (filterable sections)
-│       ├── following.astro      # Blogs, podcasts, newsletters
 │       ├── work.astro           # Projects page
-│       └── writing/
-│           ├── index.astro      # Writing list
-│           └── [slug].astro     # Individual post template
+│       ├── writing/
+│       │   ├── index.astro      # Writing list
+│       │   └── [slug].astro     # Individual post template
+│       └── commonplace/
+│           ├── index.astro      # Commonplace list
+│           └── [slug].astro     # Individual piece template
 └── package.json
 ```
 
@@ -50,34 +53,64 @@ The dev server runs at `http://localhost:4321`
 - Clean, minimal introduction
 
 ### Dark Mode
-- **Theme toggle** in header navigation with sun/moon icons
+- **Theme toggle** in sidebar (desktop) and mobile header
 - **System preference detection**: Automatically matches your OS theme
 - **Manual override**: Click toggle to switch themes
 - **Persistent**: Your preference is saved to localStorage
 - Warm color palette for comfortable reading in both modes
 
+### Mobile Navigation
+- **Fixed top header** (56px) with site name, theme toggle, and hamburger menu
+- **Slide-down nav menu** with active page highlighting and social links
+- Sidebar hidden on mobile, replaced by the mobile header/menu
+
+### Active Navigation
+- Current page is highlighted in the sidebar (desktop) and mobile menu
+- Uses `startsWith()` matching for sub-pages (e.g., `/writing/post-slug` highlights "Writing")
+
 ### Reading (`/reading`)
-- **217 books** organized by genre (Fantasy, Sci-Fi, Non-Fiction, Other Favorites)
-- **Filterable navigation**: Click genres to show only that category
-- Compact list format with inline author names
+- Books organized by genre (Fantasy, Sci-Fi, Non-Fiction, Other Favorites)
+- **Pill/tag filter buttons**: Click genres to filter by category
+- Hover backgrounds on book items
 - Links to [Goodreads profile](https://www.goodreads.com/devashish_097)
 
 ### Interests (`/interests`)
-- **Filterable sections**: Swiss Knives & EDC, Wallets, Watches, Fountain Pens, Coffee
-- Click navigation to show individual sections
+- **Pill/tag filter buttons**: Swiss Knives & EDC, Wallets, Watches, Fountain Pens, Coffee
+- Hover backgrounds on individual items
 - Links to products/references
 - Personal notes on each collection
-
-### Following (`/following`)
-- Blogs, podcasts, and newsletters I follow
-- Organized by media type
-- Links to sources
 
 ### Writing (`/writing`)
 - Blog posts and essays with Markdown support
 - **Footnotes support**: GitHub Flavored Markdown footnotes
-- Sorted by date (newest first)
+- Hover backgrounds on post list
 - Individual post pages with formatted content
+
+### Commonplace (`/commonplace`)
+- Collected poems, quotes, and fragments
+- Hover backgrounds on piece list
+- Individual piece pages with author attribution
+
+## Design
+
+### Color Palette
+- **Background**: `#faf8f5` (warm cream)
+- **Text**: `#292524` (soft dark)
+- **Accent**: `#b45309` (warm amber) — used in blockquotes, selection, focus outlines
+- **Surface**: `#f5f0eb` — hover backgrounds and interactive states
+
+### Typography
+- **Body**: Source Serif 4 (serif)
+- **Headings/UI**: DM Sans (sans-serif)
+- **Line height**: 1.75 for comfortable reading
+
+### Key Design Decisions
+- Section headers use bottom borders instead of uppercase text
+- Prose links have subtle underlines that darken on hover
+- List items use hover backgrounds instead of border separators
+- Content is optically centered on wide screens via `margin-left: max(220px, calc(50vw - 320px))`
+- `::selection` uses warm amber tint
+- Blockquote borders use amber accent color
 
 ## Adding Content
 
@@ -103,6 +136,22 @@ Add footnotes like this.[^1]
 
 **Footnotes**: Use GitHub Flavored Markdown syntax with `[^1]` in text and `[^1]: Content` at the bottom.
 
+### New Commonplace Piece
+
+Create a new `.md` file in `src/content/commonplace/`:
+
+```markdown
+---
+title: "Piece Title"
+slug: "piece-slug"
+date: "2026-01-15"
+description: "Brief description"
+author: "Author Name"
+---
+
+Your content here...
+```
+
 ### Adding Books
 
 Edit `src/pages/reading.astro` and add to the appropriate category in `readingData`:
@@ -127,20 +176,6 @@ Edit `src/pages/interests.astro` and add items to the relevant section:
   brand: "Brand Name",
   url: "https://example.com",
   notes: "Optional notes"
-}
-```
-
-### Adding Sources to Following
-
-Edit `src/pages/following.astro` and add to podcasts, blogs, or newsletters:
-
-```javascript
-{
-  name: "Source Name",
-  author: "Author/Host",
-  description: "What they cover",
-  url: "https://example.com",
-  favorite: true
 }
 ```
 
@@ -193,10 +228,12 @@ Edit the CSS variables in `src/layouts/BaseLayout.astro`:
 ```css
 /* Light mode */
 :root {
-  --color-bg: #fafaf9;
-  --color-text: #1c1917;
+  --color-bg: #faf8f5;
+  --color-text: #292524;
   --color-text-muted: #78716c;
   --color-border: #e7e5e4;
+  --color-accent: #b45309;
+  --color-surface: #f5f0eb;
   --font-body: 'Source Serif 4', Georgia, serif;
   --font-heading: 'DM Sans', system-ui, sans-serif;
 }
@@ -204,27 +241,26 @@ Edit the CSS variables in `src/layouts/BaseLayout.astro`:
 /* Dark mode */
 [data-theme="dark"] {
   --color-bg: #1c1917;
-  --color-text: #fafaf9;
+  --color-text: #e7e5e4;
   --color-text-muted: #a8a29e;
   --color-border: #44403c;
-  --color-link: #fafaf9;
-  --color-link-hover: #d6d3d1;
+  --color-surface: #292524;
 }
 ```
 
 ### Social Media Links
 
-The footer contains social media icons that appear on every page:
+The sidebar and mobile nav contain social media icons:
 - **GitHub:** [https://github.com/deva-097](https://github.com/deva-097)
 - **LinkedIn:** [https://www.linkedin.com/in/devashish-bansal](https://www.linkedin.com/in/devashish-bansal)
 - **Goodreads:** [https://www.goodreads.com/devashish_097](https://www.goodreads.com/devashish_097)
 
-To update these links, edit the footer section in `src/layouts/BaseLayout.astro`.
+To update these links, edit the sidebar and mobile nav sections in `src/layouts/BaseLayout.astro`.
 
 ### Adding New Sections
 
 1. Create a new `.astro` file in `src/pages/`
-2. Add a link in the navigation in `BaseLayout.astro`
+2. Add a link in the `navLinks` array in `BaseLayout.astro`
 
 ## Development Notes
 
@@ -242,7 +278,7 @@ This folder is gitignored and won't be committed to version control.
 The Reading and Interests pages use client-side JavaScript to filter content by category:
 - Uses URL hash navigation (e.g., `/reading#fantasy`)
 - Bookmarkable filtered views
-- Active state indication on navigation links
+- Pill/tag buttons with active state (filled background)
 - Shows all content when no filter is selected
 
 ## Working with Claude Code
@@ -251,10 +287,10 @@ This site is designed to be easily modified with Claude Code. You can ask it to:
 
 - "Add a new book to the Fantasy section"
 - "Add a new interest category"
-- "Update the Following page with new podcasts"
-- "Adjust the dark mode colors"
+- "Adjust the color palette"
 - "Add filtering to another page"
 - "Create a new blog post about [topic]"
+- "Add a new commonplace piece"
 - "Add footnotes to an existing post"
 
 Claude Code can read and modify all the files in this project.

@@ -18,7 +18,7 @@ const { title, description, author } = piece.frontmatter;
   <article>
     <header class="piece-header">
       <h1>{title}</h1>
-      {author && <p class="piece-author">— {author}</p>}
+      {author && <p class="piece-author">&mdash; {author}</p>}
     </header>
 
     <div class="piece-content">
@@ -26,18 +26,18 @@ const { title, description, author } = piece.frontmatter;
     </div>
 
     <footer class="piece-footer">
-      <a href="/commonplace">← Back to commonplace</a>
+      <a href="/commonplace">&larr; Back to commonplace</a>
     </footer>
   </article>
 </BaseLayout>
 
 <style>
   .piece-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
   }
 
   .piece-header h1 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
   }
 
   .piece-author {
@@ -46,6 +46,7 @@ const { title, description, author } = piece.frontmatter;
     color: var(--color-text-muted);
     font-style: italic;
     margin: 0;
+    letter-spacing: 0.01em;
   }
 
   .piece-content {

@@ -12,15 +12,15 @@ const sortedPosts = posts
   <section class="intro">
     <p class="greeting">Hello, I'm <strong>Devashish</strong>.</p>
     <p>
-      This is my corner of the internet where I collect 
+      This is my corner of the internet where I collect
       my thoughts, interests, and things I'm learning along the way.
     </p>
     <p>
-      I write about things that interest me, keep track of what I'm reading, 
-      and maintain lists of the objects and ideas that shape my life. 
+      I write about things that interest me, keep track of what I'm reading,
+      and maintain lists of the objects and ideas that shape my life.
     </p>
     <p>
-      I like to dabble, so some of this may feel very disconnected. But I hope it will tie together in ways I cannot yet see. 
+      I like to dabble, so some of this may feel very disconnected. But I hope it will tie together in ways I cannot yet see.
     </p>
     <p>
       This is my way of discovering myself. I hope you find something meaningful that resonates with you too.
@@ -48,7 +48,7 @@ const sortedPosts = posts
     ) : (
       <p class="no-posts">No posts yet. Check back soon!</p>
     )}
-    <p class="see-all"><a href="/writing">See all →</a></p>
+    <p class="see-all"><a href="/writing">See all &rarr;</a></p>
   </section>
 </BaseLayout>
 
@@ -56,11 +56,11 @@ const sortedPosts = posts
   .intro {
     margin-bottom: 2rem;
   }
-  
+
   .greeting {
     font-size: 1.25rem;
   }
-  
+
   .greeting strong {
     font-weight: 600;
   }
@@ -69,43 +69,46 @@ const sortedPosts = posts
     list-style: none;
     padding: 0;
   }
-  
+
   .post-list li {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
   }
-  
+
   .post-list a {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--color-border);
+    padding: 0.5rem 0.75rem;
+    margin: 0 -0.75rem;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
   }
-  
+
   .post-list a:hover {
+    background-color: var(--color-surface);
     color: var(--color-text);
   }
-  
+
   .post-list a:hover .post-title {
     text-decoration: underline;
     text-underline-offset: 3px;
   }
-  
+
   .post-title {
     font-family: var(--font-heading);
   }
-  
+
   .post-date {
     font-size: 0.85rem;
     color: var(--color-text-muted);
     white-space: nowrap;
   }
-  
+
   .see-all {
     margin-top: 1rem;
   }
-  
+
   .see-all a {
     font-family: var(--font-heading);
     font-size: 0.9rem;
