@@ -3,7 +3,8 @@ title: "Things That Aren't Doing the Thing"
 slug: "things-that-arent-doing-the-thing"
 date: "2026-02-09"
 description: "A reminder about the distinction between preparation and action"
-author: "Strangest Loop"
+author: "Steven Bartlett"
+tags: ["prose", "motivation"]
 source: "https://strangestloop.io/essays/things-that-arent-doing-the-thing"
 ---
 

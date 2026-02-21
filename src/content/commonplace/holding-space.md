@@ -4,6 +4,7 @@ slug: "holding-space"
 date: "2026-02-09"
 description: "On the gift of presence"
 author: "Unknown"
+tags: ["prose", "philosophy"]
 ---
 
 The concept that bartenders and therapists listen very well, do not offer solutions or judgement. Help you sit there with your problems (hold space) and then eventually work things out.

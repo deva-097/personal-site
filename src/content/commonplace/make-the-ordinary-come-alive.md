@@ -4,6 +4,7 @@ slug: "make-the-ordinary-come-alive"
 date: "2026-02-09"
 description: "A poem about finding wonder in ordinary life"
 author: "William Martin"
+tags: ["poem"]
 ---
 
 *Do not ask your children<br>

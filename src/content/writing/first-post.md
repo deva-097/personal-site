@@ -3,6 +3,7 @@ title: "Welcome to my site"
 slug: "first-post"
 date: "2026-01-08"
 description: "An introduction to this space"
+tags: ["meta"]
 ---
 
 This is the beginning of something new.
@@ -19,7 +20,7 @@ This site is that place. It will evolve over time. For now, it's simple and spar
 
 **Interests** — Collections of things I care about: fountain pens, watches, music, and whatever else catches my attention.
 
-**Work** — Professional projects and things I've built.
+**Experiments** — Small tools I've built for myself on my AI learning journey.
 
 ## Why now?
 

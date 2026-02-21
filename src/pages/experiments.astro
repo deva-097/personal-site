@@ -3,38 +3,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const projects = [
   {
+    name: "Content Agent",
+    description: "A personal content pipeline with three AI agents — Scout discovers relevant articles via RSS and web search, Mirror analyzes Chrome browsing history to surface patterns and content ideas, and Scribe generates drafts. Runs on a schedule for ~$1/month. Work in progress.",
+    link: "https://github.com/deva-097/content-agent",
+    year: 2026
+  },
+  {
     name: "Reddit Saved Posts Manager",
     description: "A Flask web app to view, browse, and manage your saved Reddit posts. Features subreddit filtering, inline post viewer, keyboard navigation, and dark mode.",
     link: "https://github.com/deva-097/reddit-manager",
     year: 2026
   },
+  {
+    name: "Penabler",
+    description: "A fountain pen and ink collection manager built with React and Supabase. Track pens, inks, inking events, and view analytics on your collection. A learning project, currently inactive.",
+    link: "https://github.com/deva-097/penabler-inkscribe",
+    year: 2025
+  },
 ];
 ---
 
-<BaseLayout title="Work | Devashish" description="Professional work and projects">
-  <h1>Work</h1>
+<BaseLayout title="Experiments | Devashish" description="AI experiments and tools I've built">
+  <h1>Experiments</h1>
   <p class="page-intro">
-    Projects I've worked on and things I've built.
+    On my AI learning journey, these are small tools I've built for myself using tools like Claude Code, Lovable and Cursor. Code on <a href="https://github.com/deva-097" target="_blank" rel="noopener">GitHub</a>.
   </p>
-  
-  <section class="links-section">
-    <h2>Links</h2>
-    <ul class="external-links">
-      <li>
-        <a href="https://github.com/deva-097" target="_blank" rel="noopener">
-          GitHub
-        </a>
-      </li>
-      <li>
-        <a href="https://www.linkedin.com/in/devashish-bansal" target="_blank" rel="noopener">
-          LinkedIn
-        </a>
-      </li>
-    </ul>
-  </section>
-  
+
   <section class="projects-section">
-    <h2>Projects</h2>
     {projects.length > 0 ? (
       <ul class="project-list">
         {projects.map((project) => (
@@ -61,23 +56,6 @@ const projects = [
   .page-intro {
     color: var(--color-text-muted);
     margin-bottom: 2.5rem;
-  }
-  
-  .links-section {
-    margin-bottom: 2rem;
-  }
-  
-  .external-links {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .external-links a {
-    font-family: var(--font-heading);
-    text-decoration: underline;
-    text-underline-offset: 3px;
   }
   
   .project-list {

@@ -3,7 +3,7 @@ title: "Reading Heinlein in the age of AI"
 slug: "reading-heinlein-ai"
 date: "2026-01-13"
 description: "Reflections on The Moon is a Harsh Mistress and its surprising predictions about AI, constraints, and society"
-tags: ["books"]
+tags: ["books", "ai"]
 ---
 
 Whenever I find myself a little "unhinged" in life, I find solace in reading. As I scanned my bookshelf and Kindle library for my next book, I realized that I need to be a little more intentional about what I'm reading. 

@@ -6,23 +6,39 @@ const posts = await Astro.glob('../../content/writing/*.md');
 const sortedPosts = posts.sort((a, b) =>
   new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
 );
+
+// Collect all unique tags
+const allTags = [...new Set(sortedPosts.flatMap(p => p.frontmatter.tags || []))].sort();
 ---
 
 <BaseLayout title="Writing | Devashish" description="Essays and thoughts">
   <h1>Writing</h1>
   <p class="page-intro">Essays, notes, and thoughts on various topics.</p>
 
+  {allTags.length > 0 && (
+    <nav class="tag-nav">
+      {allTags.map((tag) => (
+        <a href={`#${tag}`} class="pill" data-tag={tag}>{tag}</a>
+      ))}
+    </nav>
+  )}
+
   {sortedPosts.length > 0 ? (
     <ul class="post-list">
       {sortedPosts.map((post) => (
-        <li>
+        <li data-tags={JSON.stringify(post.frontmatter.tags || [])}>
           <a href={`/writing/${post.frontmatter.slug}`}>
             <span class="post-title">{post.frontmatter.title}</span>
-            <span class="post-date">
-              {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-                month: 'short',
-                year: 'numeric'
-              })}
+            <span class="post-meta">
+              {(post.frontmatter.tags || []).map((tag: string) => (
+                <span class="post-tag">{tag}</span>
+              ))}
+              <span class="post-date">
+                {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                  month: 'short',
+                  year: 'numeric'
+                })}
+              </span>
             </span>
           </a>
         </li>
@@ -38,7 +54,38 @@ const sortedPosts = posts.sort((a, b) =>
 <style>
   .page-intro {
     color: var(--color-text-muted);
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .tag-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .pill {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    cursor: pointer;
+  }
+
+  .pill:hover {
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border-color: var(--color-text-muted);
+  }
+
+  .pill.active {
+    color: var(--color-bg);
+    background-color: var(--color-text);
+    border-color: var(--color-text);
   }
 
   .post-list {
@@ -48,6 +95,10 @@ const sortedPosts = posts.sort((a, b) =>
 
   .post-list li {
     margin-bottom: 0;
+  }
+
+  .post-list li.hidden {
+    display: none;
   }
 
   .post-list a {
@@ -74,10 +125,24 @@ const sortedPosts = posts.sort((a, b) =>
     font-family: var(--font-heading);
   }
 
+  .post-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    white-space: nowrap;
+  }
+
+  .post-tag {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+  }
+
   .post-date {
     font-size: 0.85rem;
     color: var(--color-text-muted);
-    white-space: nowrap;
   }
 
   .placeholder {
@@ -93,3 +158,46 @@ const sortedPosts = posts.sort((a, b) =>
     margin: 0;
   }
 </style>
+
+<script>
+  function filterPosts() {
+    const hash = window.location.hash.slice(1);
+    const items = document.querySelectorAll('.post-list li');
+    const pills = document.querySelectorAll('.tag-nav a');
+
+    pills.forEach(pill => {
+      if (pill.dataset.tag === hash) {
+        pill.classList.add('active');
+      } else {
+        pill.classList.remove('active');
+      }
+    });
+
+    if (hash) {
+      items.forEach(item => {
+        const tags = JSON.parse(item.dataset.tags || '[]');
+        if (tags.includes(hash)) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    } else {
+      items.forEach(item => item.classList.remove('hidden'));
+    }
+  }
+
+  // Toggle: clicking active pill clears filter
+  document.querySelectorAll('.tag-nav a').forEach(pill => {
+    pill.addEventListener('click', (e) => {
+      if (pill.classList.contains('active')) {
+        e.preventDefault();
+        window.location.hash = '';
+        filterPosts();
+      }
+    });
+  });
+
+  filterPosts();
+  window.addEventListener('hashchange', filterPosts);
+</script>

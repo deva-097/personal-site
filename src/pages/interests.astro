@@ -6,9 +6,11 @@ const interests = {
     title: "Swiss Knives & EDC",
     description: "My first obsession. Multi-functional, well-designed, built to last. Led me down the broader EDC rabbithole.",
     items: [
-      { name: "Tinker", brand: "Victorinox", url: "https://www.victorinox.com/en/Products/Swiss-Army-Knife%E2%84%A2-and-Tools/Essentials/Tinker/p/1.4603" },
-      { name: "Spartan", brand: "Victorinox", url: "https://www.victorinox.com/en/Products/Swiss-Army-Knife%E2%84%A2-and-Tools/Essentials/Spartan/p/1.3603" },
-      { name: "Evolution 14 Wood", brand: "Victorinox", url: "https://www.victorinox.com/en-KR/Products/Swiss-Army-Knife%E2%84%A2-and-Tools/Outdoor/Evolution-17-Wood/p/2.3911.63" },
+      { brand: "Victorinox", links: [
+        { name: "Tinker", url: "https://www.victorinox.com/en/Products/Swiss-Army-Knife%E2%84%A2-and-Tools/Essentials/Tinker/p/1.4603" },
+        { name: "Spartan", url: "https://www.victorinox.com/en/Products/Swiss-Army-Knife%E2%84%A2-and-Tools/Essentials/Spartan/p/1.3603" },
+        { name: "Evolution 14 Wood", url: "https://www.victorinox.com/en-KR/Products/Swiss-Army-Knife%E2%84%A2-and-Tools/Outdoor/Evolution-17-Wood/p/2.3911.63" },
+      ]},
       { name: "Tenacious", brand: "Spyderco", url: "https://spyderco.com/products/c122g-tenacious%C2%AE?variant=44049535696940" },
       { name: "No.8 Carbon", brand: "Opinel", url: "https://www.opinel.com/en/pocket-knives/carbone/n8-carbon" },
       { name: "i3T 2", brand: "Olight", url: "https://www.olight.com/store/i3t-2-small-edc-flashlight", notes: "EDC flashlight" },
@@ -19,7 +21,7 @@ const interests = {
     title: "Wallets",
     description: "Started off as functional, but I quickly got tired of the fat leather wallets. Tried a few, settled on the Secrid wallet.",
     items: [
-      { name: "Miniwallet Original (Chocolate)", brand: "Secrid", url: "https://secrid.com/en-global/miniwallet-original-chocolate/", notes: "Highly recommend some version of this" },
+      { name: "Miniwallet Original", brand: "Secrid", url: "https://secrid.com/en-global/miniwallet-original-chocolate/", notes: "Highly recommend some version of this" },
       { name: "Altitude Billfold", brand: "Pioneer", url: "https://pioneercarry.com/collections/wallets/products/altitude-billfold" },
       { name: "Classic Wallet (Ikat Blue)", brand: "Nappadori", url: "https://www.nappadori.com/collections/wallets/products/classic-wallet-ikat" }
     ]
@@ -34,14 +36,16 @@ const interests = {
       { name: "6M13 Age of Discovery", brand: "Seiko", url: "https://www.reddit.com/r/Watches/comments/be4r0d/seiko_6m13_age_of_discovery_perpetual_calendar/", notes: "Lying out of commission. Need to find someone I trust enough to repair it" },
       { name: "Couturier Chronograph", brand: "Tissot", url: "https://zimsonwatches.com/products/tissot-t-classic-silver-dial-men-41mm-t0356171103100" },
       { name: "Metric Retro Black", brand: "Brew", url: "https://www.brew-watches.com/products/brew-metric-retro-black" },
-      { name: "A Perfectly Useless Afternoon", brand: "Mr Jones", url: "https://mrjoneswatches.com/collections/all-watches/products/a-perfectly-useless-afternoon" },
-      { name: "Paper Crane", brand: "Mr Jones", url: "https://mrjoneswatches.com/products/paper-crane" },
+      { brand: "Mr Jones", links: [
+        { name: "A Perfectly Useless Afternoon", url: "https://mrjoneswatches.com/collections/all-watches/products/a-perfectly-useless-afternoon" },
+        { name: "Paper Crane", url: "https://mrjoneswatches.com/products/paper-crane" },
+      ]},
       { name: "INOX", brand: "Victorinox", url: "https://www.victorinox.com/en/Products/Watches/Men's-Watches/INOX/p/241682.1", notes: "Mine's on a paracord strap" }
     ]
   },
   fountainPens: {
     title: "Fountain Pens",
-    description: "The deepest (and most recent) obsession - hopefully recovered from it now :crossed_fingers:. From a Lamy Safari in school to 25+ pens at one point. Ran the gauntlet on different filling systems, grinds, nibs, custom pens, inks, leather holders — Diderot effect in full glory.",
+    description: "Recovering fountain pen addict. From a Lamy Safari in school to 25+ pens at one point. Ran the gauntlet on different filling systems, grinds, nibs, custom pens, inks, leather holders — Diderot effect in full glory.",
     items: [
       { name: "2000", brand: "Lamy", url: "https://www.lamy.com/en-us/p/lamy-2000-fountain-pen/52875809096014" },
       { name: "3776 Century (Chartres Blue)", brand: "Platinum", url: "https://www.gouletpens.com/products/platinum-3776-century-fountain-pen-chartres-blue-gold" },
@@ -51,9 +55,6 @@ const interests = {
       { name: "Safari (Umbra)", brand: "Lamy", url: "https://makoba.com/products/lamy-safari-fountain-pen-umbra" },
       { name: "Starwalker Ultrablack", brand: "Montblanc", url: "https://www.gioiellerialucchese.it/en/writing-pens/19971-montblanc-starwalker-ultrablack-fountain-pen-126339.html" },
       { name: "Beatles LE", brand: "Montblanc" },
-      { name: "Legacy Swirl (Red/Black)", brand: "Kanwrite", url: "https://kanwrite.com/product/legacy-swirl-red-black/" },
-      { name: "302", brand: "Ratnamson", url: "https://helloaugust.in/my-shop/ratnamson-302-fountain-pen/" },
-      { name: "Aura", brand: "Mohi", url: "https://www.mohipens.com/product-page/mohi-aura" },
       { name: "Several vintage pens", brand: "Various" }
     ]
   },
@@ -94,7 +95,9 @@ const interests = {
       {interests.swissKnives.items.map((item) => (
         <li class="item">
           <div>
-            {item.url ? (
+            {item.links ? (
+              <span class="item-name">{item.links.map((link, i) => (<>{i > 0 && ', '}<a href={link.url} target="_blank" rel="noopener noreferrer" class="item-name">{link.name}</a></>))}</span>
+            ) : item.url ? (
               <a href={item.url} target="_blank" rel="noopener noreferrer" class="item-name">{item.name}</a>
             ) : (
               <span class="item-name">{item.name}</span>
@@ -114,7 +117,9 @@ const interests = {
       {interests.wallets.items.map((item) => (
         <li class="item">
           <div>
-            {item.url ? (
+            {item.links ? (
+              <span class="item-name">{item.links.map((link, i) => (<>{i > 0 && ', '}<a href={link.url} target="_blank" rel="noopener noreferrer" class="item-name">{link.name}</a></>))}</span>
+            ) : item.url ? (
               <a href={item.url} target="_blank" rel="noopener noreferrer" class="item-name">{item.name}</a>
             ) : (
               <span class="item-name">{item.name}</span>
@@ -134,7 +139,9 @@ const interests = {
       {interests.watches.items.map((item) => (
         <li class="item">
           <div>
-            {item.url ? (
+            {item.links ? (
+              <span class="item-name">{item.links.map((link, i) => (<>{i > 0 && ', '}<a href={link.url} target="_blank" rel="noopener noreferrer" class="item-name">{link.name}</a></>))}</span>
+            ) : item.url ? (
               <a href={item.url} target="_blank" rel="noopener noreferrer" class="item-name">{item.name}</a>
             ) : (
               <span class="item-name">{item.name}</span>
@@ -154,7 +161,9 @@ const interests = {
       {interests.fountainPens.items.map((item) => (
         <li class="item">
           <div>
-            {item.url ? (
+            {item.links ? (
+              <span class="item-name">{item.links.map((link, i) => (<>{i > 0 && ', '}<a href={link.url} target="_blank" rel="noopener noreferrer" class="item-name">{link.name}</a></>))}</span>
+            ) : item.url ? (
               <a href={item.url} target="_blank" rel="noopener noreferrer" class="item-name">{item.name}</a>
             ) : (
               <span class="item-name">{item.name}</span>
@@ -174,7 +183,9 @@ const interests = {
       {interests.coffee.items.map((item) => (
         <li class="item">
           <div>
-            {item.url ? (
+            {item.links ? (
+              <span class="item-name">{item.links.map((link, i) => (<>{i > 0 && ', '}<a href={link.url} target="_blank" rel="noopener noreferrer" class="item-name">{link.name}</a></>))}</span>
+            ) : item.url ? (
               <a href={item.url} target="_blank" rel="noopener noreferrer" class="item-name">{item.name}</a>
             ) : (
               <span class="item-name">{item.name}</span>

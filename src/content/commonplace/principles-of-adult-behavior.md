@@ -4,6 +4,7 @@ slug: "principles-of-adult-behavior"
 date: "2026-02-09"
 description: "25 principles for living well"
 author: "John Perry Barlow"
+tags: ["philosophy"]
 ---
 
 1. Be patient. No matter what.

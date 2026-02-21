@@ -4,6 +4,7 @@ slug: "this-is-to-be-my-symphony"
 date: "2026-02-09"
 description: "A poem about living with elegance and contentment"
 author: "William Ellery Channing"
+tags: ["poem"]
 ---
 
 *To live content with small means.<br>
