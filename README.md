@@ -281,20 +281,6 @@ The Reading and Interests pages use client-side JavaScript to filter content by 
 - Pill/tag buttons with active state (filled background)
 - Shows all content when no filter is selected
 
-## Working with Claude Code
-
-This site is designed to be easily modified with Claude Code. You can ask it to:
-
-- "Add a new book to the Fantasy section"
-- "Add a new interest category"
-- "Adjust the color palette"
-- "Add filtering to another page"
-- "Create a new blog post about [topic]"
-- "Add a new commonplace piece"
-- "Add footnotes to an existing post"
-
-Claude Code can read and modify all the files in this project.
-
 ---
 
 Built with Astro • Inspired by personal sites everywhere
