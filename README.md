@@ -2,7 +2,7 @@
 
 A minimal personal website built with [Astro](https://astro.build).
 
-**Live Site:** [https://devashish-bansal.vercel.app](https://devashish-bansal.vercel.app)
+**Live Site:** [https://personal.devashishbansal.com](https://personal.devashishbansal.com)
 **Repository:** [https://github.com/deva-097/personal-site](https://github.com/deva-097/personal-site)
 
 ## Quick Start
@@ -190,7 +190,7 @@ This site is deployed on **Vercel** and automatically deploys on every push to t
 
 ### Current Deployment
 - **Platform:** Vercel
-- **URL:** https://devashish-bansal.vercel.app
+- **URL:** https://personal.devashishbansal.com
 - **Auto-deploy:** Enabled (pushes to `main` trigger automatic rebuilds)
 
 ### Making Updates
