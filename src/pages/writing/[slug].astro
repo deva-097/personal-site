@@ -2,11 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
   const posts = await Astro.glob('../../content/writing/*.md');
-  return posts.map((post) => ({
-    params: { slug: post.frontmatter.slug },
-    props: { post },
-  }));
+  return posts
+    .filter((post) => new Date(post.frontmatter.date) <= today)
+    .map((post) => ({
+      params: { slug: post.frontmatter.slug },
+      props: { post },
+    }));
 }
 
 const { post } = Astro.props;

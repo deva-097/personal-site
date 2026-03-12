@@ -2,10 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 // Get all posts from the content/writing folder
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 const posts = await Astro.glob('../../content/writing/*.md');
-const sortedPosts = posts.sort((a, b) =>
-  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
-);
+const sortedPosts = posts
+  .filter((p) => new Date(p.frontmatter.date) <= today)
+  .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 
 // Collect all unique tags
 const allTags = [...new Set(sortedPosts.flatMap(p => p.frontmatter.tags || []))].sort();

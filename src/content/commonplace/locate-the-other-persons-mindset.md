@@ -4,7 +4,7 @@ slug: "locate-the-other-persons-mindset"
 date: "2026-02-26"
 description: "Take a few minutes to explicitly locate where the other person is"
 author: "Ava Bookbear"
-tags: ["essay", "relationships"]
+tags: ["relationships"]
 ---
 
 Whether you're chatting with someone at a party for the first time or meeting up with your boyfriend, you should always take a few minutes to explicitly _locate_ where the other person is. For a new person, this might involve asking a few questions about their background, their week, their day—not interrogating them, but trying to figure out the basics of who they are and how they're feeling. For someone you know really well, you're mostly trying to ascertain their _state_. Are they excited? Are they impatient? Are they angry? Are they calm? Did something particularly notable happen at work today?

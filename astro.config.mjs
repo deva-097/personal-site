@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import remarkGfm from 'remark-gfm';
 
 export default defineConfig({
-  site: 'https://yoursite.com', // Update this when you have a domain
+  site: 'https://devashish-bansal.vercel.app',
   markdown: {
     remarkPlugins: [remarkGfm],
     shikiConfig: {
