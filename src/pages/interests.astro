@@ -1,6 +1,54 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+const games = {
+  historicalStrategy: {
+    subtitle: "Historical Strategy",
+    intro: "Long campaigns set against real history — these sparked a lasting interest in ancient civilisations, mythology, and how the world got here.",
+    items: [
+      { title: "Age of Empires II" },
+      { title: "Age of Mythology", notes: "The first one — Greeks, Egyptians, Norse gods. My entry point into mythology." },
+      { title: "Rise of Nations" },
+      { title: "Stronghold Crusader", notes: "Played an unreasonable amount of this." },
+      { title: "Caesar 3" },
+      { title: "Pharaoh" },
+    ]
+  },
+  fantasyStrategy: {
+    subtitle: "Fantasy & Sci-Fi Strategy",
+    items: [
+      { title: "Warcraft III (+ The Frozen Throne)", notes: "The primary one. All campaigns and expansions. The lore runs deep." },
+      { title: "Warcraft II" },
+      { title: "StarCraft" },
+    ]
+  },
+  adventure: {
+    subtitle: "Action & Adventure",
+    items: [
+      { title: "Assassin's Creed", notes: "The original. Parkour across 12th century Jerusalem." },
+      { title: "Assassin's Creed: Ezio Trilogy", notes: "AC2, Brotherhood, Revelations. The high point of the series." },
+      { title: "Max Payne", notes: "The first one." },
+      { title: "God of War (2018 & Ragnarök)" },
+      { title: "Ghost of Tsushima" },
+    ]
+  },
+  rpg: {
+    subtitle: "RPG",
+    intro: "Immense lore, deep world-building, real customisation — the same pull as a long book series with its own universe. You don't finish these, you live in them for a while.",
+    items: [
+      { title: "The Elder Scrolls V: Skyrim" },
+      { title: "Dragon Age: Origins" },
+      { title: "Dragon Age: Inquisition" },
+    ]
+  },
+  comfort: {
+    subtitle: "Comfort",
+    items: [
+      { title: "Stardew Valley", notes: "A reliable retreat. Return to it from time to time." },
+    ]
+  }
+};
+
 const interests = {
   swissKnives: {
     title: "Swiss Knives & EDC",
@@ -86,6 +134,7 @@ const interests = {
     <a href="#watches" class="pill">Watches</a>
     <a href="#fountain-pens" class="pill">Fountain Pens</a>
     <a href="#coffee" class="pill">Coffee</a>
+    <a href="#games" class="pill">Games</a>
   </nav>
 
   <section id="knives" class="interest-section">
@@ -197,6 +246,28 @@ const interests = {
       ))}
     </ul>
   </section>
+
+  <section id="games" class="interest-section">
+    <h2>Games</h2>
+    <p class="section-description">
+      Games were my first window into history and mythology. The long campaigns of RTS games did what textbooks couldn't.
+      RPGs pulled me in the same way long book series do — you don't finish them, you inhabit them for a while.
+    </p>
+    {Object.values(games).map((cat) => (
+      <div class="game-category">
+        <h3 class="game-category-title">{cat.subtitle}</h3>
+        {cat.intro && <p class="game-category-intro">{cat.intro}</p>}
+        <ul class="item-list">
+          {cat.items.map((item) => (
+            <li class="item">
+              <span class="item-name">{item.title}</span>
+              {item.notes && <div class="item-notes">{item.notes}</div>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
 </BaseLayout>
 
 <style>
@@ -289,6 +360,26 @@ const interests = {
     font-size: 0.85rem;
     color: var(--color-text-muted);
     margin-top: 0.15rem;
+  }
+
+  .game-category {
+    margin-bottom: 1.75rem;
+  }
+
+  .game-category-title {
+    font-size: 0.9rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .game-category-intro {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
   }
 </style>
 
