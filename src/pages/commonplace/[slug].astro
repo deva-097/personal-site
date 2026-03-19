@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 
 const { piece } = Astro.props;
 const { Content } = piece;
-const { title, description, author, source } = piece.frontmatter;
+const { title, description, author, source, source_label } = piece.frontmatter;
 ---
 
 <BaseLayout title={`${title} | Devashish`} description={description}>
@@ -19,7 +19,7 @@ const { title, description, author, source } = piece.frontmatter;
     <header class="piece-header">
       <h1>{title}</h1>
       {author && <p class="piece-author">&mdash; {author}</p>}
-      {source && <p class="piece-source"><a href={source} target="_blank" rel="noopener">Source ↗</a></p>}
+      {source && <p class="piece-source"><a href={source} target="_blank" rel="noopener">{source_label || 'Source'} ↗</a></p>}
     </header>
 
     <div class="piece-content">

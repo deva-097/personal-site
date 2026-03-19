@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const notes = await Astro.glob('../../content/book-notes/*.md');
+  return notes.map((note) => ({
+    params: { slug: note.frontmatter.slug },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = note;
+const { title, author, description } = note.frontmatter;
+---
+
+<BaseLayout title={`${title} | Devashish`} description={description}>
+  <article>
+    <header class="note-header">
+      <h1>{title}</h1>
+      {author && <p class="note-author">&mdash; {author}</p>}
+    </header>
+
+    <div class="note-content">
+      <Content />
+    </div>
+
+    <footer class="note-footer">
+      <a href="/reading">&larr; Back to reading</a>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .note-header {
+    margin-bottom: 3rem;
+  }
+
+  .note-header h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .note-author {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+
+  .note-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .note-footer a {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+</style>

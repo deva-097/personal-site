@@ -80,6 +80,9 @@ const readingData = {
       // Indian History & Politics
       { title: "India After Gandhi: The History of the World's Largest Democracy", author: "Ramachandra Guha", rating: 5, category: "History" },
       { title: "The Discovery of India", author: "Jawaharlal Nehru", rating: 4, category: "History" },
+
+      // Productivity
+      { title: "Building a Second Brain", author: "Tiago Forte", category: "Productivity", link: "/book-notes/building-a-second-brain" },
     ]
   },
 
@@ -128,7 +131,7 @@ const readingData = {
               <div>
                 <span class="book-title">
                   {book.favorite && <span class="favorite">&#11088; </span>}
-                  {book.title}
+                  {book.link ? <a href={book.link}>{book.title}</a> : book.title}
                   {book.type === "series" && book.count && <span class="series-count"> ({book.count})</span>}
                 </span>
                 <span class="book-author"> {book.author}</span>
@@ -231,6 +234,12 @@ const readingData = {
     font-size: 0.85rem;
     color: var(--color-text-muted);
     font-weight: normal;
+  }
+
+  .book-title a {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   .book-author {
