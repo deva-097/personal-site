@@ -52,8 +52,6 @@ As Diderot says in his essay "If thickened ink refused to flow in my quill, it p
 
 Am I becoming a minimalist? Heck no. I will continue to buy solid things - but with a better philosophy and (hopefully) a restraint I didn't have before.
 
-----
-
 [^1]: Goonj has drop-off centers in most major cities - you simply pull up to them and drop off. Services like Nokasa (Bangalore), Respun are happy to take used clothes off your hands.
 
 [^2]: Marketplaces on Facebook and MyGate are a great place to start. I discovered many communities on Reddit ([BLR marketplace](https://www.reddit.com/r/BangaloreMarketplace/), [Indiausedtech](https://www.reddit.com/r/IndiaUsedTech/)). And Deklutter whatsapp groups exist too. For gadgets and electronics, websites like gamenation, snapsome are a godsend. Chrono24 for watches, and whatsapp groups and subreddits for most other niches you can think of.

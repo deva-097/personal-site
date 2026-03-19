@@ -1,14 +1,14 @@
 ---
 title: "Attention is all you need"
 slug: "attention-is-all-you-need"
-date: "2026-03-18"
+date: "2026-03-25"
 description: "On reclaiming attention from algorithms, decluttering the digital second brain, and choosing human-curated over engagement-optimized content."
 tags: ["life"]
 ---
 
-In the last post I talked about my relationship with the physical stuff that tends to accumulate over a life. There is another, more sneaky kind - the Digital kind.
+In the [last post](/writing/things-that-own-you) I talked about my relationship with the physical stuff that tends to accumulate over a life. There is another, more sneaky kind - the Digital kind.
 
-Over the past 2-3years, I noticed a few changes in myself which I couldn't quite attribute to anything particular:
+Over the past 2-3 years, I noticed a few changes in myself which I couldn't quite attribute to anything particular:
 
 - I was always stuck in a "buy this, buy that" loop. As soon as I placed the order for one thing, I was on the hunt for the next - not even waiting for delivery and actual unboxing or usage
 - Low-grade anxiety and insecurity: more so about my professional life. The echo chamber around AI made me feel like I was constantly behind and "failing" in life
@@ -69,7 +69,7 @@ I'm resetting my attention and bandwidth towards my own curiosities - moving awa
 
 PS: Attention is all you need is of course a nod to the [seminal paper](https://arxiv.org/abs/1706.03762) that helped kickstart the current LLM craze.
 
-PPS: Inspired by [this piece](https://substack.com/home/post/p-140451583)
+PPS: Inspired by [this piece](https://bearsbulletins.substack.com/p/new-year-2024?open=false#%C2%A7the-other-day-i-was-scrolling-through-instagram-it-was-a-moment-of-weakness)
 
 
 [^1]: https://en.wikipedia.org/wiki/Dead_Internet_theory
