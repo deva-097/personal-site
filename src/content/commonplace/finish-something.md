@@ -4,7 +4,7 @@ slug: "finish-something"
 date: "2026-03-19"
 description: "Stop preparing to do the work and just do the work"
 author: "James Clear"
-tags: ["motivation", "productivity"]
+tags: ["motivation"]
 source: "https://jamesclear.com/quotes/finish-something-anything-stop-researching-planning-and-preparing-to-do-the-work-and-just-do-the-work-it-doesnt-matter-how-good-or-how-bad-it-is-you-dont-need-to-set-the-world"
 source_label: "James Clear"
 ---

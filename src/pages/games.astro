@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const games = {
+  historicalStrategy: {
+    id: "historical-strategy",
+    subtitle: "Historical Strategy",
+    intro: "Campaigns set against real history — these sparked a lasting interest in ancient civilisations, mythology, and how the world got here. It helped that most of them had a lot of background and detail to read about the civilisations, the units, etc.",
+    items: [
+      { title: "Age of Empires II" },
+      { title: "Age of Mythology", notes: "Greek, Egyptian, Norse gods. My entry point into mythology." },
+      { title: "Rise of Nations" },
+      { title: "Stronghold Crusader", notes: "Played an unreasonable amount of this." },
+      { title: "Caesar 3" },
+      { title: "Pharaoh" },
+    ]
+  },
+  fantasyStrategy: {
+    id: "rts",
+    subtitle: "RTS",
+    intro: "Natural \"best of\" of the RTS genre",
+    items: [
+      { title: "Warcraft III (+ The Frozen Throne)", notes: "The primary one. All campaigns and expansions. The lore runs deep." },
+      { title: "StarCraft II" },
+    ]
+  },
+  adventure: {
+    id: "adventure",
+    subtitle: "Action & Adventure",
+    intro: "Great stories, brilliant style of play and immersive, lovingly crafted worlds",
+    items: [
+      { title: "Assassin's Creed", notes: "The OG" },
+      { title: "Assassin's Creed: Ezio Trilogy", notes: "AC2, Brotherhood, Revelations. The geek in me was crying when I actually visited Florence." },
+      { title: "Max Payne", notes: "The first one." },
+      { title: "God of War (2018 & Ragnarök)" },
+      { title: "Ghost of Tsushima" },
+    ]
+  },
+  rpg: {
+    id: "rpg",
+    subtitle: "RPG",
+    intro: "Immense lore, deep world-building, so many options to play through — the same pull as a long book series with its own universe",
+    items: [
+      { title: "The Elder Scrolls V: Skyrim" },
+      { title: "Dragon Age: Origins" },
+      { title: "Dragon Age: Inquisition" },
+      { title: "Breath of the Wild" },
+    ]
+  },
+  comfort: {
+    id: "comfort",
+    subtitle: "Comfort",
+    items: [
+      { title: "Stardew Valley", notes: "A reliable retreat. Return to it from time to time." },
+    ]
+  }
+};
+---
+
+<BaseLayout title="Games | Devashish" description="Games I've loved">
+  <h1>Games</h1>
+  <p class="page-intro">
+    Games were my first window into history and mythology. The long campaigns of RTS games and 3rd person adventure games helped me spend hours learning without learning.
+    These games pulled me in the same way long book series do — feeding a little bit of escapism, a lot of wonder, and a feeling of time well-spent.
+  </p>
+
+  <nav class="genre-nav">
+    {Object.values(games).map((cat) => (
+      <a href={`#${cat.id}`} class="pill">{cat.subtitle}</a>
+    ))}
+  </nav>
+
+  <div class="categories">
+    {Object.values(games).map((cat) => (
+      <section class="category" id={cat.id}>
+        <h2>{cat.subtitle}</h2>
+        {cat.intro && <p class="category-intro">{cat.intro}</p>}
+        <ul class="item-list">
+          {cat.items.map((item) => (
+            <li class="item">
+              <span class="item-name">{item.title}</span>
+              {item.notes && <div class="item-notes">{item.notes}</div>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-intro {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .genre-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .pill {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .pill:hover {
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border-color: var(--color-text-muted);
+  }
+
+  .pill.active {
+    color: var(--color-bg);
+    background-color: var(--color-text);
+    border-color: var(--color-text);
+  }
+
+  .categories {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .category.hidden {
+    display: none;
+  }
+
+  .category-intro {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+    margin-top: -0.5rem;
+  }
+
+  .item-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .item {
+    padding: 0.4rem 0.75rem;
+    margin: 0 -0.75rem;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+  }
+
+  .item:hover {
+    background-color: var(--color-surface);
+  }
+
+  .item-name {
+    font-family: var(--font-heading);
+    font-weight: 500;
+  }
+
+  .item-notes {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 0.15rem;
+  }
+</style>
+
+<script>
+  function filterCategories() {
+    const hash = window.location.hash.slice(1);
+    const categories = document.querySelectorAll('.category');
+    const navLinks = document.querySelectorAll('.genre-nav a');
+
+    navLinks.forEach(link => {
+      const linkHash = link.getAttribute('href')?.slice(1);
+      if (linkHash === hash) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    if (hash) {
+      categories.forEach(cat => {
+        if (cat.id === hash) {
+          cat.classList.remove('hidden');
+        } else {
+          cat.classList.add('hidden');
+        }
+      });
+    } else {
+      categories.forEach(cat => cat.classList.remove('hidden'));
+      navLinks.forEach(link => link.classList.remove('active'));
+    }
+  }
+
+  filterCategories();
+  window.addEventListener('hashchange', filterCategories);
+</script>

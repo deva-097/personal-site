@@ -1,58 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const games = {
-  historicalStrategy: {
-    subtitle: "Historical Strategy",
-    intro: "Long campaigns set against real history — these sparked a lasting interest in ancient civilisations, mythology, and how the world got here.",
-    items: [
-      { title: "Age of Empires II" },
-      { title: "Age of Mythology", notes: "The first one — Greeks, Egyptians, Norse gods. My entry point into mythology." },
-      { title: "Rise of Nations" },
-      { title: "Stronghold Crusader", notes: "Played an unreasonable amount of this." },
-      { title: "Caesar 3" },
-      { title: "Pharaoh" },
-    ]
-  },
-  fantasyStrategy: {
-    subtitle: "Fantasy & Sci-Fi Strategy",
-    items: [
-      { title: "Warcraft III (+ The Frozen Throne)", notes: "The primary one. All campaigns and expansions. The lore runs deep." },
-      { title: "Warcraft II" },
-      { title: "StarCraft" },
-    ]
-  },
-  adventure: {
-    subtitle: "Action & Adventure",
-    items: [
-      { title: "Assassin's Creed", notes: "The original. Parkour across 12th century Jerusalem." },
-      { title: "Assassin's Creed: Ezio Trilogy", notes: "AC2, Brotherhood, Revelations. The high point of the series." },
-      { title: "Max Payne", notes: "The first one." },
-      { title: "God of War (2018 & Ragnarök)" },
-      { title: "Ghost of Tsushima" },
-    ]
-  },
-  rpg: {
-    subtitle: "RPG",
-    intro: "Immense lore, deep world-building, real customisation — the same pull as a long book series with its own universe. You don't finish these, you live in them for a while.",
-    items: [
-      { title: "The Elder Scrolls V: Skyrim" },
-      { title: "Dragon Age: Origins" },
-      { title: "Dragon Age: Inquisition" },
-    ]
-  },
-  comfort: {
-    subtitle: "Comfort",
-    items: [
-      { title: "Stardew Valley", notes: "A reliable retreat. Return to it from time to time." },
-    ]
-  }
-};
-
 const interests = {
-  swissKnives: {
-    title: "Swiss Knives & EDC",
-    description: "My first obsession. Multi-functional, well-designed, built to last. Led me down the broader EDC rabbithole.",
+  edc: {
+    title: "Knives, EDC & Wallets",
+    description: "Swiss knives were my first obsession - multi-functional, well-designed, built to last. Led me down into a deeper EDC rabbithole.",
     items: [
       { brand: "Victorinox", links: [
         { name: "Tinker", url: "https://www.victorinox.com/en/Products/Swiss-Army-Knife%E2%84%A2-and-Tools/Essentials/Tinker/p/1.4603" },
@@ -62,13 +14,7 @@ const interests = {
       { name: "Tenacious", brand: "Spyderco", url: "https://spyderco.com/products/c122g-tenacious%C2%AE?variant=44049535696940" },
       { name: "No.8 Carbon", brand: "Opinel", url: "https://www.opinel.com/en/pocket-knives/carbone/n8-carbon" },
       { name: "i3T 2", brand: "Olight", url: "https://www.olight.com/store/i3t-2-small-edc-flashlight", notes: "EDC flashlight" },
-      { name: "Dime", brand: "Gerber", url: "https://www.gerbergear.com/en-us/shop/multi-tools/all-multi-tools/dime-black-30-000469n", notes: "Lost at BLR airport security" }
-    ]
-  },
-  wallets: {
-    title: "Wallets",
-    description: "Started off as functional, but I quickly got tired of the fat leather wallets. Tried a few, settled on the Secrid wallet.",
-    items: [
+      { name: "Dime", brand: "Gerber", url: "https://www.gerbergear.com/en-us/shop/multi-tools/all-multi-tools/dime-black-30-000469n", notes: "Lost at BLR airport security" },
       { name: "Miniwallet Original", brand: "Secrid", url: "https://secrid.com/en-global/miniwallet-original-chocolate/", notes: "Highly recommend some version of this" },
       { name: "Altitude Billfold", brand: "Pioneer", url: "https://pioneercarry.com/collections/wallets/products/altitude-billfold" },
       { name: "Classic Wallet (Ikat Blue)", brand: "Nappadori", url: "https://www.nappadori.com/collections/wallets/products/classic-wallet-ikat" }
@@ -76,7 +22,7 @@ const interests = {
   },
   watches: {
     title: "Watches",
-    description: "Graduated slowly from kid G-Shock to an Omega. At one point my wishlist was worth about $2Mn. But the Aqua Terra made me feel 'done' — a true GADA watch.",
+    description: "Graduated slowly from kid G-Shock (with the rooster alarm) in school to an Omega now. At one point my wishlist had about 30 watches on it and worth about $2Mn. But the Aqua Terra made me feel 'done' - a true GADA watch.",
     items: [
       { name: "Seamaster Aqua Terra", brand: "Omega", url: "https://www.omegawatches.com/watch-omega-seamaster-aqua-terra-150m-co-axial-master-chronometer-41-mm-22010412103004", notes: "The GADA watch" },
       { name: "Prospex Alpinist", brand: "Seiko", url: "https://www.seikowatches.com/in-en/products/prospex/spb121j1" },
@@ -125,45 +71,21 @@ const interests = {
   <p class="page-intro">
     A collection of things that bring me joy or occupy my attention.
     Objects, hobbies, and obsessions, documented for my own reference and
-    anyone else who might share these interests.
+    anyone else who might share these interests. I can talk for hours on any of these. Try me.
   </p>
 
   <nav class="interest-nav">
-    <a href="#knives" class="pill">Swiss Knives & EDC</a>
-    <a href="#wallets" class="pill">Wallets</a>
+    <a href="#edc" class="pill">Knives, EDC & Wallets</a>
     <a href="#watches" class="pill">Watches</a>
     <a href="#fountain-pens" class="pill">Fountain Pens</a>
     <a href="#coffee" class="pill">Coffee</a>
-    <a href="#games" class="pill">Games</a>
   </nav>
 
-  <section id="knives" class="interest-section">
-    <h2>{interests.swissKnives.title}</h2>
-    <p class="section-description">{interests.swissKnives.description}</p>
+  <section id="edc" class="interest-section">
+    <h2>{interests.edc.title}</h2>
+    <p class="section-description">{interests.edc.description}</p>
     <ul class="item-list">
-      {interests.swissKnives.items.map((item) => (
-        <li class="item">
-          <div>
-            {item.links ? (
-              <span class="item-name">{item.links.map((link, i) => (<>{i > 0 && ', '}<a href={link.url} target="_blank" rel="noopener noreferrer" class="item-name">{link.name}</a></>))}</span>
-            ) : item.url ? (
-              <a href={item.url} target="_blank" rel="noopener noreferrer" class="item-name">{item.name}</a>
-            ) : (
-              <span class="item-name">{item.name}</span>
-            )}
-            <span class="item-brand"> {item.brand}</span>
-          </div>
-          {item.notes && <div class="item-notes">{item.notes}</div>}
-        </li>
-      ))}
-    </ul>
-  </section>
-
-  <section id="wallets" class="interest-section">
-    <h2>{interests.wallets.title}</h2>
-    <p class="section-description">{interests.wallets.description}</p>
-    <ul class="item-list">
-      {interests.wallets.items.map((item) => (
+      {interests.edc.items.map((item) => (
         <li class="item">
           <div>
             {item.links ? (
@@ -205,7 +127,7 @@ const interests = {
 
   <section id="fountain-pens" class="interest-section">
     <h2>{interests.fountainPens.title}</h2>
-    <p class="section-description">{interests.fountainPens.description}</p>
+    <p class="section-description">Recovering fountain pen addict. From a Lamy Safari in school to 25+ pens at one point. Ran the gauntlet on different filling systems, grinds, nibs, custom pens, inks, leather holders — <a href="/writing/things-that-own-you">Diderot effect</a> in full glory.</p>
     <ul class="item-list">
       {interests.fountainPens.items.map((item) => (
         <li class="item">
@@ -247,27 +169,6 @@ const interests = {
     </ul>
   </section>
 
-  <section id="games" class="interest-section">
-    <h2>Games</h2>
-    <p class="section-description">
-      Games were my first window into history and mythology. The long campaigns of RTS games did what textbooks couldn't.
-      RPGs pulled me in the same way long book series do — you don't finish them, you inhabit them for a while.
-    </p>
-    {Object.values(games).map((cat) => (
-      <div class="game-category">
-        <h3 class="game-category-title">{cat.subtitle}</h3>
-        {cat.intro && <p class="game-category-intro">{cat.intro}</p>}
-        <ul class="item-list">
-          {cat.items.map((item) => (
-            <li class="item">
-              <span class="item-name">{item.title}</span>
-              {item.notes && <div class="item-notes">{item.notes}</div>}
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))}
-  </section>
 </BaseLayout>
 
 <style>
@@ -366,21 +267,7 @@ const interests = {
     margin-bottom: 1.75rem;
   }
 
-  .game-category-title {
-    font-size: 0.9rem;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-text-muted);
-    margin-bottom: 0.5rem;
-  }
 
-  .game-category-intro {
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    margin-bottom: 0.75rem;
-  }
 </style>
 
 <script>

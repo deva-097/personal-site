@@ -1,5 +1,5 @@
 ---
-title: "If—"
+title: "If"
 slug: "if"
 date: "2026-02-20"
 description: "If you can keep your head when all about you are losing theirs"

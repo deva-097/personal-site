@@ -4,7 +4,7 @@ slug: "diary-vs-journal"
 date: "2026-03-19"
 description: "The distinction between recording what happened and asking why"
 author: "Unknown"
-tags: ["reflection", "writing"]
+tags: ["relationships"]
 ---
 
 There's a clear distinction between a diary and a journal. A diary is when you write about the "what"s of life: what you did, what you want, and what you felt.

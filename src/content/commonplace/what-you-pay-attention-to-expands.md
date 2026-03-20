@@ -4,7 +4,7 @@ slug: "what-you-pay-attention-to-expands"
 date: "2026-03-19"
 description: "On attention, algorithms, and the choice to look away"
 author: "Brandon Stanton"
-tags: ["attention", "technology"]
+tags: ["attention"]
 source: "https://bearsbulletins.substack.com/p/new-year-2024?open=false#%C2%A7the-other-day-i-was-scrolling-through-instagram-it-was-a-moment-of-weakness"
 source_label: "Brandon Stanton's 2024 NY letter"
 ---
