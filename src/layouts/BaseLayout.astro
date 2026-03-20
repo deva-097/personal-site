@@ -10,11 +10,14 @@ const { title, description = "Personal website" } = Astro.props;
 const currentPath = Astro.url.pathname;
 const navLinks = [
   { href: "/", label: "Home", match: (p: string) => p === "/" },
+  { separator: true },
   { href: "/writing", label: "Writing", match: (p: string) => p.startsWith("/writing") },
   { href: "/commonplace", label: "Commonplace", match: (p: string) => p.startsWith("/commonplace") },
   { href: "/reading", label: "Reading", match: (p: string) => p.startsWith("/reading") },
+  { separator: true },
   { href: "/interests", label: "Collections", match: (p: string) => p.startsWith("/interests") },
   { href: "/games", label: "Gaming", match: (p: string) => p.startsWith("/games") },
+  { separator: true },
   { href: "/experiments", label: "Experiments", match: (p: string) => p.startsWith("/experiments") },
 ];
 ---
@@ -83,9 +86,9 @@ const navLinks = [
     <!-- Mobile Navigation Dropdown -->
     <nav class="mobile-nav" id="mobile-nav">
       {navLinks.map((link) => (
-        <a href={link.href} class:list={[{ active: link.match(currentPath) }]}>
-          {link.label}
-        </a>
+        'separator' in link
+          ? <hr class="nav-separator" />
+          : <a href={link.href} class:list={[{ active: link.match(currentPath) }]}>{link.label}</a>
       ))}
       <div class="mobile-nav-footer">
         <div class="social-links">
@@ -116,9 +119,9 @@ const navLinks = [
           <a href="/" class="site-name">Devashish</a>
           <nav>
             {navLinks.map((link) => (
-              <a href={link.href} class:list={[{ active: link.match(currentPath) }]}>
-                {link.label}
-              </a>
+              'separator' in link
+                ? <hr class="nav-separator" />
+                : <a href={link.href} class:list={[{ active: link.match(currentPath) }]}>{link.label}</a>
             ))}
           </nav>
 
@@ -594,6 +597,12 @@ const navLinks = [
     flex-direction: column;
     gap: 0.25rem;
     flex: 1;
+  }
+
+  .nav-separator {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 0.5rem 0;
   }
 
   .sidebar nav a {
