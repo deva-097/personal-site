@@ -11,8 +11,8 @@ const currentPath = Astro.url.pathname;
 const navLinks = [
   { href: "/", label: "Home", match: (p: string) => p === "/" },
   { href: "/writing", label: "Writing", match: (p: string) => p.startsWith("/writing") },
-  { href: "/reading", label: "Reading", match: (p: string) => p.startsWith("/reading") },
   { href: "/commonplace", label: "Commonplace", match: (p: string) => p.startsWith("/commonplace") },
+  { href: "/reading", label: "Reading", match: (p: string) => p.startsWith("/reading") },
   { href: "/interests", label: "Collections", match: (p: string) => p.startsWith("/interests") },
   { href: "/games", label: "Gaming", match: (p: string) => p.startsWith("/games") },
   { href: "/experiments", label: "Experiments", match: (p: string) => p.startsWith("/experiments") },
