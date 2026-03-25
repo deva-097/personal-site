@@ -1,7 +1,7 @@
 ---
 title: "What is one to do?"
 slug: "what-is-one-to-do"
-date: "2026-04-01"
+date: "2026-03-24"
 description: "In a world engineered to extract from us, what does it actually take to protect yourself and the people you love? On awareness, values, and finding a purpose worth fighting for."
 tags: ["life"]
 ---

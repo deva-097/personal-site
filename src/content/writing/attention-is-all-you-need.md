@@ -1,7 +1,7 @@
 ---
 title: "Attention is all you need"
 slug: "attention-is-all-you-need"
-date: "2026-03-25"
+date: "2026-03-20"
 description: "On reclaiming attention from algorithms, decluttering the digital second brain, and choosing human-curated over engagement-optimized content."
 tags: ["life"]
 ---
