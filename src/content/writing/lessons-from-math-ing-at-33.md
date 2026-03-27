@@ -14,9 +14,10 @@ As a 33 year old, getting back to solving equations and graphing them felt good.
 
 I rediscovered why people say "Math teaches you logic". As an adult doing the problems, maybe 80% was instinct. But I really had to go back to basics (and relearn) to make the remaining 20% work - the mental gymnastics of justifying proofs is a special skill that one tends to just forget.
 
-![Why would you drop a perpendicular line when there was none? Who thinks of all this!](/images/IMG_7520.jpg)
-
-Why would you drop a perpendicular line when there was none? Who thinks of all this!
+<figure>
+  <img src="/images/IMG_7520.jpg" alt="Why would you drop a perpendicular line when there was none? Who thinks of all this!" />
+  <figcaption>Why would you drop a perpendicular line when there was none? Who thinks of all this!</figcaption>
+</figure>
 
 Breaking down basic equations was straightforward, almost mechanical - but when the same equation is presented as a word problem - I blanked out. I felt more than a little embarrassed when I had to resort to hints to make progress when I first started. Words like first principles thinking, problem framing and "make it visual" - were ringing in my head as I struggled to finish those pesky word problems.
 
@@ -32,7 +33,10 @@ First Principles problem framing. To solve some of the more hairy problems, I ha
 
 Building on this - graphing an equation is the first instance of "make it visual". Being able to visually depict something instantly simplifies the toughest of problems - whether on pen/paper, or on a computer screen, or even in your head. Now, math comes with "built-in templates"
 
-[![Math templates](/images/Screenshot 2026-03-27 at 11.32.54 AM.png)](https://www.jmeiners.com/think-in-math/)
+<figure>
+  <img src="/images/Screenshot%202026-03-27%20at%2011.32.54%20AM.png" alt="Math templates" />
+  <figcaption><a href="https://www.jmeiners.com/think-in-math/">Source</a></figcaption>
+</figure>
 
 Maybe life isn't that simple. But one can try. We are trying to figure out what S will do in his summer holidays (toddler parents will know the dilemma). What started off as trying to find a good summer camp (single variable?) is now a multi-variate equation - juggling calendar schedules (his own, and his on-call butlers aka Mom and Dad), his interests and ours, distance from the house, visits to and from daadi ghar and naani ghar, and general down time - he is just 4 after all.
 
@@ -40,7 +44,7 @@ Another important thing Math teaches us - Perseverance, and sticking to a proble
 
 Sometimes, just sometimes - there is no "acceptable" answer for a problem (No, I am not contradicting myself). You may remember this from solving quadratic equations - you can get 1 or 2 solutions since it's a 2nd degree polynomial. However, the answers may not be "real" - they are complex (imaginary) numbers, and while you followed the due process (show your work!) - you're left feeling cheated.
 
-![Complex numbers](/images/Screenshot 2026-03-27 at 11.10.58 AM.png)
+![Complex numbers](/images/Screenshot%202026-03-27%20at%2011.10.58%20AM.png)
 
 Sometimes, life may be like that. You may do everything right, but things may not eventually work out. What does one do with something like this? For now, I'm content to take it at face value and move on.
 
