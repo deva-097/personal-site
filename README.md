@@ -34,14 +34,18 @@ The dev server runs at `http://localhost:4321`
 │   └── pages/
 │       ├── index.astro          # Home page
 │       ├── reading.astro        # Books page (filterable by genre)
-│       ├── interests.astro      # Interests/collections (filterable sections)
-│       ├── work.astro           # Projects page
+│       ├── interests.astro      # Collections page (filterable sections)
+│       ├── games.astro          # Games page (filterable by category)
+│       ├── experiments.astro    # Projects/experiments page
+│       ├── rss.xml.js           # RSS feed
 │       ├── writing/
 │       │   ├── index.astro      # Writing list
 │       │   └── [slug].astro     # Individual post template
-│       └── commonplace/
-│           ├── index.astro      # Commonplace list
-│           └── [slug].astro     # Individual piece template
+│       ├── commonplace/
+│       │   ├── index.astro      # Commonplace list
+│       │   └── [slug].astro     # Individual piece template
+│       └── book-notes/
+│           └── [slug].astro     # Book notes (hidden, no nav entry)
 └── package.json
 ```
 
@@ -74,11 +78,16 @@ The dev server runs at `http://localhost:4321`
 - Hover backgrounds on book items
 - Links to [Goodreads profile](https://www.goodreads.com/devashish_097)
 
-### Interests (`/interests`)
-- **Pill/tag filter buttons**: Swiss Knives & EDC, Wallets, Watches, Fountain Pens, Coffee
+### Collections (`/interests`)
+- **Pill/tag filter buttons**: Knives/EDC & Wallets, Watches, Fountain Pens, Coffee
 - Hover backgrounds on individual items
 - Links to products/references
 - Personal notes on each collection
+
+### Games (`/games`)
+- Games organized by category (Historical Strategy, RTS, Action & Adventure, RPG, Comfort)
+- **Pill/tag filter buttons**: Click categories to filter
+- Extracted from Collections into its own page
 
 ### Writing (`/writing`)
 - Blog posts and essays with Markdown support
@@ -90,6 +99,11 @@ The dev server runs at `http://localhost:4321`
 - Collected poems, quotes, and fragments
 - Hover backgrounds on piece list
 - Individual piece pages with author attribution
+- Tags: poem, philosophy, motivation, relationships, attention
+
+### RSS Feed (`/rss.xml`)
+- Full RSS feed for Writing posts
+- Ready for import into Substack or any RSS reader
 
 ## Design
 
@@ -166,7 +180,7 @@ Edit `src/pages/reading.astro` and add to the appropriate category in `readingDa
 }
 ```
 
-### Adding Interests
+### Adding Collection Items
 
 Edit `src/pages/interests.astro` and add items to the relevant section:
 
@@ -209,15 +223,11 @@ git push
 
 Vercel automatically rebuilds and deploys (takes ~1 minute)
 
-### Adding a Custom Domain
+### Scheduled Publishing
 
-When you're ready to add a custom domain:
+Posts can be future-dated and will be hidden at build time. A GitHub Actions cron job rebuilds the site every **Thursday at 6 AM IST**, so scheduling a post for Wednesday will make it go live Thursday morning.
 
-1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
-2. Select your project → Settings → Domains
-3. Add your custom domain (e.g., `devashish.com`)
-4. Update DNS settings at your domain registrar (Vercel provides instructions)
-5. Free SSL certificate is automatically provisioned
+To schedule a post, just set `date` to a future Wednesday. The GitHub Actions workflow handles the rest via a Vercel deploy hook.
 
 ## Customization
 
