@@ -37,22 +37,30 @@ const sortedPosts = posts
     </p>
   </section>
 
-  <section class="explore-grid">
-    <a href="/reading" class="explore-card">
-      <span class="card-title">Reading</span>
-      <span class="card-desc">High Fantasy, Sci-fi, and other loved books.</span>
-      <span class="card-arrow">&rarr;</span>
-    </a>
-    <a href="/commonplace" class="explore-card">
-      <span class="card-title">Commonplace</span>
-      <span class="card-desc">Poems, quotes, and fragments I keep coming back to.</span>
-      <span class="card-arrow">&rarr;</span>
-    </a>
-    <a href="/interests" class="explore-card">
-      <span class="card-title">Collections</span>
-      <span class="card-desc">Functional luxury things that I collect (and occasionally hoard).</span>
-      <span class="card-arrow">&rarr;</span>
-    </a>
+  <section class="explore">
+    <h2>Explore</h2>
+    <div class="explore-grid">
+      <a href="/writing" class="explore-card">
+        <span class="card-title">Writing</span>
+        <span class="card-desc">Essays on whatever catches my fancy.</span>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+      <a href="/reading" class="explore-card">
+        <span class="card-title">Reading</span>
+        <span class="card-desc">High Fantasy, Sci-fi, and other loved books.</span>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+      <a href="/commonplace" class="explore-card">
+        <span class="card-title">Commonplace</span>
+        <span class="card-desc">Poems, quotes, and fragments I keep coming back to.</span>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+      <a href="/interests" class="explore-card">
+        <span class="card-title">Collections</span>
+        <span class="card-desc">Functional luxury things that I collect (and occasionally hoard).</span>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+    </div>
   </section>
 
   <section class="recent">
@@ -143,11 +151,14 @@ const sortedPosts = posts
     color: var(--color-text-muted);
   }
 
+  .explore {
+    margin-bottom: 2.5rem;
+  }
+
   .explore-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-    margin-bottom: 2.5rem;
   }
 
   .explore-card {
