@@ -13,7 +13,9 @@ const allTags = [...new Set(sortedPieces.flatMap(p => p.frontmatter.tags || []))
 
 <BaseLayout title="Commonplace | Devashish" description="Collected poems, quotes, and fragments">
   <h1>Commonplace</h1>
-  <p class="page-intro">Poems, quotes, and fragments I've collected—words that resonated. The word "commonplace" comes from a <a href="https://en.wikipedia.org/wiki/Commonplace_book" target="_blank" rel="noopener">commonplace notebook</a>.</p>
+  <p class="page-intro">Poems, quotes, and fragments I've collected over the years. These are words that resonated best. Parking them here so you can enjoy as well, and maybe for me to see and make better connections between them. </p>
+  
+  <p class="page-intro">The word "commonplace" comes from a <a href="https://en.wikipedia.org/wiki/Commonplace_book" target="_blank" rel="noopener">commonplace notebook</a>.</p>
 
   {allTags.length > 0 && (
     <nav class="tag-nav">

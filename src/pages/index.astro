@@ -37,6 +37,24 @@ const sortedPosts = posts
     </p>
   </section>
 
+  <section class="explore-grid">
+    <a href="/reading" class="explore-card">
+      <span class="card-title">Reading</span>
+      <span class="card-desc">High Fantasy, Sci-fi, and other loved books.</span>
+      <span class="card-arrow">&rarr;</span>
+    </a>
+    <a href="/commonplace" class="explore-card">
+      <span class="card-title">Commonplace</span>
+      <span class="card-desc">Poems, quotes, and fragments I keep coming back to.</span>
+      <span class="card-arrow">&rarr;</span>
+    </a>
+    <a href="/interests" class="explore-card">
+      <span class="card-title">Collections</span>
+      <span class="card-desc">Functional luxury things that I collect (and occasionally hoard).</span>
+      <span class="card-arrow">&rarr;</span>
+    </a>
+  </section>
+
   <section class="recent">
     <h2>Recent Writing</h2>
     {sortedPosts.length > 0 ? (
@@ -123,5 +141,60 @@ const sortedPosts = posts
     font-family: var(--font-heading);
     font-size: 0.9rem;
     color: var(--color-text-muted);
+  }
+
+  .explore-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .explore-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+    color: var(--color-text);
+  }
+
+  .explore-card:hover {
+    background-color: var(--color-surface);
+    border-color: var(--color-text-muted);
+    color: var(--color-text);
+  }
+
+  .card-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .card-arrow {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: 0.4rem;
+    transition: color 0.15s ease;
+  }
+
+  .explore-card:hover .card-arrow {
+    color: var(--color-text);
+  }
+
+  @media (max-width: 768px) {
+    .explore-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

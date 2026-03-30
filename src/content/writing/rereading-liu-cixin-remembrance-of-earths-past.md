@@ -6,7 +6,7 @@ description: "Character studies from Liu Cixin's Remembrance of Earth's Past —
 tags: ["books"]
 ---
 
-I just finished rereading Liu Cixin's *Remembrance of Earth's Past* trilogy (*The Three-Body Problem*, *The Dark Forest*, and *Death's End*). It is one of the most complex series I've read, and I mean that in both good and frustrating ways.
+I just finished rereading Liu Cixin's *Remembrance of Earth's Past* trilogy (*The Three-Body Problem*, *The Dark Forest*, and *Death's End*). It is one of the most complex series I've read.
 
 While the series has many memorable, cinematic moments that will stick with me for some time (flying blade, the droplet) - it is some of the characters (and what they represented) that I would like to talk about today.
 
@@ -33,7 +33,7 @@ Zhang understood that humanity had zero chance against the Trisolarans. His defe
 
 ### The cynic who carried world(s)
 
-Luo Ji is the most transformed character, and maybe the most interesting precisely because the transformation happens involuntarily. He starts as a hedonistic academic who literally dreams up an ideal woman because real relationships are too complicated. He doesn't want to be a Wallfacer, and actively flees responsibility.
+Luo Ji is the character that changes the most - and is the most interesting precisely because the transformation happens involuntarily. He starts as a hedonistic academic who literally dreams up an ideal woman because real relationships are too complicated. He doesn't want to be a Wallfacer, and actively flees responsibility.
 
 But when he finally accepts his role, he commits totally. Fifty-four years alone in that chamber, carrying the weight of two civilizations, never wavering. What makes him effective is that same clarity that made him a cynic: he sees things as they are, not as he wishes them to be. No vanity to exploit, no ambition to redirect.
 
