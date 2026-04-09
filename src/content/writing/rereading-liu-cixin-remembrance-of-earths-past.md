@@ -1,5 +1,5 @@
 ---
-title: "Re-reading Liu Cixin's Remembrance of Earth's Past trilogy"
+title: "Re-reading \"The Three-Body Problem\" series"
 slug: "rereading-liu-cixin-remembrance-of-earths-past"
 date: "2026-04-08"
 description: "Character studies from Liu Cixin's Remembrance of Earth's Past — Da Shi, Zhang Beihai, Luo Ji, Wade, Cheng Xin, and Ye Wenjie."
