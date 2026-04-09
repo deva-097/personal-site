@@ -13,14 +13,14 @@ I have a favorite statue and a favorite building (Yes, I know I am a fully grown
 I won't be able to exactly tell you what it is about them that I love.
 
 <figure>
-  <img src="/images/DSC_0737.jpg" alt="Notre Dame, clicked Nov 2016" />
+  <img src="/images/DSC_0737.JPG" alt="Notre Dame, clicked Nov 2016" />
   <figcaption>Clicked Nov 2016</figcaption>
 </figure>
 
 What I do know is that when I look at the Notre Dame, my heart feels a certain solidity, a certain grandeur and a certain sense of beauty. The flying buttresses (what a strange name for such a solid artifact), the rose windows, the entire front facade (did you know it was made intentionally asymmetrical? Because the builders believed only Heaven and God could be perfect). [^1]
 
 <figure>
-  <img src="/images/IMG_3641.jpg" alt="Winged Victory of Samothrace, clicked Nov 2016" />
+  <img src="/images/IMG_3641.JPG" alt="Winged Victory of Samothrace, clicked Nov 2016" />
   <figcaption>Clicked Nov 2016</figcaption>
 </figure>
 
@@ -40,9 +40,9 @@ One Saturday morning at the 6pc club, Utsav and Chuck held up the mirror. They s
 
 They made us take the pledge that is now letting me create, develop my own craft, and develop my Taste a little more.
 
-	I am a beginner, and I will suck in the beginning.
-	I will be okay with it.
-	The world does not care anyway.
+> I am a beginner, and I will suck in the beginning.
+> I will be okay with it.
+> The world does not care anyway.
 
 Of course, I still have mixed feelings when I read great stuff - part of me is blown away *(how the heck did this person do this)*, part of me is jealous and a little insecure *(when will I write this?)*
 
