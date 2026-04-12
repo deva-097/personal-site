@@ -44,9 +44,11 @@ They made us take the pledge that is now letting me create, develop my own craft
 > I will be okay with it.
 > The world does not care anyway.
 
-Of course, I still have mixed feelings when I read great stuff - part of me is blown away *(how the heck did this person do this)*, part of me is jealous and a little insecure *(when will I write this?)*
+Of course, I still have mixed feelings when I read great stuff - part of me is blown away *(how the heck did this person do this)*, part of me is jealous and a little insecure *(when will I write this?)*. 
 
-PS: I'm pleasantly surprised. As I sat down to write this piece, I had no plans to incorporate Notre Dame or Winged Victory at all. Yet they popped into my mind organically. I'd like to think this is some evidence of my quality graph nudging upward. Who knows.
+I have now started writing more - first for myself - and then putting out my work. I see some things have started to shift. I realize I think better as I write - in fact, I do not realize what I wanted to say until I sit down to write. I think what happens is that pieces keep churning in my head in the background with the scaffolding I build (I typically start with a map of contents and connected / disconnected thoughts in a file), and once I sit down - a piece kind of flows out. 
+
+Before I sat down to write this piece, I had no plans to incorporate Notre Dame or Winged Victory at all. "On Craft" had been buzzing in my head for bit - yet as I started writing, they slipped in almost organically. I'd like to think this is some evidence of my quality graph nudging upward. Who knows.
 
 [^1]: One of my favorite bits of trivia links one my favorite game series to the Notre Dame. When the spire and roof burnt down in 2019, Ubisoft (creators of Assassin's Creed) gave €500,000 for reconstruction, as well as [shared their maps and plans of the cathedral](https://www.reddit.com/r/interestingasfuck/comments/qq7em7/when_paris_notre_dame_cathedral_burnt_down/) to help with the effort - they had mapped it for AC Unity.  Paris repaid this during the 2024 Olympics - by having one of the [torchbearers](https://www.nbcnewyork.com/paris-2024-summer-olympics/assassins-creed-olympics-final-torchbearer-identity/5635376/) dress similar to Arno the Assassin. 
 
