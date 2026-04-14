@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const finds = {
+  websites: {
+    id: "websites",
+    title: "Websites",
+    intro: "Sites that made me pause and appreciate what people can build on the internet. Some of these inspired me to write about craft.",
+    items: [
+      { name: "Bartosz Ciechanowski", url: "https://ciechanow.ski/", notes: "Interactive explainers that belong in an Internet Hall of Fame. Start with Lights and Shadows." },
+      { name: "How Browsers Work", url: "https://howbrowserswork.com/", notes: "A beautifully made walkthrough of something most of us take for granted" },
+      { name: "Claude Code Unpacked", url: "https://ccunpacked.dev/", notes: "Clean, well-structured, does one thing extremely well" },
+      { name: "Middle Earth Interactive Map", url: "https://middle-earth-interactive-map.web.app/", notes: "For anyone who's ever wanted to trace the Fellowship's journey" },
+      { name: "Sleep Well Creatives", url: "https://sleep-well-creatives.com/", notes: "Atmospheric and immersive — the kind of site that feels like an experience" },
+      { name: "Animagraffs", url: "https://animagraffs.com/", notes: "Animated infographics that make complex things intuitive" },
+    ]
+  },
+  reddit: {
+    id: "reddit",
+    title: "Reddit Threads",
+    intro: "Threads I've saved over the years. The kind you open in a tab and come back to.",
+    items: [
+      { name: "What difficult truths should you accept sooner?", url: "https://www.reddit.com/r/AskReddit/comments/1ew56dj/what_difficult_truths_the_sooner_you_accept_them/", notes: "One of those threads that hit different" },
+      { name: "Weirdest advice that actually worked", url: "https://www.reddit.com/r/AskReddit/comments/uc8i1g/what_is_the_weirdest_advice_you_have_heard_that/", notes: "Surprisingly practical" },
+      { name: "Things nobody warns you about", url: "https://www.reddit.com/r/AskReddit/comments/qx40hl/what_is_something_nobody_warns_people_about/", notes: "Life advice from strangers on the internet" },
+      { name: "Street smarts everyone should know", url: "https://www.reddit.com/r/AskReddit/comments/kl4mjy/what_are_some_street_smarts_everyone_should_know/", notes: "Practical wisdom" },
+      { name: "Cooking around the world", url: "https://www.reddit.com/r/Cooking/comments/iya91a/my_husband_and_i_are_trying_to_cook_around_the/", notes: "A couple attempts to cook a dish from every country. Great thread for recipe discovery." },
+      { name: "Deep, thought-provoking questions", url: "https://www.reddit.com/r/AskReddit/comments/ddzkws/what_are_some_deep_thought_provoking_questions_to/", notes: "Conversation starters that go somewhere" },
+    ]
+  },
+  games: {
+    id: "simple-games",
+    title: "Simple Games",
+    intro: "Small browser games I return to when I need five minutes of nothing productive.",
+    items: [
+      { name: "Drench", url: "https://www.flashbynight.com/drench/", notes: "Flood-fill color puzzle. Deceptively addictive." },
+      { name: "Bruno Simon's Portfolio", url: "https://bruno-simon.com/", notes: "A portfolio that's also a 3D driving game. Incredible craft." },
+      { name: "Enclose", url: "https://enclose.horse/", notes: "Trap the horse. Simple premise, surprisingly tricky." },
+    ]
+  }
+};
+---
+
+<BaseLayout title="Internet Finds | Devashish" description="Websites, threads, and games worth your time">
+  <h1>Internet Finds</h1>
+  <p class="page-intro">
+    A curated collection of things I've found on the internet that I keep coming back to.
+    Well-crafted websites, Reddit rabbit holes, and small games that deserve more attention.
+  </p>
+
+  <nav class="finds-nav">
+    {Object.values(finds).map((cat) => (
+      <a href={`#${cat.id}`} class="pill">{cat.title}</a>
+    ))}
+  </nav>
+
+  {Object.values(finds).map((cat) => (
+    <section id={cat.id} class="finds-section">
+      <h2>{cat.title}</h2>
+      <p class="section-description">{cat.intro}</p>
+      <ul class="item-list">
+        {cat.items.map((item) => (
+          <li class="item">
+            <div>
+              <a href={item.url} target="_blank" rel="noopener noreferrer" class="item-name">{item.name}</a>
+            </div>
+            {item.notes && <div class="item-notes">{item.notes}</div>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+
+</BaseLayout>
+
+<style>
+  .page-intro {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .finds-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .pill {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .pill:hover {
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border-color: var(--color-text-muted);
+  }
+
+  .pill.active {
+    color: var(--color-bg);
+    background-color: var(--color-text);
+    border-color: var(--color-text);
+  }
+
+  .finds-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .finds-section.hidden {
+    display: none;
+  }
+
+  .section-description {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .item-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .item {
+    padding: 0.4rem 0.75rem;
+    margin: 0 -0.75rem;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+  }
+
+  .item:hover {
+    background-color: var(--color-surface);
+  }
+
+  .item-name {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  .item-name:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .item-notes {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 0.15rem;
+  }
+</style>
+
+<script>
+  function filterSections() {
+    const hash = window.location.hash.slice(1);
+    const sections = document.querySelectorAll('.finds-section');
+    const navLinks = document.querySelectorAll('.finds-nav a');
+
+    navLinks.forEach(link => {
+      const linkHash = link.getAttribute('href')?.slice(1);
+      if (linkHash === hash) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    if (hash) {
+      sections.forEach(section => {
+        if (section.id === hash) {
+          section.classList.remove('hidden');
+        } else {
+          section.classList.add('hidden');
+        }
+      });
+    } else {
+      // No hash — collapse all sections
+      sections.forEach(section => section.classList.add('hidden'));
+      navLinks.forEach(link => link.classList.remove('active'));
+    }
+  }
+
+  // Handle pill clicks — toggle on re-click
+  document.querySelectorAll('.finds-nav a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const linkHash = link.getAttribute('href')?.slice(1);
+      const currentHash = window.location.hash.slice(1);
+      if (linkHash === currentHash) {
+        e.preventDefault();
+        history.replaceState(null, '', window.location.pathname);
+        filterSections();
+      }
+    });
+  });
+
+  filterSections();
+  window.addEventListener('hashchange', filterSections);
+</script>

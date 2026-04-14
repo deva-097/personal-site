@@ -277,7 +277,6 @@ const interests = {
     const sections = document.querySelectorAll('.interest-section');
     const navLinks = document.querySelectorAll('.interest-nav a');
 
-    // Update navigation active state
     navLinks.forEach(link => {
       const linkHash = link.getAttribute('href')?.slice(1);
       if (linkHash === hash) {
@@ -287,7 +286,6 @@ const interests = {
       }
     });
 
-    // Show/hide sections
     if (hash) {
       sections.forEach(section => {
         if (section.id === hash) {
@@ -297,15 +295,25 @@ const interests = {
         }
       });
     } else {
-      // Show all sections if no hash
-      sections.forEach(section => section.classList.remove('hidden'));
+      // No hash — collapse all sections
+      sections.forEach(section => section.classList.add('hidden'));
       navLinks.forEach(link => link.classList.remove('active'));
     }
   }
 
-  // Run on page load
-  filterSections();
+  // Handle pill clicks — toggle on re-click
+  document.querySelectorAll('.interest-nav a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const linkHash = link.getAttribute('href')?.slice(1);
+      const currentHash = window.location.hash.slice(1);
+      if (linkHash === currentHash) {
+        e.preventDefault();
+        history.replaceState(null, '', window.location.pathname);
+        filterSections();
+      }
+    });
+  });
 
-  // Run when hash changes
+  filterSections();
   window.addEventListener('hashchange', filterSections);
 </script>

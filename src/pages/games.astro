@@ -7,12 +7,11 @@ const games = {
     subtitle: "Historical Strategy",
     intro: "Campaigns set against real history — these sparked a lasting interest in ancient civilisations, mythology, and how the world got here. It helped that most of them had a lot of background and detail to read about the civilisations, the units, etc.",
     items: [
-      { title: "Age of Empires II" },
+      { title: "Age of Empires II", notes: "Learned so much about the Huns, the Mongols, the Celts and the other races. Still sometimes view YT videos from gamers" },
       { title: "Age of Mythology", notes: "Greek, Egyptian, Norse gods. My entry point into mythology." },
       { title: "Rise of Nations" },
       { title: "Stronghold Crusader", notes: "Played an unreasonable amount of this." },
-      { title: "Caesar 3" },
-      { title: "Pharaoh" },
+      { title: "Caesar 3, Pharoah", notes: "A different kind of city builder but fun nonetheless" }, 
     ]
   },
   fantasyStrategy: {
@@ -21,7 +20,7 @@ const games = {
     intro: "Natural \"best of\" of the RTS genre",
     items: [
       { title: "Warcraft III (+ The Frozen Throne)", notes: "The primary one. All campaigns and expansions. The lore runs deep." },
-      { title: "StarCraft II" },
+      { title: "StarCraft II", notes: "Both Warcraft and Starcraft had such a great storyline, along with satisfying gameplay and varied races to dive into" },
     ]
   },
   adventure: {
@@ -31,9 +30,9 @@ const games = {
     items: [
       { title: "Assassin's Creed", notes: "The OG" },
       { title: "Assassin's Creed: Ezio Trilogy", notes: "AC2, Brotherhood, Revelations. The geek in me was crying when I actually visited Florence." },
-      { title: "Max Payne", notes: "The first one." },
-      { title: "God of War (2018 & Ragnarök)" },
-      { title: "Ghost of Tsushima" },
+      { title: "Max Payne", notes: "The first one. Bullet time FTW" },
+      { title: "God of War (2018 & Ragnarök)", notes: "Enjoyed these immensely despite not getting into the original series. Revisiting Norse mythology, the father-son dynamics and the story had me hooked." },
+      { title: "Ghost of Tsushima", notes: "Scratched the Samurai / Ninja lover in me. Beautiful design and gameplay. Just the right amount of difficulty."  },
     ]
   },
   rpg: {
@@ -41,10 +40,9 @@ const games = {
     subtitle: "RPG",
     intro: "Immense lore, deep world-building, so many options to play through — the same pull as a long book series with its own universe",
     items: [
-      { title: "The Elder Scrolls V: Skyrim" },
-      { title: "Dragon Age: Origins" },
-      { title: "Dragon Age: Inquisition" },
-      { title: "Breath of the Wild" },
+      { title: "The Elder Scrolls V: Skyrim", notes: "Fus-Ro-Dah! Right balance of customization and open-world helped this become a genre-defining game" },
+      { title: "Dragon Age: Origins and Inquisition", notes: "The companions and their stories make this game stand out for me" },
+      { title: "Breath of the Wild", notes: "Such a lovingly crafted game. My mind was blown once when I cut down a tree with a flaming sword - and instead of wood the game me a bonfire." },
     ]
   },
   comfort: {
@@ -52,7 +50,7 @@ const games = {
     subtitle: "Comfort",
     items: [
       { title: "Stardew Valley", notes: "A reliable retreat. Return to it from time to time." },
-      { title: "RollerCoaster Tycoon" },
+      { title: "RollerCoaster Tycoon", notes: "Absolute fun designing and maintaining parks. So many little mechanics packed into such a small game" },
     ]
   }
 };
@@ -194,10 +192,24 @@ const games = {
         }
       });
     } else {
-      categories.forEach(cat => cat.classList.remove('hidden'));
+      // No hash — collapse all categories
+      categories.forEach(cat => cat.classList.add('hidden'));
       navLinks.forEach(link => link.classList.remove('active'));
     }
   }
+
+  // Handle pill clicks — toggle on re-click
+  document.querySelectorAll('.genre-nav a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const linkHash = link.getAttribute('href')?.slice(1);
+      const currentHash = window.location.hash.slice(1);
+      if (linkHash === currentHash) {
+        e.preventDefault();
+        history.replaceState(null, '', window.location.pathname);
+        filterCategories();
+      }
+    });
+  });
 
   filterCategories();
   window.addEventListener('hashchange', filterCategories);

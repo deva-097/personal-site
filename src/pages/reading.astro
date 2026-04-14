@@ -258,7 +258,6 @@ const readingData = {
     const categories = document.querySelectorAll('.category');
     const navLinks = document.querySelectorAll('.genre-nav a');
 
-    // Update navigation active state
     navLinks.forEach(link => {
       const linkHash = link.getAttribute('href')?.slice(1);
       if (linkHash === hash) {
@@ -268,7 +267,6 @@ const readingData = {
       }
     });
 
-    // Show/hide categories
     if (hash) {
       categories.forEach(category => {
         if (category.id === hash) {
@@ -278,15 +276,25 @@ const readingData = {
         }
       });
     } else {
-      // Show all categories if no hash
-      categories.forEach(category => category.classList.remove('hidden'));
+      // No hash — collapse all categories
+      categories.forEach(category => category.classList.add('hidden'));
       navLinks.forEach(link => link.classList.remove('active'));
     }
   }
 
-  // Run on page load
-  filterGenres();
+  // Handle pill clicks — toggle on re-click
+  document.querySelectorAll('.genre-nav a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const linkHash = link.getAttribute('href')?.slice(1);
+      const currentHash = window.location.hash.slice(1);
+      if (linkHash === currentHash) {
+        e.preventDefault();
+        history.replaceState(null, '', window.location.pathname);
+        filterGenres();
+      }
+    });
+  });
 
-  // Run when hash changes
+  filterGenres();
   window.addEventListener('hashchange', filterGenres);
 </script>
