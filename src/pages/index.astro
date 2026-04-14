@@ -13,6 +13,9 @@ const sortedPosts = posts
 
 <BaseLayout title="Devashish">
   <section class="intro">
+    <div class="hero-image">
+      <img src="/images/IMG_7512.jpg" alt="Vintage fountain pens — a Parker Vacumatic, a Pilot eyedropper, and a Swan lever filler" />
+    </div>
     <p class="greeting">Hello, I'm <strong>Devashish</strong>.</p>
     <p>
       I'm an engineer-MBA generalist in my professional life; and a doting father
@@ -36,10 +39,6 @@ const sortedPosts = posts
       myself. I hope you find something meaningful that resonates with you too.
     </p>
   </section>
-
-  <div class="hero-image">
-    <img src="/images/IMG_7512.jpg" alt="Vintage fountain pens — a Parker Vacumatic, a Pilot eyedropper, and a Swan lever filler" />
-  </div>
 
   <section class="explore">
     <h2>Explore</h2>
@@ -95,6 +94,7 @@ const sortedPosts = posts
 <style>
   .intro {
     margin-bottom: 2rem;
+    overflow: hidden; /* clearfix for floated image */
   }
 
   .greeting {
@@ -136,7 +136,7 @@ const sortedPosts = posts
   }
 
   .post-title {
-    font-family: var(--font-heading);
+    font-family: var(--font-ui);
   }
 
   .post-date {
@@ -150,18 +150,28 @@ const sortedPosts = posts
   }
 
   .see-all a {
-    font-family: var(--font-heading);
+    font-family: var(--font-ui);
     font-size: 0.9rem;
     color: var(--color-text-muted);
   }
 
   .hero-image {
-    margin-bottom: 2.5rem;
+    float: right;
+    width: 225px;
+    margin: 4.5rem 0 1rem 1.5rem;
   }
 
   .hero-image img {
     width: 100%;
     border-radius: 8px;
+  }
+
+  @media (max-width: 480px) {
+    .hero-image {
+      float: none;
+      width: 100%;
+      margin: 0 0 1.5rem 0;
+    }
   }
 
   .explore {
@@ -191,7 +201,7 @@ const sortedPosts = posts
   }
 
   .card-title {
-    font-family: var(--font-heading);
+    font-family: var(--font-ui);
     font-weight: 600;
     font-size: 0.95rem;
     margin-bottom: 0.25rem;
@@ -205,7 +215,7 @@ const sortedPosts = posts
   }
 
   .card-arrow {
-    font-family: var(--font-heading);
+    font-family: var(--font-ui);
     font-size: 0.9rem;
     color: var(--color-text-muted);
     margin-top: 0.4rem;
