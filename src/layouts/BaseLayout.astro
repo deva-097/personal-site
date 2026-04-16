@@ -391,6 +391,11 @@ const navLinks = [
     display: block;
   }
 
+  .post-content img:not(figure img) {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
   figcaption {
     margin-top: 0.4rem;
     font-size: 0.8rem;
@@ -455,11 +460,12 @@ const navLinks = [
   }
 
   .footnotes a {
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   .footnotes a:hover {
-    text-decoration: underline;
+    color: var(--color-accent);
   }
 
   /* Footnote reference in text */

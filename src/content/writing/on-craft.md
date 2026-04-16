@@ -1,5 +1,5 @@
 ---
-title: "On Craft"
+title: "On Craft and Taste"
 slug: "on-craft"
 date: "2026-04-15"
 description: "On what it means to have Taste — and how the gap between recognizing good craft and producing it is the hardest thing to cross."
@@ -17,7 +17,7 @@ I won't be able to exactly tell you what it is about them that I love.
   <figcaption>Clicked Nov 2016</figcaption>
 </figure>
 
-What I do know is that when I look at the Notre Dame, my heart feels a certain solidity, a certain grandeur and a certain sense of beauty. The flying buttresses (what a strange name for such a solid artifact), the rose windows, the entire front facade (did you know it was made intentionally asymmetrical? Because the builders believed only Heaven and God could be perfect). [^1]
+What I do know is that when I look at the Notre Dame, my heart feels a certain solidity, a certain grandeur and a certain sense of beauty. I love every inch of it - the flying buttresses (what a strange name for such a solid artifact), the rose windows, the entire front facade (did you know it was made intentionally asymmetrical? Because the builders believed only Heaven and God could be perfect). [^1]
 
 <figure>
   <img src="/images/IMG_3641.JPG" alt="Winged Victory of Samothrace, clicked Nov 2016" />
@@ -44,7 +44,7 @@ They made us take the pledge that is now letting me create, develop my own craft
 > I will be okay with it.
 > The world does not care anyway.
 
-Of course, I still have mixed feelings when I read great stuff - part of me is blown away *(how the heck did this person do this)*, part of me is jealous and a little insecure *(when will I write this?)*. 
+Of course, I still have mixed feelings when I read great stuff - part of me is blown away *(how the heck did this person do this)*, part of me is jealous and a little insecure *(when will I write like this?)*. 
 
 I have now started writing more - first for myself - and then putting out my work. I see some things have started to shift. I realize I think better as I write - in fact, I do not realize what I wanted to say until I sit down to write. I think what happens is that pieces keep churning in my head in the background with the scaffolding I build (I typically start with a map of contents and connected / disconnected thoughts in a file), and once I sit down - a piece kind of flows out. 
 
