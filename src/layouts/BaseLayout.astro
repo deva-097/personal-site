@@ -1,26 +1,13 @@
 ---
+import Sidebar from '../components/Sidebar.astro';
+import Footer from '../components/Footer.astro';
+
 interface Props {
   title: string;
   description?: string;
 }
 
 const { title, description = "Personal website" } = Astro.props;
-
-// Active nav detection
-const currentPath = Astro.url.pathname;
-const navLinks = [
-  { href: "/", label: "Home", match: (p: string) => p === "/" },
-  { separator: true },
-  { href: "/writing", label: "Writing", match: (p: string) => p.startsWith("/writing") },
-  { href: "/commonplace", label: "Commonplace", match: (p: string) => p.startsWith("/commonplace") },
-  { href: "/reading", label: "Reading", match: (p: string) => p.startsWith("/reading") },
-  { separator: true },
-  { href: "/interests", label: "Collections", match: (p: string) => p.startsWith("/interests") },
-  { href: "/games", label: "Gaming", match: (p: string) => p.startsWith("/games") },
-  { href: "/finds", label: "Internet Finds", match: (p: string) => p.startsWith("/finds") },
-  { separator: true },
-  { href: "/experiments", label: "Experiments", match: (p: string) => p.startsWith("/experiments") },
-];
 ---
 
 <!doctype html>
@@ -32,230 +19,72 @@ const navLinks = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
 
-    <!-- Fonts: Source Serif for body, Instrument Serif for headings, DM Sans for UI -->
+    <!-- Fonts: Fraunces for headings, Inter for body + UI -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Theme Detection: Run immediately to prevent flash -->
+    <!-- Apply .dark class before paint to prevent flash -->
     <script is:inline>
       (function() {
-        const getTheme = () => {
-          const stored = localStorage.getItem('theme');
-          if (stored) return stored;
-          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        };
-        document.documentElement.setAttribute('data-theme', getTheme());
+        const t = localStorage.getItem("theme");
+        if (t === "dark") document.documentElement.classList.add("dark");
       })();
     </script>
   </head>
   <body>
-    <!-- Mobile Header -->
-    <header class="mobile-header">
-      <a href="/" class="mobile-site-name">Devashish</a>
-      <div class="mobile-header-actions">
-        <button id="theme-toggle-mobile" aria-label="Toggle theme">
-          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
-        <button id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-          <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-          <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-    </header>
-
-    <!-- Mobile Navigation Dropdown -->
-    <nav class="mobile-nav" id="mobile-nav">
-      {navLinks.map((link) => (
-        'separator' in link
-          ? <hr class="nav-separator" />
-          : <a href={link.href} class:list={[{ active: link.match(currentPath) }]}>{link.label}</a>
-      ))}
-      <div class="mobile-nav-footer">
-        <div class="social-links">
-          <a href="https://github.com/deva-097" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-          </a>
-          <a href="https://www.linkedin.com/in/devashish-bansal" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
-          </a>
-          <a href="https://www.goodreads.com/devashish_097" target="_blank" rel="noopener noreferrer" aria-label="Goodreads">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </nav>
-
-    <div class="layout-wrapper">
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <div class="sidebar-content">
-          <a href="/" class="site-name">Devashish</a>
-          <nav>
-            {navLinks.map((link) => (
-              'separator' in link
-                ? <hr class="nav-separator" />
-                : <a href={link.href} class:list={[{ active: link.match(currentPath) }]}>{link.label}</a>
-            ))}
-          </nav>
-
-          <div class="sidebar-footer">
-            <div class="social-links">
-              <button id="theme-toggle" aria-label="Toggle theme">
-                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="5"></circle>
-                  <line x1="12" y1="1" x2="12" y2="3"></line>
-                  <line x1="12" y1="21" x2="12" y2="23"></line>
-                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                  <line x1="1" y1="12" x2="3" y2="12"></line>
-                  <line x1="21" y1="12" x2="23" y2="12"></line>
-                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                </svg>
-                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-              </button>
-              <span class="social-divider">|</span>
-              <a href="https://github.com/deva-097" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </a>
-              <a href="https://www.linkedin.com/in/devashish-bansal" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                </svg>
-              </a>
-              <a href="https://www.goodreads.com/devashish_097" target="_blank" rel="noopener noreferrer" aria-label="Goodreads">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                </svg>
-              </a>
-            </div>
-
-            <p class="copyright">&copy; {new Date().getFullYear()}</p>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Main content wrapper -->
-      <div class="main-wrapper">
-        <main>
-          <slot />
-        </main>
-      </div>
+    <Sidebar />
+    <div class="main-wrapper">
+      <main>
+        <slot />
+      </main>
+      <Footer />
     </div>
-
-    <!-- Theme Toggle + Mobile Menu Script -->
-    <script>
-      function initThemeToggle() {
-        const toggles = [
-          document.getElementById('theme-toggle'),
-          document.getElementById('theme-toggle-mobile')
-        ];
-
-        toggles.forEach(toggle => {
-          toggle?.addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-          });
-        });
-
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-          if (!localStorage.getItem('theme')) {
-            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-          }
-        });
-      }
-
-      function initMobileMenu() {
-        const toggle = document.getElementById('mobile-menu-toggle');
-        const nav = document.getElementById('mobile-nav');
-
-        toggle?.addEventListener('click', () => {
-          const isOpen = nav?.classList.toggle('open');
-          toggle.setAttribute('aria-expanded', String(isOpen));
-        });
-
-        // Close menu when a link is clicked
-        nav?.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            nav.classList.remove('open');
-            toggle?.setAttribute('aria-expanded', 'false');
-          });
-        });
-      }
-
-      initThemeToggle();
-      initMobileMenu();
-    </script>
   </body>
 </html>
 
 <style is:global>
+  /* ---- tokens ---- */
   :root {
-    --color-bg: #F6F1EB;
-    --color-text: #2C2520;
-    --color-text-muted: #7A6E63;
-    --color-border: #E2D9CF;
-    --color-link: #2C2520;
-    --color-link-hover: #B85C38;
-    --color-accent: #B85C38;
-    --color-accent-light: #D4896A;
-    --color-surface: #EDE6DD;
+    /* Parchment + ink-blue palette */
+    --color-bg:           oklch(0.965 0.014 80);
+    --color-text:         oklch(0.27  0.018 50);
+    --color-text-muted:   oklch(0.48  0.022 60);
+    --color-border:       oklch(0.82  0.025 68);
+    --color-link:         oklch(0.36  0.09  255);
+    --color-link-hover:   oklch(0.36  0.09  255);
+    --color-accent:       oklch(0.36  0.09  255);
+    --color-accent-light: oklch(0.5   0.08  255);
+    --color-surface:      oklch(0.945 0.018 78);
 
-    --font-body: 'Source Serif 4', Georgia, serif;
-    --font-heading: 'Instrument Serif', Georgia, serif;
-    --font-ui: 'DM Sans', system-ui, sans-serif;
+    /* Aliases used by Sidebar + Footer components */
+    --background:         var(--color-bg);
+    --foreground:         var(--color-text);
+    --muted-foreground:   var(--color-text-muted);
+    --ink:                var(--color-accent);
+    --rule:               var(--color-border);
+
+    --font-body:    'Inter', system-ui, sans-serif;
+    --font-heading: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+    --font-ui:      'Inter', system-ui, sans-serif;
 
     --max-width: 640px;
     --spacing-unit: 1rem;
   }
 
-  [data-theme="dark"] {
-    --color-bg: #1c1917;
-    --color-text: #e7e5e4;
-    --color-text-muted: #a8a29e;
-    --color-border: #44403c;
-    --color-link: #e7e5e4;
-    --color-link-hover: #D4896A;
-    --color-accent: #D4896A;
-    --color-accent-light: #B85C38;
-    --color-surface: #292524;
+  .dark {
+    --color-bg:           oklch(0.18  0.012 60);
+    --color-text:         oklch(0.92  0.012 80);
+    --color-text-muted:   oklch(0.65  0.018 70);
+    --color-border:       oklch(0.36  0.018 60);
+    --color-link:         oklch(0.72  0.1   250);
+    --color-link-hover:   oklch(0.72  0.1   250);
+    --color-accent:       oklch(0.72  0.1   250);
+    --color-accent-light: oklch(0.62  0.09  250);
+    --color-surface:      oklch(0.22  0.014 60);
   }
 
+  /* ---- base ---- */
   * {
     margin: 0;
     padding: 0;
@@ -274,10 +103,11 @@ const navLinks = [
     background-color: var(--color-bg);
     color: var(--color-text);
     line-height: 1.6;
+    font-feature-settings: "ss01", "kern";
   }
 
   ::selection {
-    background: rgba(184, 92, 56, 0.15);
+    background: oklch(0.36 0.09 255 / 0.18);
   }
 
   :focus-visible {
@@ -285,24 +115,28 @@ const navLinks = [
     outline-offset: 2px;
   }
 
-  .layout-wrapper {
-    display: flex;
-    min-height: 100vh;
-  }
-
+  /* ---- layout ---- */
   .main-wrapper {
-    flex: 1;
-    max-width: 720px;
-    padding: 2rem 1.75rem;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    min-height: 100vh;
+    margin-left: 16rem;
   }
 
   main {
-    flex: 1;
+    flex-grow: 1;
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2.5rem 1.75rem 2rem;
   }
 
+  @media (max-width: 768px) {
+    .main-wrapper { margin-left: 0; }
+    main { padding: 1.5rem 1.25rem 2rem; }
+  }
+
+  /* ---- links ---- */
   a {
     color: var(--color-link);
     text-decoration: none;
@@ -313,7 +147,7 @@ const navLinks = [
     color: var(--color-link-hover);
   }
 
-  /* Prose content link underlines */
+  /* Prose inline links */
   .post-content a,
   .piece-content a,
   .intro a,
@@ -333,32 +167,29 @@ const navLinks = [
     text-decoration-color: var(--color-text-muted);
   }
 
+  /* ---- typography ---- */
   h1, h2, h3, h4 {
-    font-family: var(--font-ui);
+    font-family: var(--font-heading);
     font-weight: 500;
     line-height: 1.3;
+    letter-spacing: -0.01em;
   }
 
   h1 {
-    font-size: 1.75rem;
+    font-size: 2rem;
     margin-bottom: 1.5rem;
   }
 
   h2 {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
-    color: var(--color-text);
-    font-weight: 600;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--color-border);
   }
 
   h3 {
-    font-size: 1rem;
+    font-size: 1.05rem;
     margin-top: 2rem;
     margin-bottom: 0.75rem;
-    font-weight: 600;
   }
 
   p {
@@ -438,7 +269,7 @@ const navLinks = [
     padding: 0;
   }
 
-  /* Footnotes */
+  /* ---- footnotes ---- */
   .footnotes {
     margin-top: 3rem;
     padding-top: 2rem;
@@ -446,316 +277,81 @@ const navLinks = [
     font-size: 0.9rem;
   }
 
-  .footnotes ol {
-    padding-left: 1.5rem;
-  }
-
-  .footnotes li {
-    margin-bottom: 0.5rem;
-  }
-
-  .footnotes p {
-    display: inline;
-    margin: 0;
-  }
+  .footnotes ol { padding-left: 1.5rem; }
+  .footnotes li { margin-bottom: 0.5rem; }
+  .footnotes p  { display: inline; margin: 0; }
 
   .footnotes a {
     text-decoration: underline;
     text-underline-offset: 2px;
   }
 
-  .footnotes a:hover {
-    color: var(--color-accent);
-  }
+  .footnotes a:hover { color: var(--color-accent); }
 
-  /* Footnote reference in text */
-  sup a {
-    text-decoration: none;
-    font-weight: 600;
-  }
+  sup a { text-decoration: none; font-weight: 600; }
+  sup a:hover { text-decoration: underline; }
 
-  sup a:hover {
-    text-decoration: underline;
-  }
-</style>
-
-<style>
-  /* Mobile Header */
-  .mobile-header {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 56px;
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
-    z-index: 200;
-    padding: 0 1rem;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .mobile-site-name {
+  /* ---- utility classes ---- */
+  .smallcaps {
     font-family: var(--font-ui);
-    font-weight: 600;
-    font-size: 1.1rem;
-  }
-
-  .mobile-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
-
-  .mobile-header button {
-    background: none;
-    border: none;
-    color: var(--color-text-muted);
-    cursor: pointer;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color 0.15s ease;
-  }
-
-  .mobile-header button:hover {
-    color: var(--color-text);
-  }
-
-  /* Hide close icon by default, show menu icon */
-  .mobile-header .close-icon {
-    display: none;
-  }
-
-  /* Mobile Navigation Dropdown */
-  .mobile-nav {
-    display: none;
-    position: fixed;
-    top: 56px;
-    left: 0;
-    right: 0;
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
-    z-index: 190;
-    padding: 0.75rem 1.5rem 1rem;
-    flex-direction: column;
-    gap: 0.125rem;
-    transform: translateY(-100%);
-    opacity: 0;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    pointer-events: none;
-  }
-
-  .mobile-nav.open {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* When menu is open, swap icons */
-  .mobile-nav.open ~ .layout-wrapper .sidebar { /* no-op, just for reference */ }
-
-  .mobile-nav a {
-    font-family: var(--font-ui);
-    font-size: 1rem;
-    color: var(--color-text-muted);
-    padding: 0.6rem 0;
-    transition: color 0.15s ease;
-  }
-
-  .mobile-nav a:hover {
-    color: var(--color-accent);
-  }
-
-  .mobile-nav a.active {
-    color: var(--color-text);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.72rem;
     font-weight: 500;
   }
 
-  .mobile-nav-footer {
-    margin-top: 0.75rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .mobile-nav-footer .social-links {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .mobile-nav-footer .social-links a {
-    padding: 0;
-  }
-
-  /* Sidebar - Desktop only */
-  .sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 220px;
-    height: 100vh;
-    background: var(--color-bg);
-    border-right: 1px solid var(--color-border);
-    z-index: 100;
-    overflow-y: auto;
-  }
-
-  .sidebar-content {
-    padding: 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    height: 100%;
-  }
-
-  .site-name {
+  .dateline {
     font-family: var(--font-ui);
-    font-weight: 600;
-    font-size: 1.25rem;
-  }
-
-  .sidebar nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    flex: 1;
-  }
-
-  .nav-separator {
-    border: none;
-    border-top: 1px solid var(--color-border);
-    margin: 0.5rem 0;
-  }
-
-  .sidebar nav a {
-    font-family: var(--font-ui);
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    padding: 0.35rem 0;
-    transition: color 0.15s ease;
-  }
-
-  .sidebar nav a:hover {
-    color: var(--color-accent);
-  }
-
-  .sidebar nav a.active {
-    color: var(--color-text);
-    font-weight: 500;
-  }
-
-  .sidebar-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--color-border);
-    margin-top: auto;
-  }
-
-  #theme-toggle {
-    background: none;
-    border: none;
-    color: var(--color-text-muted);
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color 0.15s ease;
-  }
-
-  #theme-toggle:hover {
-    color: var(--color-text);
-  }
-
-  [data-theme="light"] .moon-icon {
-    display: none;
-  }
-
-  [data-theme="dark"] .sun-icon {
-    display: none;
-  }
-
-  .social-links {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .social-links a {
-    color: var(--color-text-muted);
-    display: flex;
-    align-items: center;
-    transition: color 0.15s ease;
-  }
-
-  .social-links a:hover {
-    color: var(--color-text);
-  }
-
-  .social-links svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .social-divider {
-    color: var(--color-border);
-    font-size: 1rem;
-    line-height: 1;
-    user-select: none;
-  }
-
-  .copyright {
-    font-family: var(--font-ui);
-    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.68rem;
     color: var(--color-text-muted);
     margin: 0;
   }
 
-  /* Content optical centering on wide screens */
-  .main-wrapper {
-    margin-left: max(220px, calc(50vw - 320px));
+  .ink-link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: oklch(0.36 0.09 255 / 0.3);
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color 0.2s;
+  }
+  .ink-link:hover {
+    color: var(--color-accent);
+    text-decoration-color: var(--color-accent);
   }
 
-  /* Mobile: hide sidebar, show mobile header */
-  @media (max-width: 768px) {
-    .mobile-header {
-      display: flex;
-    }
+  .dark .ink-link {
+    text-decoration-color: oklch(0.72 0.1 250 / 0.3);
+  }
+  .dark .ink-link:hover {
+    text-decoration-color: var(--color-accent);
+  }
 
-    .mobile-nav {
-      display: flex;
-    }
+  .rule-hair {
+    border-top: 1px solid var(--rule);
+  }
 
-    .sidebar {
-      display: none;
-    }
+  .prose-measure { max-width: 38rem; }
 
-    .main-wrapper {
-      margin-left: 0;
-      padding: 56px 1.5rem 3rem;
-      padding-top: calc(56px + 1.5rem);
-    }
+  .dropcap::first-letter {
+    font-family: var(--font-heading);
+    float: left;
+    font-size: 3.6em;
+    line-height: 0.85;
+    padding: 0.05em 0.1em 0 0;
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  /* Section label — smallcaps above a heading */
+  .section-label {
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
   }
 </style>
-
-<script is:inline>
-  // Handle mobile menu icon swap based on open state
-  document.addEventListener('click', function(e) {
-    const toggle = document.getElementById('mobile-menu-toggle');
-    if (!toggle) return;
-    const nav = document.getElementById('mobile-nav');
-    if (!nav) return;
-    const isOpen = nav.classList.contains('open');
-    const menuIcon = toggle.querySelector('.menu-icon');
-    const closeIcon = toggle.querySelector('.close-icon');
-    if (menuIcon && closeIcon) {
-      menuIcon.style.display = isOpen ? 'none' : 'block';
-      closeIcon.style.display = isOpen ? 'block' : 'none';
-    }
-  });
-</script>

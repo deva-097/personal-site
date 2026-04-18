@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-// Get all posts from the content/writing folder
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 const posts = await Astro.glob('../../content/writing/*.md');
@@ -9,98 +8,132 @@ const sortedPosts = posts
   .filter((p) => new Date(p.frontmatter.date) <= today)
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 
-// Collect all unique tags
-const allTags = [...new Set(sortedPosts.flatMap(p => p.frontmatter.tags || []))].sort();
+const featured = sortedPosts[0];
+const rest = sortedPosts.slice(1);
 ---
 
 <BaseLayout title="Writing | Devashish" description="Essays and thoughts">
-  <h1>Writing</h1>
-  <p class="page-intro">Essays, notes, and thoughts on various topics. I write about whatever catches my fancy - books, AI and living a fuller life. </p>
+  <p class="section-label">Writing</p>
+  <p class="page-intro">Essays, in no particular order.</p>
+  <hr class="intro-rule" />
 
-  {allTags.length > 0 && (
-    <nav class="tag-nav">
-      {allTags.map((tag) => (
-        <a href={`#${tag}`} class="pill" data-tag={tag}>{tag}</a>
-      ))}
-    </nav>
+  {featured && (
+    <div class="featured">
+      <div class="featured-meta">
+        <p class="smallcaps meta-label">Featured</p>
+        <p class="smallcaps meta-date">
+          {new Date(featured.frontmatter.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+        </p>
+        {(featured.frontmatter.tags || []).map((tag: string) => (
+          <p class="smallcaps meta-tag">{tag}</p>
+        ))}
+      </div>
+      <div class="featured-body">
+        <h2 class="featured-title">
+          <a href={`/writing/${featured.frontmatter.slug}`}>{featured.frontmatter.title}</a>
+        </h2>
+        {featured.frontmatter.description && (
+          <p class="featured-excerpt dropcap">{featured.frontmatter.description}</p>
+        )}
+        <a href={`/writing/${featured.frontmatter.slug}`} class="continue-link">continue reading &rarr;</a>
+      </div>
+    </div>
   )}
 
-  {sortedPosts.length > 0 ? (
+  {rest.length > 0 && (
     <ul class="post-list">
-      {sortedPosts.map((post) => (
-        <li data-tags={JSON.stringify(post.frontmatter.tags || [])}>
+      {rest.map((post) => (
+        <li>
           <a href={`/writing/${post.frontmatter.slug}`}>
             <span class="post-title">{post.frontmatter.title}</span>
-            <span class="post-meta">
-              {(post.frontmatter.tags || []).map((tag: string) => (
-                <span class="post-tag">{tag}</span>
-              ))}
-              <span class="post-date">
-                {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-                  month: 'short',
-                  year: 'numeric'
-                })}
-              </span>
+            <span class="post-date">
+              {new Date(post.frontmatter.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
             </span>
           </a>
         </li>
       ))}
     </ul>
-  ) : (
-    <div class="placeholder">
-      <p>Writing coming soon. Check back later for essays and thoughts.</p>
-    </div>
   )}
+
+  <p class="see-all"><a href="/writing" class="ink-link">All essays &rarr;</a></p>
 </BaseLayout>
 
 <style>
   .page-intro {
+    font-family: var(--font-heading);
+    font-style: italic;
     color: var(--color-text-muted);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
-  .tag-nav {
+  .intro-rule {
+    margin: 1.5rem 0 2.5rem;
+  }
+
+  /* Featured essay */
+  .featured {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
+    gap: 2rem;
+    margin-bottom: 3rem;
   }
 
-  .pill {
-    font-family: var(--font-ui);
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    padding: 0.35rem 0.85rem;
-    border: 1px solid var(--color-border);
-    border-radius: 100px;
-    text-decoration: none;
-    transition: all 0.15s ease;
-    cursor: pointer;
+  .featured-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    min-width: 9rem;
+    padding-top: 0.35rem;
   }
 
-  .pill:hover {
+  .meta-label { color: var(--color-text-muted); }
+  .meta-date  { color: var(--color-text-muted); }
+  .meta-tag   { color: var(--color-text-muted); }
+
+  .featured-body { flex: 1; }
+
+  .featured-title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+
+  .featured-title a {
     color: var(--color-text);
-    background-color: var(--color-surface);
-    border-color: var(--color-text-muted);
+    text-decoration: none;
   }
 
-  .pill.active {
-    color: var(--color-bg);
-    background-color: var(--color-text);
-    border-color: var(--color-text);
+  .featured-title a:hover {
+    color: var(--color-accent);
   }
 
+  .featured-excerpt {
+    font-family: var(--font-heading);
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+
+  .continue-link {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    color: var(--color-accent);
+  }
+
+  .continue-link:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  /* Post list */
   .post-list {
     list-style: none;
     padding: 0;
+    border-top: 1px solid var(--color-border);
   }
 
   .post-list li {
-    margin-bottom: 0;
-  }
-
-  .post-list li.hidden {
-    display: none;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .post-list a {
@@ -108,98 +141,40 @@ const allTags = [...new Set(sortedPosts.flatMap(p => p.frontmatter.tags || []))]
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
-    padding: 0.75rem 0.75rem;
-    margin: 0 -0.75rem;
-    border-radius: 6px;
+    padding: 0.75rem 0.5rem;
+    margin: 0 -0.5rem;
+    border-radius: 4px;
     transition: background-color 0.15s ease;
+    color: var(--color-text);
   }
 
   .post-list a:hover {
     background-color: var(--color-surface);
-  }
-
-  .post-list a:hover .post-title {
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    color: var(--color-text);
   }
 
   .post-title {
-    font-family: var(--font-ui);
-  }
-
-  .post-meta {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    white-space: nowrap;
-  }
-
-  .post-tag {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-    padding: 0.15rem 0.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: 100px;
+    font-family: var(--font-heading);
   }
 
   .post-date {
-    font-size: 0.85rem;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
     color: var(--color-text-muted);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
-  .placeholder {
+  .see-all {
     margin-top: 2rem;
-    padding: 2rem;
-    background: var(--color-surface);
-    border-radius: 6px;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    text-align: right;
   }
 
-  .placeholder p {
-    color: var(--color-text-muted);
-    text-align: center;
-    margin: 0;
+  @media (max-width: 600px) {
+    .featured { flex-direction: column; gap: 1rem; }
+    .featured-meta { flex-direction: row; flex-wrap: wrap; gap: 0.5rem; min-width: unset; }
   }
 </style>
-
-<script>
-  function filterPosts() {
-    const hash = window.location.hash.slice(1);
-    const items = document.querySelectorAll('.post-list li');
-    const pills = document.querySelectorAll('.tag-nav a');
-
-    pills.forEach(pill => {
-      if (pill.dataset.tag === hash) {
-        pill.classList.add('active');
-      } else {
-        pill.classList.remove('active');
-      }
-    });
-
-    if (hash) {
-      items.forEach(item => {
-        const tags = JSON.parse(item.dataset.tags || '[]');
-        if (tags.includes(hash)) {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
-      });
-    } else {
-      items.forEach(item => item.classList.remove('hidden'));
-    }
-  }
-
-  // Toggle: clicking active pill clears filter
-  document.querySelectorAll('.tag-nav a').forEach(pill => {
-    pill.addEventListener('click', (e) => {
-      if (pill.classList.contains('active')) {
-        e.preventDefault();
-        window.location.hash = '';
-        filterPosts();
-      }
-    });
-  });
-
-  filterPosts();
-  window.addEventListener('hashchange', filterPosts);
-</script>

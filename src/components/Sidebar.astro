@@ -1,0 +1,362 @@
+---
+const pathname = Astro.url.pathname;
+
+const GROUPS = [
+  {
+    label: "Words",
+    items: [
+      { href: "/writing",     label: "Writing",       match: (p: string) => p.startsWith("/writing") },
+      { href: "/commonplace", label: "Commonplace",   match: (p: string) => p.startsWith("/commonplace") },
+    ],
+  },
+  {
+    label: "Things",
+    items: [
+      { href: "/reading",   label: "Reading",        match: (p: string) => p.startsWith("/reading") },
+      { href: "/interests", label: "Collections",    match: (p: string) => p.startsWith("/interests") },
+      { href: "/games",     label: "Gaming",         match: (p: string) => p.startsWith("/games") },
+      { href: "/finds",     label: "Internet Finds", match: (p: string) => p.startsWith("/finds") },
+    ],
+  },
+  {
+    label: "Workshop",
+    items: [
+      { href: "/experiments", label: "Experiments", match: (p: string) => p.startsWith("/experiments") },
+    ],
+  },
+];
+
+const today = new Date()
+  .toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
+  .toUpperCase();
+---
+
+<!-- Desktop sidebar -->
+<aside class="sidebar-desktop">
+  <div class="sidebar-inner">
+    <div>
+      <a href="/" class="identity">Devashish<br />Bansal</a>
+      <p class="tagline">a notebook in public</p>
+    </div>
+
+    <div class="rule-short"></div>
+
+    <nav class="nav-groups">
+      {GROUPS.map((group) => (
+        <div>
+          <p class="smallcaps group-label">{group.label}</p>
+          <ul class="nav-list">
+            {group.items.map((item) => {
+              const active = item.match(pathname);
+              return (
+                <li>
+                  <a href={item.href} class:list={["nav-link", "smallcaps", { "is-active": active }]}>
+                    <span aria-hidden class:list={["bullet", { "is-active": active }]}></span>
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))}
+    </nav>
+
+    <div class="bottom">
+      <div class="rule-short"></div>
+      <p class="dateline">{today}</p>
+      <div class="social-links">
+        <button id="theme-toggle" aria-label="Toggle theme" class="icon-btn">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <span class="social-divider">|</span>
+        <a href="https://github.com/deva-097" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="icon-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/devashish-bansal" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="icon-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </a>
+        <a href="https://www.goodreads.com/devashish_097" target="_blank" rel="noopener noreferrer" aria-label="Goodreads" class="icon-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- Mobile top bar (hidden on desktop) -->
+<header class="topbar">
+  <a href="/" class="topbar-name">Devashish Bansal</a>
+  <div class="topbar-actions">
+    <button id="theme-toggle-mobile" aria-label="Toggle theme" class="icon-btn">
+      <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+    <button id="nav-open" type="button" aria-label="Open navigation" class="icon-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile drawer -->
+<div id="nav-drawer" class="drawer" hidden>
+  <div class="drawer-backdrop" data-close></div>
+  <div class="drawer-panel">
+    <button id="nav-close" type="button" aria-label="Close navigation" class="icon-btn close-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="sidebar-inner">
+      <div>
+        <a href="/" class="identity">Devashish<br />Bansal</a>
+        <p class="tagline">a notebook in public</p>
+      </div>
+      <div class="rule-short"></div>
+      <nav class="nav-groups">
+        {GROUPS.map((group) => (
+          <div>
+            <p class="smallcaps group-label">{group.label}</p>
+            <ul class="nav-list">
+              {group.items.map((item) => {
+                const active = item.match(pathname);
+                return (
+                  <li>
+                    <a href={item.href} class:list={["nav-link", "smallcaps", { "is-active": active }]}>
+                      <span aria-hidden class:list={["bullet", { "is-active": active }]}></span>
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Theme toggle (handles both desktop + mobile buttons)
+  const applyTheme = (mode: "light" | "dark") => {
+    document.documentElement.classList.toggle("dark", mode === "dark");
+    localStorage.setItem("theme", mode);
+    // Sync sun/moon icon visibility
+    document.querySelectorAll(".sun-icon").forEach(el => {
+      (el as HTMLElement).style.display = mode === "dark" ? "block" : "none";
+    });
+    document.querySelectorAll(".moon-icon").forEach(el => {
+      (el as HTMLElement).style.display = mode === "dark" ? "none" : "block";
+    });
+  };
+
+  const currentTheme = localStorage.getItem("theme") === "dark" ? "dark" : "light";
+  applyTheme(currentTheme);
+
+  const toggleTheme = () => {
+    const next = document.documentElement.classList.contains("dark") ? "light" : "dark";
+    applyTheme(next);
+  };
+
+  document.getElementById("theme-toggle")?.addEventListener("click", toggleTheme);
+  document.getElementById("theme-toggle-mobile")?.addEventListener("click", toggleTheme);
+
+  // Mobile drawer
+  const drawer = document.getElementById("nav-drawer");
+  const openDrawer = () => { drawer?.removeAttribute("hidden"); document.body.style.overflow = "hidden"; };
+  const closeDrawer = () => { drawer?.setAttribute("hidden", ""); document.body.style.overflow = ""; };
+  document.getElementById("nav-open")?.addEventListener("click", openDrawer);
+  document.getElementById("nav-close")?.addEventListener("click", closeDrawer);
+  drawer?.querySelector("[data-close]")?.addEventListener("click", closeDrawer);
+</script>
+
+<style>
+  /* Desktop sidebar — hidden by default, shown at ≥768px */
+  .sidebar-desktop {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 16rem;
+    border-right: 1px solid var(--rule);
+    background: var(--background);
+    z-index: 30;
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .sidebar-desktop { display: block; }
+  }
+
+  /* Mobile topbar — hidden by default, shown below 768px */
+  .topbar { display: none; }
+  @media (max-width: 767px) {
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.875rem 1.25rem;
+      background: var(--background);
+      border-bottom: 1px solid var(--rule);
+    }
+  }
+
+  .sidebar-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 2.5rem 2rem;
+    overflow-y: auto;
+  }
+
+  .identity {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--foreground);
+    text-decoration: none;
+  }
+  .identity:hover { color: var(--foreground); }
+
+  .tagline {
+    margin-top: 0.5rem;
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+  }
+
+  .rule-short {
+    width: 3rem;
+    height: 1px;
+    background: var(--rule);
+    margin: 2rem 0;
+    flex-shrink: 0;
+  }
+
+  .nav-groups { display: flex; flex-direction: column; gap: 2rem; }
+
+  .group-label {
+    color: var(--muted-foreground);
+    opacity: 0.7;
+    margin: 0 0 0.75rem;
+  }
+
+  .nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--muted-foreground);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--ink); }
+  .nav-link.is-active { color: var(--ink); }
+
+  .bullet {
+    display: inline-block;
+    width: 0.375rem;
+    height: 0.375rem;
+    margin-right: 0.75rem;
+    background: var(--ink);
+    opacity: 0;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
+  }
+  .nav-link:hover .bullet { opacity: 0.4; }
+  .bullet.is-active { opacity: 1; }
+
+  /* Sidebar bottom */
+  .bottom { margin-top: auto; padding-top: 2.5rem; }
+
+  .social-links {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.875rem;
+  }
+
+  .social-divider {
+    color: var(--rule);
+    user-select: none;
+    font-size: 0.9rem;
+  }
+
+  .icon-btn {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: var(--muted-foreground);
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+  }
+  .icon-btn:hover { color: var(--ink); }
+
+  /* Drawer */
+  .drawer { position: fixed; inset: 0; z-index: 50; }
+  .drawer-backdrop { position: absolute; inset: 0; background: oklch(0.27 0.018 50 / 0.2); }
+  .dark .drawer-backdrop { background: oklch(0.1 0.01 60 / 0.4); }
+  .drawer-panel {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 18rem;
+    background: var(--background);
+    border-right: 1px solid var(--rule);
+    overflow-y: auto;
+  }
+  .close-btn { position: absolute; right: 1rem; top: 1rem; }
+
+  .topbar-name {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    color: var(--foreground);
+    text-decoration: none;
+  }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+</style>

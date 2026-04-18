@@ -1,14 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Get all posts from the content/writing folder
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 const posts = await Astro.glob('../content/writing/*.md');
 const sortedPosts = posts
   .filter((p) => new Date(p.frontmatter.date) <= today)
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
-  .slice(0, 5); // Show up to 5 most recent posts
+  .slice(0, 5);
 ---
 
 <BaseLayout title="Devashish">
@@ -41,33 +40,36 @@ const sortedPosts = posts
   </section>
 
   <section class="explore">
-    <h2>Explore</h2>
-    <div class="explore-grid">
-      <a href="/writing" class="explore-card">
-        <span class="card-title">Writing</span>
-        <span class="card-desc">Essays on books, living a fuller life, and learning things.</span>
-        <span class="card-arrow">&rarr;</span>
-      </a>
-      <a href="/reading" class="explore-card">
-        <span class="card-title">Reading</span>
-        <span class="card-desc">High Fantasy, Sci-fi, and other loved books.</span>
-        <span class="card-arrow">&rarr;</span>
-      </a>
-      <a href="/commonplace" class="explore-card">
-        <span class="card-title">Commonplace</span>
-        <span class="card-desc">Poems, quotes, and fragments I keep coming back to.</span>
-        <span class="card-arrow">&rarr;</span>
-      </a>
-      <a href="/interests" class="explore-card">
-        <span class="card-title">Collections</span>
-        <span class="card-desc">Functional luxury things that I collect (and occasionally hoard).</span>
-        <span class="card-arrow">&rarr;</span>
-      </a>
+    <p class="section-label">Recurring threads</p>
+    <p class="explore-subtitle">The handful of subjects this site keeps circling back to.</p>
+    <div class="explore-rule"></div>
+
+    <div class="explore-list">
+      <div class="explore-item level-1">
+        <h2 class="item-title"><a href="/reading">Books &amp; worlds</a></h2>
+        <p class="item-desc">High fantasy, science fiction, the long shelf of books that built the inner shelf. <a href="/reading">reading &rarr;</a></p>
+      </div>
+      <div class="explore-item level-2">
+        <h2 class="item-title"><a href="/interests">Objects &amp; functional luxury</a></h2>
+        <p class="item-desc">Pens, knives, watches, wallets — small well-made tools, kept and used. <a href="/interests">collections &rarr;</a></p>
+      </div>
+      <div class="explore-item level-1">
+        <h2 class="item-title"><a href="/writing">Meaning, attention, ambition</a></h2>
+        <p class="item-desc">The slow questions of adulthood, written down in the hope of clearing them. <a href="/writing">writing &rarr;</a></p>
+      </div>
+      <div class="explore-item level-2">
+        <h2 class="item-title"><a href="/games">Games, mythology, history</a></h2>
+        <p class="item-desc">The stories we keep retelling — and what we learn from telling them again. <a href="/games">gaming &rarr;</a></p>
+      </div>
+      <div class="explore-item level-1">
+        <h2 class="item-title"><a href="/experiments">Small builds &amp; AI experiments</a></h2>
+        <p class="item-desc">Quick, curious, mostly for myself — software made to think with. <a href="/experiments">experiments &rarr;</a></p>
+      </div>
     </div>
   </section>
 
   <section class="recent">
-    <h2>Recent Writing</h2>
+    <p class="section-label">Recent writing</p>
     {sortedPosts.length > 0 ? (
       <ul class="post-list">
         {sortedPosts.map((post) => (
@@ -76,7 +78,7 @@ const sortedPosts = posts
               <span class="post-title">{post.frontmatter.title}</span>
               <span class="post-date">
                 {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-                  month: 'long',
+                  month: 'short',
                   year: 'numeric'
                 })}
               </span>
@@ -87,42 +89,108 @@ const sortedPosts = posts
     ) : (
       <p class="no-posts">No posts yet. Check back soon!</p>
     )}
-    <p class="see-all"><a href="/writing">See all &rarr;</a></p>
+    <p class="see-all"><a href="/writing" class="ink-link">All essays &rarr;</a></p>
   </section>
 </BaseLayout>
 
 <style>
-  .intro {
-    margin-bottom: 2rem;
-    overflow: hidden; /* clearfix for floated image */
-  }
+  section { margin-bottom: 3rem; }
+
+  /* Intro */
+  .intro { overflow: hidden; }
 
   .greeting {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
   }
 
-  .greeting strong {
-    font-weight: 600;
+  .greeting strong { font-weight: 600; }
+
+  .hero-image {
+    float: right;
+    width: 200px;
+    margin: 0.5rem 0 1rem 1.5rem;
   }
 
-  .post-list {
-    list-style: none;
-    padding: 0;
+  .hero-image img {
+    width: 100%;
+    border-radius: 6px;
   }
 
-  .post-list li {
-    margin-bottom: 0;
+  @media (max-width: 480px) {
+    .hero-image { float: none; width: 100%; margin: 0 0 1.5rem 0; }
   }
+
+  /* Recurring Threads */
+  .explore-subtitle {
+    font-family: var(--font-heading);
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .explore-rule {
+    width: 3.5rem;
+    height: 1px;
+    background: var(--color-border);
+    margin-bottom: 2.5rem;
+  }
+
+  .explore-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .explore-item { max-width: 36rem; }
+
+  /* Alternating indentation */
+  .level-1 { margin-left: 0; }
+  .level-2 { margin-left: 3rem; }
+
+  .item-title {
+    font-size: 1.6rem;
+    margin-bottom: 0.35rem;
+    margin-top: 0;
+    line-height: 1.2;
+  }
+
+  /* Level-2 items slightly smaller */
+  .level-2 .item-title { font-size: 1.5rem; }
+
+  .item-title a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+  .item-title a:hover { color: var(--color-accent); }
+
+  .item-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .item-desc a { color: var(--color-accent); font-size: 0.85rem; }
+
+  @media (max-width: 480px) {
+    .level-2 { margin-left: 1.25rem; }
+    .item-title { font-size: 1.35rem; }
+    .level-2 .item-title { font-size: 1.15rem; }
+  }
+
+  /* Post list */
+  .post-list { list-style: none; padding: 0; }
 
   .post-list a {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
-    padding: 0.5rem 0.75rem;
-    margin: 0 -0.75rem;
-    border-radius: 6px;
+    padding: 0.5rem 0.5rem;
+    margin: 0 -0.5rem;
+    border-radius: 4px;
     transition: background-color 0.15s ease;
+    color: var(--color-text);
   }
 
   .post-list a:hover {
@@ -130,105 +198,21 @@ const sortedPosts = posts
     color: var(--color-text);
   }
 
-  .post-list a:hover .post-title {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  .post-title {
-    font-family: var(--font-ui);
-  }
+  .post-title { font-family: var(--font-heading); }
 
   .post-date {
-    font-size: 0.85rem;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
     color: var(--color-text-muted);
     white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .see-all {
     margin-top: 1rem;
-  }
-
-  .see-all a {
     font-family: var(--font-ui);
     font-size: 0.9rem;
-    color: var(--color-text-muted);
-  }
-
-  .hero-image {
-    float: right;
-    width: 225px;
-    margin: 4.5rem 0 1rem 1.5rem;
-  }
-
-  .hero-image img {
-    width: 100%;
-    border-radius: 8px;
-  }
-
-  @media (max-width: 480px) {
-    .hero-image {
-      float: none;
-      width: 100%;
-      margin: 0 0 1.5rem 0;
-    }
-  }
-
-  .explore {
-    margin-bottom: 2.5rem;
-  }
-
-  .explore-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .explore-card {
-    display: flex;
-    flex-direction: column;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    transition: background-color 0.15s ease, border-color 0.15s ease;
-    color: var(--color-text);
-  }
-
-  .explore-card:hover {
-    background-color: var(--color-surface);
-    border-color: var(--color-text-muted);
-    color: var(--color-text);
-  }
-
-  .card-title {
-    font-family: var(--font-ui);
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .card-desc {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    line-height: 1.5;
-    flex: 1;
-  }
-
-  .card-arrow {
-    font-family: var(--font-ui);
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    margin-top: 0.4rem;
-    transition: color 0.15s ease;
-  }
-
-  .explore-card:hover .card-arrow {
-    color: var(--color-text);
-  }
-
-  @media (max-width: 768px) {
-    .explore-grid {
-      grid-template-columns: 1fr;
-    }
+    text-align: right;
   }
 </style>

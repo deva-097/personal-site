@@ -1,0 +1,26 @@
+---
+interface Props {
+  label: string;
+  subtitle?: string;
+}
+const { label, subtitle } = Astro.props;
+---
+
+<div class="sl-block">
+  <p class="sl-label smallcaps">{label}</p>
+  {subtitle && <p class="sl-subtitle">{subtitle}</p>}
+  <div class="sl-rule"></div>
+</div>
+
+<style>
+  .sl-block { margin-bottom: 2.5rem; }
+  .sl-label { color: var(--ink); margin: 0 0 0.75rem; }
+  .sl-subtitle {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin: 0 0 1rem;
+  }
+  .sl-rule { width: 3rem; height: 1px; background: var(--ink); }
+</style>

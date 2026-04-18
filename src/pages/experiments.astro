@@ -1,113 +1,102 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionLabel from '../components/SectionLabel.astro';
 
 const projects = [
   {
     name: "Content Agent",
-    description: "A personal content pipeline with three AI agents — Scout discovers relevant articles via RSS and web search, Mirror analyzes Chrome browsing history to surface patterns and content ideas, Tuner scans subscribed newsletters & podcasts and provides a brief summary. Runs on a schedule for ~$1/month. Work in progress.",
+    description: "A personal content pipeline with three AI agents — Scout discovers relevant articles via RSS and web search, Mirror analyzes Chrome browsing history to surface patterns and content ideas, Tuner scans subscribed newsletters & podcasts and provides a brief summary. Runs on a schedule for ~$1/month.",
     link: "https://github.com/deva-097/content-agent",
-    year: 2026
+    year: "2026",
   },
   {
     name: "Reddit Saved Posts Manager",
-    description: "A Flask web app to view, browse, and manage your saved Reddit posts. Features subreddit filtering, inline post viewer, keyboard navigation, and dark mode.",
+    description: "A Flask web app to view, browse, and manage saved Reddit posts. Features subreddit filtering, inline post viewer, keyboard navigation, and dark mode.",
     link: "https://github.com/deva-097/reddit-manager",
-    year: 2026
+    year: "2026",
   },
   {
     name: "Penabler",
     description: "A fountain pen and ink collection manager built with React and Supabase. Track pens, inks, inking events, and view analytics on your collection. A learning project, currently inactive.",
     link: "https://github.com/deva-097/penabler-inkscribe",
-    year: 2025
+    year: "2025",
   },
 ];
 ---
 
 <BaseLayout title="Experiments | Devashish" description="AI experiments and tools I've built">
-  <h1>Experiments</h1>
-  <p class="page-intro">
-    On my AI learning journey, these are small tools I've built for myself using tools like Claude Code, Lovable and Cursor. Code on <a href="https://github.com/deva-097" target="_blank" rel="noopener">GitHub</a>.
-  </p>
+  <div class="page-header">
+    <p class="section-label">Experiments</p>
+    <h1>Small things I have made, mostly to think with.</h1>
+    <p class="header-intro">
+      On my AI learning journey, these are small tools I've built for myself using Claude Code, Lovable, and Cursor.
+      None of them are products; some of them are useful. Code on <a href="https://github.com/deva-097" target="_blank" rel="noopener" class="ink-link">GitHub</a>.
+    </p>
+  </div>
 
-  <section class="projects-section">
-    {projects.length > 0 ? (
-      <ul class="project-list">
-        {projects.map((project) => (
-          <li class="project-item">
-            <div class="project-header">
-              <a href={project.link} target="_blank" rel="noopener" class="project-name">
-                {project.name} ↗
-              </a>
-              <span class="project-year">{project.year}</span>
-            </div>
-            <p class="project-description">{project.description}</p>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <div class="empty-state">
-        <p>Projects will be added here soon.</p>
-      </div>
-    )}
-  </section>
+  <SectionLabel label="From the workshop" subtitle="Side projects that exist somewhere between a finished tool and a long note." />
+
+  <ul class="project-list">
+    {projects.map((project) => (
+      <li class="project-row">
+        <div class="project-main">
+          <a href={project.link} target="_blank" rel="noopener" class="project-name ink-link">
+            {project.name} ↗
+          </a>
+          <p class="project-desc">{project.description}</p>
+        </div>
+        <span class="dateline">{project.year}</span>
+      </li>
+    ))}
+  </ul>
 </BaseLayout>
 
 <style>
-  .page-intro {
-    color: var(--color-text-muted);
-    margin-bottom: 2.5rem;
+  .page-header { margin-bottom: 3rem; }
+
+  h1 {
+    font-size: 2.25rem;
+    line-height: 1.15;
+    margin-bottom: 1rem;
   }
-  
+
+  .header-intro {
+    max-width: 38rem;
+    color: var(--color-text);
+    opacity: 0.85;
+  }
+
   .project-list {
     list-style: none;
     padding: 0;
-  }
-  
-  .project-item {
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-  
-  .project-item:first-child {
     border-top: 1px solid var(--color-border);
   }
-  
-  .project-header {
-    display: flex;
-    justify-content: space-between;
+
+  .project-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: baseline;
-    gap: 1rem;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .project-name {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    display: block;
     margin-bottom: 0.5rem;
   }
-  
-  .project-name {
-    font-family: var(--font-ui);
-    font-weight: 500;
-  }
-  
-  .project-year {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    white-space: nowrap;
-  }
-  
-  .project-description {
-    font-size: 0.95rem;
+
+  .project-desc {
+    font-size: 0.925rem;
     color: var(--color-text-muted);
     margin: 0;
+    max-width: 36rem;
   }
-  
-  .empty-state {
-    margin-top: 1rem;
-    padding: 2rem;
-    background: var(--color-border);
-    border-radius: 6px;
-  }
-  
-  .empty-state p {
-    color: var(--color-text-muted);
-    font-size: 0.95rem;
-    text-align: center;
-    margin: 0;
+
+  @media (max-width: 500px) {
+    .project-row { grid-template-columns: 1fr; }
+    h1 { font-size: 1.75rem; }
   }
 </style>

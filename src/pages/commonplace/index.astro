@@ -1,21 +1,30 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
 
-// Get all pieces from the content/commonplace folder
 const pieces = await Astro.glob('../../content/commonplace/*.md');
 const sortedPieces = pieces.sort((a, b) =>
   new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
 );
-
-// Collect all unique tags
 const allTags = [...new Set(sortedPieces.flatMap(p => p.frontmatter.tags || []))].sort();
 ---
 
 <BaseLayout title="Commonplace | Devashish" description="Collected poems, quotes, and fragments">
-  <h1>Commonplace</h1>
-  <p class="page-intro">Poems, quotes, and fragments I've collected over the years. These are words that resonated best. Parking them here so you can enjoy as well, and maybe for me to see and make better connections between them. </p>
-  
-  <p class="page-intro">The word "commonplace" comes from a <a href="https://en.wikipedia.org/wiki/Commonplace_book" target="_blank" rel="noopener">commonplace notebook</a>.</p>
+  <div class="page-header">
+    <p class="section-label">A kept book</p>
+    <h1>Commonplace</h1>
+    <p class="hero-sub">Borrowed lines, fragments, and remembered passages I keep close.</p>
+    <div class="header-body">
+      <p>
+        A <a href="https://en.wikipedia.org/wiki/Commonplace_book" target="_blank" rel="noopener" class="ink-link">commonplace book</a> is an old habit: a notebook where one copies down the lines, poems, and passages that earn a second reading. Mine has lived in margins, in apps, on scraps of paper. This is its public shelf.
+      </p>
+      <p>
+        Poems, quotes, and fragments I've collected over the years — words that resonated best, parked here so you can enjoy them too.
+      </p>
+    </div>
+  </div>
+
+  <SectionLabel label="The whole notebook" subtitle="Every fragment, tagged and indexed." />
 
   {allTags.length > 0 && (
     <nav class="tag-nav">
@@ -29,43 +38,66 @@ const allTags = [...new Set(sortedPieces.flatMap(p => p.frontmatter.tags || []))
     <ul class="piece-list">
       {sortedPieces.map((piece) => (
         <li data-tags={JSON.stringify(piece.frontmatter.tags || [])}>
-          <a href={`/commonplace/${piece.frontmatter.slug}`}>
+          <a href={`/commonplace/${piece.frontmatter.slug}`} class="piece-row">
+            <span class="dateline piece-date">
+              {new Date(piece.frontmatter.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase()}
+            </span>
             <span class="piece-title">{piece.frontmatter.title}</span>
             <span class="piece-meta">
-              {(piece.frontmatter.tags || []).map((tag: string) => (
-                <span class="piece-tag">{tag}</span>
-              ))}
               <span class="piece-author">{piece.frontmatter.author}</span>
+              {(piece.frontmatter.tags || []).map((tag: string) => (
+                <span class="piece-tag smallcaps">{tag}</span>
+              ))}
             </span>
           </a>
         </li>
       ))}
     </ul>
   ) : (
-    <div class="placeholder">
-      <p>Collection coming soon.</p>
-    </div>
+    <p class="empty">Collection coming soon.</p>
   )}
 </BaseLayout>
 
 <style>
-  .page-intro {
-    color: var(--color-text-muted);
-    margin-bottom: 2rem;
+  /* Hero */
+  .page-header { margin-bottom: 4rem; }
+
+  h1 {
+    font-size: 3rem;
+    line-height: 1.05;
+    margin-bottom: 1rem;
   }
 
+  .hero-sub {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.375rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .header-body {
+    max-width: 38rem;
+    color: var(--color-text);
+    opacity: 0.85;
+  }
+
+  /* Tag filter */
   .tag-nav {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .pill {
     font-family: var(--font-ui);
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     color: var(--color-text-muted);
-    padding: 0.35rem 0.85rem;
+    padding: 0.3rem 0.75rem;
     border: 1px solid var(--color-border);
     border-radius: 100px;
     text-decoration: none;
@@ -74,9 +106,8 @@ const allTags = [...new Set(sortedPieces.flatMap(p => p.frontmatter.tags || []))
   }
 
   .pill:hover {
-    color: var(--color-text);
-    background-color: var(--color-surface);
-    border-color: var(--color-text-muted);
+    color: var(--ink);
+    border-color: var(--ink);
   }
 
   .pill.active {
@@ -85,75 +116,62 @@ const allTags = [...new Set(sortedPieces.flatMap(p => p.frontmatter.tags || []))
     border-color: var(--color-text);
   }
 
+  /* Archive list */
   .piece-list {
     list-style: none;
     padding: 0;
+    border-top: 1px solid var(--color-border);
   }
 
-  .piece-list li {
-    margin-bottom: 0;
-  }
+  .piece-list li { border-bottom: 1px solid var(--color-border); }
+  .piece-list li.hidden { display: none; }
 
-  .piece-list li.hidden {
-    display: none;
-  }
-
-  .piece-list a {
-    display: flex;
-    justify-content: space-between;
+  .piece-row {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr auto;
     align-items: baseline;
-    gap: 1rem;
-    padding: 0.75rem 0.75rem;
-    margin: 0 -0.75rem;
-    border-radius: 6px;
-    transition: background-color 0.15s ease;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.15s;
   }
 
-  .piece-list a:hover {
-    background-color: var(--color-surface);
-  }
+  .piece-row:hover { color: var(--ink); }
 
-  .piece-list a:hover .piece-title {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
+  .piece-date { white-space: nowrap; }
 
   .piece-title {
-    font-family: var(--font-ui);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    line-height: 1.3;
   }
 
   .piece-meta {
     display: flex;
     align-items: baseline;
-    gap: 0.5rem;
-    white-space: nowrap;
-  }
-
-  .piece-tag {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-    padding: 0.15rem 0.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: 100px;
+    gap: 0.75rem;
+    text-align: right;
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
 
   .piece-author {
     font-size: 0.85rem;
     color: var(--color-text-muted);
     font-style: italic;
+    white-space: nowrap;
   }
 
-  .placeholder {
-    margin-top: 2rem;
-    padding: 2rem;
-    background: var(--color-surface);
-    border-radius: 6px;
-  }
-
-  .placeholder p {
+  .piece-tag {
+    font-size: 0.65rem;
     color: var(--color-text-muted);
-    text-align: center;
-    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .piece-row { grid-template-columns: 1fr; gap: 0.25rem; }
+    .piece-meta { justify-content: flex-start; }
+    h1 { font-size: 2.25rem; }
   }
 </style>
 
@@ -164,28 +182,19 @@ const allTags = [...new Set(sortedPieces.flatMap(p => p.frontmatter.tags || []))
     const pills = document.querySelectorAll('.tag-nav a');
 
     pills.forEach(pill => {
-      if (pill.dataset.tag === hash) {
-        pill.classList.add('active');
-      } else {
-        pill.classList.remove('active');
-      }
+      pill.classList.toggle('active', (pill as HTMLElement).dataset.tag === hash);
     });
 
     if (hash) {
       items.forEach(item => {
-        const tags = JSON.parse(item.dataset.tags || '[]');
-        if (tags.includes(hash)) {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
+        const tags = JSON.parse((item as HTMLElement).dataset.tags || '[]');
+        item.classList.toggle('hidden', !tags.includes(hash));
       });
     } else {
       items.forEach(item => item.classList.remove('hidden'));
     }
   }
 
-  // Toggle: clicking active pill clears filter
   document.querySelectorAll('.tag-nav a').forEach(pill => {
     pill.addEventListener('click', (e) => {
       if (pill.classList.contains('active')) {
