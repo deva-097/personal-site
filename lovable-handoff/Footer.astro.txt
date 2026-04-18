@@ -1,0 +1,74 @@
+---
+// src/components/Footer.astro
+// Astro translation of the Lovable React Footer with theme toggle.
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="inner">
+    <p class="colophon">
+      Set in <span>Fraunces</span> and <span>Inter</span>. Built slowly, in spare hours,
+      inspired by
+      <a href="https://henry.codes/writing/a-website-to-destroy-all-websites/" class="ink-link" target="_blank" rel="noreferrer">henry.codes</a>.
+    </p>
+    <div class="meta">
+      <p class="dateline">© {year}</p>
+      <button id="theme-toggle" type="button" class="smallcaps toggle">Dark</button>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const btn = document.getElementById("theme-toggle");
+  const apply = (mode: "light" | "dark") => {
+    document.documentElement.classList.toggle("dark", mode === "dark");
+    if (btn) btn.textContent = mode === "dark" ? "Light" : "Dark";
+    localStorage.setItem("theme", mode);
+  };
+  // Sync label to current state on load
+  const initial = (localStorage.getItem("theme") === "dark") ? "dark" : "light";
+  apply(initial);
+  btn?.addEventListener("click", () => {
+    const next = document.documentElement.classList.contains("dark") ? "light" : "dark";
+    apply(next);
+  });
+</script>
+
+<style>
+  .site-footer {
+    margin-top: 6rem;
+    border-top: 1px solid var(--rule);
+  }
+  .inner {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  @media (min-width: 768px) {
+    .inner { flex-direction: row; align-items: baseline; justify-content: space-between; }
+  }
+  .colophon {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--muted-foreground);
+    max-width: 36rem;
+  }
+  .colophon span { color: var(--foreground); }
+  .meta { display: flex; align-items: center; gap: 1.5rem; }
+  .toggle { background: none; border: 0; cursor: pointer; color: var(--muted-foreground); transition: color 0.2s; }
+  .toggle:hover { color: var(--ink); }
+</style>
+
+<!-- IMPORTANT: also add this inline script in your root layout's <head>
+     to prevent a flash of wrong theme on first paint:
+
+  <script is:inline>
+    const t = localStorage.getItem("theme");
+    if (t === "dark") document.documentElement.classList.add("dark");
+  </script>
+-->
