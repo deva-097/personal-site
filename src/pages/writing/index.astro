@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);
@@ -8,66 +9,80 @@ const sortedPosts = posts
   .filter((p) => new Date(p.frontmatter.date) <= today)
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 
-const featured = sortedPosts[0];
-const rest = sortedPosts.slice(1);
+const now = new Date();
+const startOfYear = new Date(now.getFullYear(), 0, 1);
+const weekNum = Math.floor((now.getTime() - startOfYear.getTime()) / (7 * 24 * 60 * 60 * 1000));
+const featuredIdx = sortedPosts.length > 0 ? weekNum % sortedPosts.length : 0;
+const featured = sortedPosts[featuredIdx];
+const rest = sortedPosts.filter((_, i) => i !== featuredIdx);
 ---
 
 <BaseLayout title="Writing | Devashish" description="Essays and thoughts">
-  <p class="section-label">Writing</p>
-  <p class="page-intro">Essays, in no particular order.</p>
-  <hr class="intro-rule" />
+  <div class="page-header">
+    <p class="section-label">Writing</p>
+    <h1>Essays</h1>
+    <p class="hero-sub">In no particular order.</p>
+  </div>
 
   {featured && (
-    <div class="featured">
-      <div class="featured-meta">
-        <p class="smallcaps meta-label">Featured</p>
-        <p class="smallcaps meta-date">
-          {new Date(featured.frontmatter.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-        </p>
-        {(featured.frontmatter.tags || []).map((tag: string) => (
-          <p class="smallcaps meta-tag">{tag}</p>
-        ))}
+    <>
+      <SectionLabel label="Featured" />
+      <div class="featured">
+        <div class="featured-meta">
+          <p class="smallcaps meta-date">
+            {new Date(featured.frontmatter.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+          </p>
+          {(featured.frontmatter.tags || []).map((tag: string) => (
+            <p class="smallcaps meta-tag">{tag}</p>
+          ))}
+        </div>
+        <div class="featured-body">
+          <h2 class="featured-title">
+            <a href={`/writing/${featured.frontmatter.slug}`}>{featured.frontmatter.title}</a>
+          </h2>
+          {featured.frontmatter.description && (
+            <p class="featured-excerpt dropcap">{featured.frontmatter.description}</p>
+          )}
+          <a href={`/writing/${featured.frontmatter.slug}`} class="continue-link">continue reading &rarr;</a>
+        </div>
       </div>
-      <div class="featured-body">
-        <h2 class="featured-title">
-          <a href={`/writing/${featured.frontmatter.slug}`}>{featured.frontmatter.title}</a>
-        </h2>
-        {featured.frontmatter.description && (
-          <p class="featured-excerpt dropcap">{featured.frontmatter.description}</p>
-        )}
-        <a href={`/writing/${featured.frontmatter.slug}`} class="continue-link">continue reading &rarr;</a>
-      </div>
-    </div>
+    </>
   )}
 
   {rest.length > 0 && (
-    <ul class="post-list">
-      {rest.map((post) => (
-        <li>
-          <a href={`/writing/${post.frontmatter.slug}`}>
-            <span class="post-title">{post.frontmatter.title}</span>
-            <span class="post-date">
-              {new Date(post.frontmatter.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
-            </span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <>
+      <SectionLabel label="All essays" />
+      <ul class="post-list">
+        {rest.map((post) => (
+          <li>
+            <a href={`/writing/${post.frontmatter.slug}`}>
+              <span class="post-title">{post.frontmatter.title}</span>
+              <span class="post-date">
+                {new Date(post.frontmatter.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
   )}
-
-  <p class="see-all"><a href="/writing" class="ink-link">All essays &rarr;</a></p>
 </BaseLayout>
 
 <style>
-  .page-intro {
-    font-family: var(--font-heading);
-    font-style: italic;
-    color: var(--color-text-muted);
+  .page-header { margin-bottom: 3rem; }
+
+  h1 {
+    font-size: 3rem;
+    line-height: 1.05;
     margin-bottom: 1rem;
   }
 
-  .intro-rule {
-    margin: 1.5rem 0 2.5rem;
+  .hero-sub {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.375rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0;
   }
 
   /* Featured essay */
@@ -85,9 +100,8 @@ const rest = sortedPosts.slice(1);
     padding-top: 0.35rem;
   }
 
-  .meta-label { color: var(--color-text-muted); }
-  .meta-date  { color: var(--color-text-muted); }
-  .meta-tag   { color: var(--color-text-muted); }
+  .meta-date { color: var(--color-text-muted); }
+  .meta-tag  { color: var(--color-text-muted); }
 
   .featured-body { flex: 1; }
 
@@ -166,15 +180,9 @@ const rest = sortedPosts.slice(1);
     letter-spacing: 0.05em;
   }
 
-  .see-all {
-    margin-top: 2rem;
-    font-family: var(--font-ui);
-    font-size: 0.9rem;
-    text-align: right;
-  }
-
   @media (max-width: 600px) {
     .featured { flex-direction: column; gap: 1rem; }
     .featured-meta { flex-direction: row; flex-wrap: wrap; gap: 0.5rem; min-width: unset; }
+    h1 { font-size: 2.25rem; }
   }
 </style>
