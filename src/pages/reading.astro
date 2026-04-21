@@ -116,7 +116,7 @@ const readingData = {
                 ? <a href={book.link}>{book.title}</a>
                 : book.title
               }
-              {book.note && <span class="book-note"> — {book.note}</span>}
+              {book.note && <span class="book-note"> ({book.note})</span>}
             </p>
             <p class="book-author">{book.author}</p>
           </li>

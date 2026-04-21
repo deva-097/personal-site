@@ -6,7 +6,7 @@ const interests = {
   edc: {
     id: "edc",
     title: "Knives, EDC & Wallets",
-    subtitle: "Swiss knives were my first obsession — multi-functional, well-designed, built to last.",
+    subtitle: "Swiss knives were my first obsession. Multi-functional, well-designed, built to last.",
     description: "Swiss knives were my first obsession - multi-functional, well-designed, built to last. Led me down into a deeper EDC rabbithole.",
     items: [
       { brand: "Victorinox", links: [
@@ -47,7 +47,7 @@ const interests = {
     id: "fountain-pens",
     title: "Fountain Pens",
     subtitle: "Recovering addict. From a Lamy Safari in school to 25+ pens at one point.",
-    description: "Recovering fountain pen addict. From a Lamy Safari in school to 25+ pens at one point. Ran the gauntlet on different filling systems, grinds, nibs, custom pens, inks, leather holders — Diderot effect in full glory.",
+    description: "Recovering fountain pen addict. From a Lamy Safari in school to 25+ pens at one point. Ran the gauntlet on different filling systems, grinds, nibs, custom pens, inks, leather holders. Diderot effect in full glory.",
     items: [
       { name: "2000", brand: "Lamy", url: "https://www.lamy.com/en-us/p/lamy-2000-fountain-pen/52875809096014" },
       { name: "3776 Century (Chartres Blue)", brand: "Platinum", url: "https://www.gouletpens.com/products/platinum-3776-century-fountain-pen-chartres-blue-gold" },
@@ -82,7 +82,7 @@ const interests = {
     <p class="section-label">Collections</p>
     <h1>Functional luxuries.</h1>
     <p class="header-intro">
-      A collection of things that bring me joy or occupy my attention — objects, hobbies, and obsessions, documented for my own reference and anyone else who might share these interests. I can talk for hours on any of these.
+      A collection of things that bring me joy or occupy my attention: objects, hobbies, and obsessions, documented for my own reference and anyone else who might share these interests. I can talk for hours on any of these.
     </p>
   </div>
 
@@ -97,7 +97,7 @@ const interests = {
     <section class="interest-section" id={cat.id}>
       <SectionLabel label={cat.title} subtitle={cat.subtitle} />
       {cat.id === 'fountain-pens' ? (
-        <p class="section-desc">Recovering fountain pen addict. From a Lamy Safari in school to 25+ pens at one point. Ran the gauntlet on different filling systems, grinds, nibs, custom pens, inks, leather holders — <a href="/writing/things-that-own-you" class="ink-link">Diderot effect</a> in full glory.</p>
+        <p class="section-desc">Recovering fountain pen addict. From a Lamy Safari in school to 25+ pens at one point. Ran the gauntlet on different filling systems, grinds, nibs, custom pens, inks, leather holders. <a href="/writing/things-that-own-you" class="ink-link">Diderot effect</a> in full glory.</p>
       ) : (
         <p class="section-desc">{cat.description}</p>
       )}
