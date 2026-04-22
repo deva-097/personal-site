@@ -10,11 +10,12 @@ const sortedPosts = posts
   .slice(0, 5);
 ---
 
-<BaseLayout title="Devashish">
+<BaseLayout title="Devashish" wide={true}>
   <section class="intro">
     <div class="hero-image">
       <img src="/images/IMG_7512.jpg" alt="Vintage fountain pens — a Parker Vacumatic, a Pilot eyedropper, and a Swan lever filler" />
     </div>
+    <p class="tagline">A reader-writer, father, collector of crafted things &mdash; <span class="tagline-accent">keeping a notebook in public.</span></p>
     <p class="greeting">Hello, I'm <strong>Devashish</strong>.</p>
     <p>
       I'm an engineer-MBA generalist in my professional life; and a doting father
@@ -40,11 +41,18 @@ const sortedPosts = posts
   </section>
 
   <section class="explore">
-    <p class="section-label">Recurring threads</p>
-    <p class="explore-subtitle">The handful of subjects this site keeps circling back to.</p>
+    <p class="section-label">The notebook</p>
     <div class="explore-rule"></div>
 
     <div class="explore-list">
+      <div class="explore-item level-1">
+        <h2 class="item-title"><a href="/writing">Meaning, attention, ambition</a></h2>
+        <p class="item-desc">The slow questions of adulthood, written down in the hope of clearing them. <a href="/writing">writing &rarr;</a></p>
+      </div>
+      <div class="explore-item level-2">
+        <h2 class="item-title"><a href="/commonplace">Borrowed lines</a></h2>
+        <p class="item-desc">Things written by others, saved because they said it first, and better. <a href="/commonplace">commonplace &rarr;</a></p>
+      </div>
       <div class="explore-item level-1">
         <h2 class="item-title"><a href="/reading">Books &amp; worlds</a></h2>
         <p class="item-desc">High fantasy, science fiction, the long shelf of books that built the inner shelf. <a href="/reading">reading &rarr;</a></p>
@@ -52,18 +60,6 @@ const sortedPosts = posts
       <div class="explore-item level-2">
         <h2 class="item-title"><a href="/interests">Objects &amp; functional luxury</a></h2>
         <p class="item-desc">Pens, knives, watches, wallets. Small well-made tools, kept and used. <a href="/interests">collections &rarr;</a></p>
-      </div>
-      <div class="explore-item level-1">
-        <h2 class="item-title"><a href="/writing">Meaning, attention, ambition</a></h2>
-        <p class="item-desc">The slow questions of adulthood, written down in the hope of clearing them. <a href="/writing">writing &rarr;</a></p>
-      </div>
-      <div class="explore-item level-2">
-        <h2 class="item-title"><a href="/games">Games, mythology, history</a></h2>
-        <p class="item-desc">The stories we keep retelling, and what we learn from telling them again. <a href="/games">gaming &rarr;</a></p>
-      </div>
-      <div class="explore-item level-1">
-        <h2 class="item-title"><a href="/experiments">Small builds &amp; AI experiments</a></h2>
-        <p class="item-desc">Quick, curious, mostly for myself. Software made to think with. <a href="/experiments">experiments &rarr;</a></p>
       </div>
     </div>
   </section>
@@ -97,7 +93,22 @@ const sortedPosts = posts
   section { margin-bottom: 3rem; }
 
   /* Intro */
-  .intro { overflow: hidden; }
+  .intro { overflow: hidden; padding-top: 3rem; }
+
+  .tagline {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+  }
+
+  .tagline-accent {
+    color: var(--color-accent);
+    font-style: italic;
+  }
 
   .greeting {
     font-size: 1.1rem;
@@ -108,8 +119,8 @@ const sortedPosts = posts
 
   .hero-image {
     float: right;
-    width: 200px;
-    margin: 0.5rem 0 1rem 1.5rem;
+    width: 310px;
+    margin: 10rem 0 1rem 2rem;
   }
 
   .hero-image img {
@@ -119,16 +130,10 @@ const sortedPosts = posts
 
   @media (max-width: 480px) {
     .hero-image { float: none; width: 100%; margin: 0 0 1.5rem 0; }
+    .tagline { font-size: 1.6rem; }
   }
 
   /* Recurring Threads */
-  .explore-subtitle {
-    font-family: var(--font-heading);
-    font-style: italic;
-    color: var(--color-text-muted);
-    margin-bottom: 0.75rem;
-  }
-
   .explore-rule {
     width: 3.5rem;
     height: 1px;
