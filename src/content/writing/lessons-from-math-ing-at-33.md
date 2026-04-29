@@ -1,7 +1,7 @@
 ---
 title: "Lessons from Math-ing at 33"
 slug: "lessons-from-math-ing-at-33"
-date: "2026-04-02"
+date: "2026-04-29"
 description: "Going back to Math at 33 taught me more than I expected — about first principles thinking, perseverance, and finding joy in the process."
 tags: ["life", "learning"]
 ---
