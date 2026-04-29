@@ -14,7 +14,7 @@ const startOfYear = new Date(now.getFullYear(), 0, 1);
 const weekNum = Math.floor((now.getTime() - startOfYear.getTime()) / (7 * 24 * 60 * 60 * 1000));
 const featuredIdx = sortedPosts.length > 0 ? weekNum % sortedPosts.length : 0;
 const featured = sortedPosts[featuredIdx];
-const rest = sortedPosts.filter((_, i) => i !== featuredIdx);
+const rest = sortedPosts;
 ---
 
 <BaseLayout title="Writing | Devashish" description="Essays and thoughts">

@@ -12,9 +12,9 @@ const startOfYear = new Date(now.getFullYear(), 0, 1);
 const weekNum = Math.floor((now.getTime() - startOfYear.getTime()) / (7 * 24 * 60 * 60 * 1000));
 const featuredIdx = sortedPieces.length > 0 ? weekNum % sortedPieces.length : 0;
 const featured = sortedPieces[featuredIdx];
-const rest = sortedPieces.filter((_, i) => i !== featuredIdx);
+const rest = sortedPieces;
 
-const allTags = [...new Set(rest.flatMap(p => p.frontmatter.tags || []))].sort();
+const allTags = [...new Set(sortedPieces.flatMap(p => p.frontmatter.tags || []))].sort();
 ---
 
 <BaseLayout title="Commonplace | Devashish" description="Collected poems, quotes, and fragments">
