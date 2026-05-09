@@ -1,7 +1,7 @@
 ---
 title: My AI Learning Journey
 slug: my-ai-learning-journey
-date: "2026-05-06"
+date: "2026-05-13"
 description: A personal account of stumbling into AI through vibe coding, FOMO, and anxiety spirals — and eventually finding a way to use these tools that actually fits.
 tags: ["life"]
 ---

@@ -1,7 +1,7 @@
 ---
 title: The Characters that Broke Me
 slug: the-characters-that-broke-me
-date: "2026-05-13"
+date: "2026-05-05"
 description: "Four characters from fiction — Ove, Dumbledore, Coltaine, Fitz and the Fool — made me ugly-cry. I've been trying to figure out what connects them, and what they say about the kind of person I want to be."
 tags: ["life", "books"]
 ---
